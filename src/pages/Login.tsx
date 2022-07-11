@@ -3,17 +3,17 @@ import { FC, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { BiLogIn } from 'react-icons/bi';
 import { FaEnvelope, FaLock, FaPlus } from 'react-icons/fa';
-import fetchData from '../context/CustomFetch';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 interface UserData {
-	email: string;
+	username: string;
 	password: string;
 }
 
 const Login: FC = (): JSX.Element => {
 	const [formData, setFormData] = useState<UserData>({
-		email: '',
+		username: '',
 		password: '',
 	});
 	const [errorMessage, setErrorMessage] = useState('');
@@ -31,11 +31,7 @@ const Login: FC = (): JSX.Element => {
 	): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await fetchData({
-				method: 'post',
-				data: formData,
-				url: '/auth/login',
-			});
+			const { data: user } = await axios({});
 			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
 			navigate('/');
 		} catch (err: any) {
@@ -55,12 +51,12 @@ const Login: FC = (): JSX.Element => {
 				<section className='logo'>
 					<h1>
 						<FaPlus />
-						<span>Umino</span>
+						<span>Marketeer</span>
 					</h1>
 				</section>
 				<section className='slogan'>
 					<h2>
-						<span>Gerenciamento de Dados</span>
+						<span>Market Management System</span>
 					</h2>
 				</section>
 			</header>
@@ -69,19 +65,19 @@ const Login: FC = (): JSX.Element => {
 					<div className='form-container'>
 						<section className='message'>
 							<h2>
-								<span>Bem-vindo de volta Administrador!</span>
+								<span>Welcome back!</span>
 							</h2>
 						</section>
-						<p>Faça login para continuar. </p>
+						<p>Login to your account to continue. </p>
 						<form onSubmit={handleSubmit}>
-							<label htmlFor='email'>
+							<label htmlFor='username'>
 								<FaEnvelope />
-								<span>E-mail</span>
+								<span>Username</span>
 							</label>
 							<input
-								type='email'
-								placeholder='Escreva o seu e-mail'
-								name='email'
+								type='username'
+								placeholder='Type your username here.'
+								name='username'
 								required
 								onChange={(e) => handleChange(e)}
 							/>
@@ -92,7 +88,7 @@ const Login: FC = (): JSX.Element => {
 							<input
 								type='password'
 								name='password'
-								placeholder='Escreva a sua senha'
+								placeholder='Type your password here.'
 								onChange={(e) => handleChange(e)}
 							/>
 							<span className='errorMessage'>{errorMessage}</span>
@@ -108,9 +104,9 @@ const Login: FC = (): JSX.Element => {
 			</main>
 			<footer>
 				<div>
-					Copyright &copy; 2022 <i>Umino+</i>
+					Copyright &copy; 2022 <i>Marketeer Systems.</i>
 				</div>
-				<div>Todos os Direitos Reservados.</div>
+				<div>All Rights Reserved.</div>
 			</footer>
 		</Container>
 	);

@@ -1,9 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import * as React from 'react';
-
-interface Props {
-	children: React.ReactNode;
-}
 
 // used to restrict acess to admin routes
 const ProtectedRoute = (props: any) => {
