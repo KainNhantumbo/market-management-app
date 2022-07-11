@@ -22,7 +22,7 @@ const AppContext: React.FC<Props> = ({ children }) => {
 	const [mode, setMode] = useState(primary);
 
 	const themePrefers = (): void => {
-		let key: string = 'UminoSettings';
+		let key: string = 'AppSettings';
 		let theme_data: any = JSON.parse(
 			localStorage.getItem(key) || `{"dark_mode": false}`
 		);
@@ -43,14 +43,14 @@ const AppContext: React.FC<Props> = ({ children }) => {
 			setMode(dark);
 			setThemeSettings({ dark_mode: true });
 			localStorage.setItem(
-				'UminoSettings',
+				'AppSettings',
 				JSON.stringify({ dark_mode: true })
 			);
 			return;
 		}
 		setMode(primary);
 		setThemeSettings({ dark_mode: false });
-		localStorage.setItem('UminoSettings', JSON.stringify({ dark_mode: false }));
+		localStorage.setItem('AppSettings', JSON.stringify({ dark_mode: false }));
 	};
 
 	useEffect(() => {

@@ -6,37 +6,35 @@ import { FC } from 'react';
 
 const Home: FC = () => {
 	const navigate = useNavigate();
-	const useNavigatert = {name: 'adda', log: 'ghg'}
 
 	return (
 		<Container>
 			<header>
-				<h1>Administração</h1>
-				<h2>O que vamos fazer hoje?</h2>
+				<h1>Supermarket Management System</h1>
+				<h2>Choose your path to work on</h2>
 			</header>
 			<main>
 				<article className='actions-container'>
 					<div className='action'>
 						<BiCog className='icon' />
-						<span>Gerenciar Recipes Blog</span>
-						<button onClick={() => navigate('/recipes-blog')}>
+						<span>Employeers</span>
+						<button onClick={() => navigate('/sales')}>
 							<FaArrowRight />
-							<span>Gerenciar</span>
+							<span>Sales workflow</span>
 						</button>
-						<button><button/>
 					</div>
 					<div className='action'>
 						<BiCog className='icon' />
-						<span>Gerenciar Usuários</span>
-						<button onClick={() => navigate('/users')}>
+						<span>Administrator</span>
+						<button onClick={() => navigate('/admin')}>
 							<FaArrowRight />
-							<span>Gerenciar</span>
+							<span>Manage system</span>
 						</button>
 					</div>
 				</article>
 			</main>
 		</Container>
-	)
+	);
 };
 
 export default Home;
