@@ -5,12 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { RegisterContainer as Container } from '../styles/register';
 import {
 	FaAddressCard,
-	FaArrowRight,
 	FaEnvelope,
 	FaGenderless,
 	FaLock,
-	FaLockOpen,
-	FaPhone,
 	FaPhoneAlt,
 	FaSuperpowers,
 	FaUnlock,
