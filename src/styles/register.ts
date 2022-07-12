@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { BaseButton, ButtonA } from './global/buttons';
 
-export const LoginContainer = styled.div`
+export const RegisterContainer = styled.div`
 	width: 100%;
 	min-height: 100vh;
 	display: flex;
@@ -129,10 +129,10 @@ export const LoginContainer = styled.div`
 					justify-content: flex-start;
 					gap: 10px;
 
-					.login {
+					.next {
 						${BaseButton}
 					}
-					.register{
+					.login {
 						${ButtonA}
 					}
 				}

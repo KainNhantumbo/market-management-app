@@ -1,17 +1,17 @@
-import { LoginContainer as Container } from '../styles/login';
-import { FC, useState } from 'react';
-import type { ChangeEvent } from 'react';
-import { BiLogIn } from 'react-icons/bi';
-import { FaLock, FaUser } from 'react-icons/fa';
+import * as React from 'react';
+import { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { RegisterContainer as Container } from '../styles/register';
+import { FaArrowRight, FaLock, FaUser, FaUserLock } from 'react-icons/fa';
+import { BiLogInCircle } from 'react-icons/bi';
 
 interface UserData {
 	username: string;
 	password: string;
 }
 
-const Login: FC = (): JSX.Element => {
+export default function Register() {
 	const [formData, setFormData] = useState<UserData>({
 		username: '',
 		password: '',
@@ -45,6 +45,7 @@ const Login: FC = (): JSX.Element => {
 			setErrorMessage('');
 		}, 3000);
 	};
+
 	return (
 		<Container>
 			<header className='upper-container'>
@@ -64,10 +65,10 @@ const Login: FC = (): JSX.Element => {
 					<div className='form-container'>
 						<section className='message'>
 							<h2>
-								<span>Welcome back!</span>
+								<span>Register</span>
 							</h2>
 						</section>
-						<p>Login to your account to continue. </p>
+						<p>Register a new administrative account. </p>
 						<form onSubmit={handleSubmit}>
 							<label htmlFor='username'>
 								<FaUser />
@@ -92,16 +93,14 @@ const Login: FC = (): JSX.Element => {
 							/>
 							<span className='errorMessage'>{errorMessage}</span>
 							<section className='actions'>
-								<button className='login' type='submit'>
-									<BiLogIn />
-									<span>Login</span>
+								<button className='next' type='submit'>
+									<BiLogInCircle />
+									<span>Next</span>
 								</button>
-								<button
-									className='register'
-									onClick={() => navigate('/register')}
-								>
-									<BiLogIn />
-									<span>New Account</span>
+
+								<button className='login' onClick={() => navigate('/register')}>
+									<FaUserLock />
+									<span>Login</span>
 								</button>
 							</section>
 						</form>
@@ -116,6 +115,4 @@ const Login: FC = (): JSX.Element => {
 			</footer>
 		</Container>
 	);
-};
-
-export default Login;
+}
