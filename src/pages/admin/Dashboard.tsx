@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { DashboardContainer as Container } from '../../styles/admin-dashboard';

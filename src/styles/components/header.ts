@@ -13,7 +13,6 @@ export const HeaderContainer = styled.header`
 	background: rgb(${({ theme }) => theme.backgroundAlt});
 	box-shadow: 0 0 12px rgba(${({ theme }) => theme.shadows}, 0.6);
 	z-index: 5000;
-	border-radius: 0 0 20px 20px;
 
 	.brand {
 		position: relative;
@@ -25,17 +24,27 @@ export const HeaderContainer = styled.header`
 			text-align: center;
 			font-size: 1.4rem;
 		}
-		svg {
-			position: absolute;
-			width: 18px;
-			height: 18px;
-			color: rgb(${({ theme }) => theme.alter});
-			right: -20px;
-			top: -1px;
-		}
 	}
 	p {
 		font-weight: 500;
 		user-select: none;
+	}
+
+	button {
+		border: none;
+		background: none;
+		border-radius: 5px;
+		padding: 3px;
+		position: absolute;
+		top: 20px;
+		left: 180px;
+		color: rgb(${({ theme }) => theme.alterAlt});
+		cursor: pointer;
+		display: grid;
+		place-content: center;
+		svg {
+			width: 20px;
+			height: 20px;
+		}
 	}
 `;
