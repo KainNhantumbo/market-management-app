@@ -102,7 +102,7 @@ export const RegisterContainer = styled.div`
 					}
 				}
 
-				input {
+				input, select {
 					border: none;
 					padding: 5px 10px;
 					line-height: 1.2rem;
@@ -147,6 +147,7 @@ export const RegisterContainer = styled.div`
 		justify-content: center;
 		gap: 10px;
 		font-weight: 500;
+		margin-bottom: 20px;
 
 		i {
 			color: rgb(${({ theme }) => theme.primary});

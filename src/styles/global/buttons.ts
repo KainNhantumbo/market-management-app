@@ -41,6 +41,7 @@ export const ButtonA = css`
 	:hover {
 		color: rgb(${({ theme }) => theme.text});
 		transition: all 200ms ease-in-out;
+		background: rgb(${({ theme }) => theme.secondary});
 	}
 	svg {
 		width: 18px;

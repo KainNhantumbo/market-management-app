@@ -74,7 +74,7 @@ const Login: FC = (): JSX.Element => {
 								<span>Username</span>
 							</label>
 							<input
-								type='username'
+								type='text'
 								placeholder='Type your username here.'
 								name='username'
 								required

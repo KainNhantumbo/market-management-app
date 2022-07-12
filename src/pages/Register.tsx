@@ -3,7 +3,23 @@ import { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { RegisterContainer as Container } from '../styles/register';
-import { FaArrowRight, FaLock, FaUser, FaUserLock } from 'react-icons/fa';
+import {
+	FaAddressCard,
+	FaArrowRight,
+	FaEnvelope,
+	FaGenderless,
+	FaLock,
+	FaLockOpen,
+	FaPhone,
+	FaPhoneAlt,
+	FaSuperpowers,
+	FaUnlock,
+	FaUser,
+	FaUserEdit,
+	FaUserFriends,
+	FaUserGraduate,
+	FaUserLock,
+} from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 
 interface UserData {
@@ -19,7 +35,9 @@ export default function Register() {
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+	): void => {
 		setFormData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
@@ -70,35 +88,188 @@ export default function Register() {
 						</section>
 						<p>Register a new administrative account. </p>
 						<form onSubmit={handleSubmit}>
-							<label htmlFor='username'>
-								<FaUser />
-								<span>Username</span>
-							</label>
-							<input
-								type='username'
-								placeholder='Type your username here.'
-								name='username'
-								required
-								onChange={(e) => handleChange(e)}
-							/>
-							<label htmlFor='password'>
-								<FaLock />
-								<span>Password</span>
-							</label>
-							<input
-								type='password'
-								name='password'
-								placeholder='Type your password here.'
-								onChange={(e) => handleChange(e)}
-							/>
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaUserEdit />
+										<span>First name</span>
+									</label>
+									<input
+										type='text'
+										placeholder='Type your first name here.'
+										name='first_name'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaUserEdit />
+										<span>Last name</span>
+									</label>
+									<input
+										type='text'
+										placeholder='Type your last name here.'
+										name='last_name'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaUser />
+										<span>Username</span>
+									</label>
+									<input
+										type='text'
+										placeholder='Type your username here.'
+										name='user_name'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaEnvelope />
+										<span>E-mail</span>
+									</label>
+									<input
+										type='email'
+										placeholder='Type your e-mail here.'
+										name='email'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaUserGraduate />
+										<span>Qualification</span>
+									</label>
+									<input
+										type='text'
+										name='qualification'
+										required
+										placeholder='Type your qualification here.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaUserFriends />
+										<span>Department</span>
+									</label>
+									<input
+										type='text'
+										required
+										name='department'
+										placeholder='Type your department here.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaSuperpowers />
+										<span>Age</span>
+									</label>
+									<input
+										type='number'
+										name='age'
+										placeholder='Type your age here'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaGenderless />
+										<span>Gender</span>
+									</label>
+									<select
+										name='gender'
+										defaultValue={'Male'}
+										defaultChecked={true}
+										onChange={(e) => handleChange(e)}
+									>
+										<option value='Male'>Male</option>
+										<option value='Female'>Female</option>
+									</select>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaAddressCard />
+										<span>Adress</span>
+									</label>
+									<input
+										type='text'
+										name='adress'
+										placeholder='Type your adress here.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaPhoneAlt />
+										<span>Phone</span>
+										<input
+											type='number'
+											name='phone'
+											maxLength={30}
+											required
+											placeholder='Type your phone number.'
+											onChange={(e) => handleChange(e)}
+										/>
+									</label>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaUnlock />
+										<span>Password</span>
+									</label>
+									<input
+										type='password'
+										name='password'
+										placeholder='Type your password here.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaLock />
+										<span>Confirm Password</span>
+									</label>
+									<input
+										type='confirm_password'
+										name='confirm_password'
+										placeholder='Confirm your password.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+							</section>
+
 							<span className='errorMessage'>{errorMessage}</span>
+
 							<section className='actions'>
 								<button className='next' type='submit'>
 									<BiLogInCircle />
 									<span>Next</span>
 								</button>
-
-								<button className='login' onClick={() => navigate('/register')}>
+								<button className='login' onClick={() => navigate('/login')}>
 									<FaUserLock />
 									<span>Login</span>
 								</button>
