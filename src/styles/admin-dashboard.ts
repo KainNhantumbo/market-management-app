@@ -2,34 +2,11 @@ import styled from 'styled-components';
 import { BaseButton, ButtonA } from './global/buttons';
 
 export const DashboardContainer = styled.div`
-	width: 100%;
+	width: 100vw;
 	min-height: 100vh;
-	margin-left: ;
+	position: relative;
+	padding: 75px 0 30px 160px;
 	display: flex;
-	align-items: center;
-	flex-direction: column;
-	gap: 40px;
-
-	header {
-		width: 100%;
-		padding: 15px;
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-		align-items: center;
-		gap: 10px;
-		background: rgb(${({ theme }) => theme.backgroundAlt});
-		font-weight: 600;
-		margin: 0;
-		h1 {
-			position: relative;
-			color: rgb(${({ theme }) => theme.primary});
-			line-height: 1.2rem;
-		}
-		h2 {
-			font-size: 1.2rem;
-			color: rgb(${({ theme }) => theme.font});
-		}
-	}
-
+	justify-content: space-between;
+	gap: 10px;
 `;
