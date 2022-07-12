@@ -5,7 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Open Sans', Montserrat, Poppins, 'PT Sans';
+    font-family: Inter, 'Open Sans', Montserrat, Poppins, 'PT Sans';
     max-width: 100%;
   }
 

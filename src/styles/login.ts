@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BaseButton } from './global/globals';
 
 export const LoginContainer = styled.div`
 	width: 100%;
@@ -17,9 +18,7 @@ export const LoginContainer = styled.div`
 		align-items: center;
 		gap: 5px;
 		background: rgb(${({ theme }) => theme.backgroundAlt});
-		box-shadow: 0 0 10px rgb(${({ theme }) => theme.shadows});
-		border-bottom: 3px solid rgb(${({ theme }) => theme.alter});
-		border-radius: 0 0 20px 20px;
+
 		h1 {
 			position: relative;
 			span {
@@ -57,10 +56,9 @@ export const LoginContainer = styled.div`
 			gap: 20px;
 			justify-content: flex-start;
 			flex-direction: column;
-			box-shadow: 0 0 25px rgba(${({ theme }) => theme.shadows}, 0.6);
-			border-bottom: 3px solid rgb(${({ theme }) => theme.alter});
 			background: rgb(${({ theme }) => theme.backgroundAlt});
-			border-radius: 10px;
+			border-radius: 3px;
+			border: 1px solid rgba(${({ theme }) => theme.shadows}, .5);
 			padding: 40px;
 
 			@media screen and (max-width: 340px) {
@@ -69,10 +67,9 @@ export const LoginContainer = styled.div`
 
 			.message {
 				line-height: 1.4rem;
-				font-weight: 500;
+				font-weight: 600;
 				font-size: 1.2rem;
-				border-left: 3px solid rgb(${({ theme }) => theme.alter});
-				padding-left: 5px;
+				color: rgb(${({ theme }) => theme.alter});
 			}
 
 			p {
@@ -106,36 +103,7 @@ export const LoginContainer = styled.div`
 				}
 
 				button {
-					border: none;
-					background: none;
-					border-radius: 15px;
-					position: relative;
-					padding: 7px 10px;
-					color: rgb(${({ theme }) => theme.text});
-					background: rgb(${({ theme }) => theme.alter});
-					width: fit-content;
-					cursor: pointer;
-
-					:hover {
-						box-shadow: 0 0 12px rgb(${({ theme }) => theme.shadows});
-						background: rgb(${({ theme }) => theme.secondary});
-
-						transition: all 200ms ease-in-out;
-					}
-
-					svg {
-						width: 18px;
-						height: 18px;
-						position: absolute;
-						top: 7px;
-						left: 7px;
-						pointer-events: none;
-					}
-					span {
-						padding-left: 20px;
-						font-weight: 500;
-						pointer-events: none;
-					}
+					${BaseButton}
 				}
 
 				input {
@@ -144,7 +112,7 @@ export const LoginContainer = styled.div`
 					line-height: 1.2rem;
 					font-weight: 500;
 					outline: none;
-					border-radius: 15px;
+					border-radius: 5px;
 					border: 1px solid transparent;
 
 					::placeholder {
@@ -154,7 +122,7 @@ export const LoginContainer = styled.div`
 				}
 
 				.errorMessage {
-					color:  rgb(${({ theme }) => theme.alter});
+					color: rgb(${({ theme }) => theme.alter});
 					font-weight: 500;
 					font-size: 0.9rem;
 				}

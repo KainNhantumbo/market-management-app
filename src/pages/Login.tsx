@@ -2,7 +2,7 @@ import { LoginContainer as Container } from '../styles/login';
 import { FC, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { BiLogIn } from 'react-icons/bi';
-import { FaEnvelope, FaLock, FaPlus } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaPlus, FaUser } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,6 @@ const Login: FC = (): JSX.Element => {
 			<header className='upper-container'>
 				<section className='logo'>
 					<h1>
-						<FaPlus />
 						<span>Marketeer</span>
 					</h1>
 				</section>
@@ -71,7 +70,7 @@ const Login: FC = (): JSX.Element => {
 						<p>Login to your account to continue. </p>
 						<form onSubmit={handleSubmit}>
 							<label htmlFor='username'>
-								<FaEnvelope />
+								<FaUser/>
 								<span>Username</span>
 							</label>
 							<input
@@ -104,7 +103,7 @@ const Login: FC = (): JSX.Element => {
 			</main>
 			<footer>
 				<div>
-					Copyright &copy; 2022 <i>Marketeer Systems.</i>
+					Copyright &copy; 2022 <i>Marketeer Systems</i>
 				</div>
 				<div>All Rights Reserved.</div>
 			</footer>

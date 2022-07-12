@@ -10,7 +10,7 @@ const Home: FC = () => {
 	return (
 		<Container>
 			<header>
-				<h1>Supermarket Management System</h1>
+				<h1>Market Management System</h1>
 				<h2>Choose your path to work on</h2>
 			</header>
 			<main>
