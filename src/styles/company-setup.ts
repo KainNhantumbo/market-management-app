@@ -7,37 +7,25 @@ export const CompanySetupContainer = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 50px;
+	gap: 40px;
 
 	header {
 		width: 100%;
-		padding: 20px 20px;
+		padding: 15px;
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
 		align-items: center;
-		gap: 5px;
+		gap: 10px;
 		background: rgb(${({ theme }) => theme.backgroundAlt});
-
+		font-weight: 600;
+		margin: 0;
 		h1 {
 			position: relative;
-			span {
-				font-weight: 600;
-				text-align: center;
-				color: rgb(${({ theme }) => theme.primary});
-			}
-			svg {
-				position: absolute;
-				width: 25px;
-				height: 25px;
-				color: rgb(${({ theme }) => theme.alter});
-				right: -30px;
-				top: 3px;
-			}
+			color: rgb(${({ theme }) => theme.primary});
+			line-height: 1.2rem;
 		}
-
 		h2 {
-			font-weight: 600;
 			font-size: 1.2rem;
 			color: rgb(${({ theme }) => theme.font});
 		}
@@ -137,7 +125,7 @@ export const CompanySetupContainer = styled.div`
 					}
 				}
 
-				select{
+				select {
 					max-height: 32px;
 				}
 

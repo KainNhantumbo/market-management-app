@@ -5,23 +5,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
 	FaAddressCard,
+	FaCheck,
 	FaDotCircle,
 	FaEnvelope,
-	FaGenderless,
 	FaIdCard,
 	FaLayerGroup,
-	FaLock,
-	FaMapMarked,
+	FaLocationArrow,
 	FaPhoneAlt,
-	FaSuperpowers,
-	FaUnlock,
-	FaUser,
-	FaUserEdit,
-	FaUserFriends,
-	FaUserGraduate,
 	FaUserLock,
 } from 'react-icons/fa';
-import { BiLogInCircle, BiMap } from 'react-icons/bi';
+import { BiLogInCircle, BiMap, BiTargetLock } from 'react-icons/bi';
 
 interface CompanyData {
 	username: string;
@@ -106,22 +99,6 @@ export default function CompanySetup() {
 								</div>
 								<div className='form-element'>
 									<label>
-										<FaDotCircle />
-										<span>Description</span>
-									</label>
-									<input
-										type='text'
-										placeholder='Type description here.'
-										name='description'
-										required
-										onChange={(e) => handleChange(e)}
-									/>
-								</div>
-							</section>
-
-							<section className='form-section'>
-								<div className='form-element'>
-									<label>
 										<FaLayerGroup />
 										<span>Group</span>
 									</label>
@@ -132,6 +109,23 @@ export default function CompanySetup() {
 										required
 										onChange={(e) => handleChange(e)}
 									/>
+								</div>
+							</section>
+
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaPhoneAlt />
+										<span>Phone</span>
+										<input
+											type='number'
+											name='phone'
+											maxLength={30}
+											required
+											placeholder='Type your phone number.'
+											onChange={(e) => handleChange(e)}
+										/>
+									</label>
 								</div>
 								<div className='form-element'>
 									<label>
@@ -164,7 +158,7 @@ export default function CompanySetup() {
 								</div>
 								<div className='form-element'>
 									<label>
-										<BiMap />
+										<FaLocationArrow />
 										<span>Country</span>
 									</label>
 									<select
@@ -496,20 +490,18 @@ export default function CompanySetup() {
 							</section>
 
 							<section className='form-section'>
-				
 								<div className='form-element'>
 									<label>
-										<FaPhoneAlt />
-										<span>Phone</span>
-										<input
-											type='number'
-											name='phone'
-											maxLength={30}
-											required
-											placeholder='Type your phone number.'
-											onChange={(e) => handleChange(e)}
-										/>
+										<FaDotCircle />
+										<span>Description</span>
 									</label>
+									<input
+										type='text'
+										placeholder='Type description here.'
+										name='description'
+										required
+										onChange={(e) => handleChange(e)}
+									/>
 								</div>
 							</section>
 
@@ -517,12 +509,8 @@ export default function CompanySetup() {
 
 							<section className='actions'>
 								<button className='next' type='submit'>
-									<BiLogInCircle />
-									<span>Next</span>
-								</button>
-								<button className='login' onClick={() => navigate('/login')}>
-									<FaUserLock />
-									<span>Login</span>
+									<FaCheck />
+									<span>Finish</span>
 								</button>
 							</section>
 						</form>
