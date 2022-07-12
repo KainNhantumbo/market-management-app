@@ -7,11 +7,11 @@ export const LoginContainer = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	gap: 50px;
+	gap: 30px;
 
 	header {
 		width: 100%;
-		padding: 10px 20px;
+		padding: 20px 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
@@ -147,7 +147,7 @@ export const LoginContainer = styled.div`
 		justify-content: center;
 		gap: 10px;
 		font-weight: 500;
-
+		margin-bottom: 20px;
 		i {
 			color: rgb(${({ theme }) => theme.primary});
 		}

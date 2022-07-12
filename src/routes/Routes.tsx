@@ -9,7 +9,7 @@ export default function Routes(): JSX.Element {
 		<Roots>
 			<Route path='/' element={<Home />} />
 			<Route path='/login' element={<Login />} />
-			<Route path='/register' element={<Register/>} />
+			<Route path='/create-account' element={<Register/>} />
 		</Roots>
 	);
 }

@@ -11,7 +11,7 @@ export const RegisterContainer = styled.div`
 
 	header {
 		width: 100%;
-		padding: 10px 20px;
+		padding: 20px 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
@@ -59,7 +59,7 @@ export const RegisterContainer = styled.div`
 			background: rgb(${({ theme }) => theme.backgroundAlt});
 			border-radius: 3px;
 			border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
-			padding: 40px;
+			padding: 40px 30px;
 
 			@media screen and (max-width: 340px) {
 				padding: 40px 15px;
@@ -74,6 +74,7 @@ export const RegisterContainer = styled.div`
 
 			p {
 				font-weight: 500;
+				line-height: 1.4rem;
 			}
 
 			form {
@@ -81,6 +82,23 @@ export const RegisterContainer = styled.div`
 				justify-content: flex-start;
 				flex-direction: column;
 				gap: 15px;
+
+				.form-section {
+					display: flex;
+					flex-direction: row;
+					width: 100%;
+					gap: 10px;
+
+					@media screen and (max-width: 655px) {
+						flex-direction: column;
+					}
+					.form-element {
+						display: flex;
+						flex-direction: column;
+						width: 100%;
+						gap: 5px;
+					}
+				}
 
 				label {
 					font-weight: 500;
@@ -102,7 +120,9 @@ export const RegisterContainer = styled.div`
 					}
 				}
 
-				input, select {
+				input,
+				select {
+					width: 100%;
 					border: none;
 					padding: 5px 10px;
 					line-height: 1.2rem;

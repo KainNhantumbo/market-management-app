@@ -55,7 +55,7 @@ const Login: FC = (): JSX.Element => {
 				</section>
 				<section className='slogan'>
 					<h2>
-						<span>Market Management System</span>
+						<span>Market Management</span>
 					</h2>
 				</section>
 			</header>
@@ -98,10 +98,10 @@ const Login: FC = (): JSX.Element => {
 								</button>
 								<button
 									className='register'
-									onClick={() => navigate('/register')}
+									onClick={() => navigate('/create-account')}
 								>
 									<BiLogIn />
-									<span>New Account</span>
+									<span>Create Account</span>
 								</button>
 							</section>
 						</form>

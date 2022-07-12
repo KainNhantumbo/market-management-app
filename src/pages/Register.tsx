@@ -74,7 +74,7 @@ export default function Register() {
 				</section>
 				<section className='slogan'>
 					<h2>
-						<span>Market Management System</span>
+						<span>Market Management</span>
 					</h2>
 				</section>
 			</header>
@@ -83,7 +83,7 @@ export default function Register() {
 					<div className='form-container'>
 						<section className='message'>
 							<h2>
-								<span>Register</span>
+								<span>Create account</span>
 							</h2>
 						</section>
 						<p>Register a new administrative account. </p>
