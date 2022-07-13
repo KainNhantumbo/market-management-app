@@ -23,6 +23,7 @@ export default function Categories(): JSX.Element {
 		{ name: 'Marlalela', id: 'kjbhasdjk' },
 	]);
 
+
 	return (
 		<Container>
 			<Header location='Categories' />
@@ -49,7 +50,7 @@ export default function Categories(): JSX.Element {
 								type='text'
 								name='category'
 								placeholder='Type the product category name.'
-								max-maxLength={250}
+								maxLength={250}
 							/>
 							<button type='submit'>
 								<HiSave />
