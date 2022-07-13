@@ -57,3 +57,25 @@ export const ButtonA = css`
 		pointer-events: none;
 	}
 `;
+
+export const ButtonB = css`
+	border: none;
+	background: rgb(${({ theme }) => theme.primary});
+	border-radius: 3px;
+	position: relative;
+	padding: 7px 10px;
+	color: rgb(${({ theme }) => theme.text});
+	width: fit-content;
+	cursor: pointer;
+	display: grid;
+	place-content: center;
+	
+	:hover {
+		color: rgb(${({ theme }) => theme.text});
+		transition: all 200ms ease-in-out;
+		background: rgb(${({ theme }) => theme.secondary});
+	}
+	svg {
+		pointer-events: none;
+	}
+`;

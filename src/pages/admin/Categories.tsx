@@ -30,11 +30,11 @@ export default function Categories(): JSX.Element {
 			<Aside />
 			<main>
 				<section className='upper-container'>
-					<div className='title'>
+					<div className='title-tools'>
 						<h2>Categories</h2>
-						<div className='serch'>
+						<div className='search'>
 							<input type={'search'} placeholder={'Search category'} />
-							<button className='search'>
+							<button >
 								<FaSearch />
 							</button>
 						</div>
