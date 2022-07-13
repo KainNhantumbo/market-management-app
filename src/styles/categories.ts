@@ -93,6 +93,7 @@ export const CategoriesContainer = styled.div`
 				justify-content: space-between;
 				padding: 10px;
 				background: rgb(${({ theme }) => theme.backgroundAlt});
+				border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
 				align-items: center;
 				border-radius: 5px;
 				.actions {
