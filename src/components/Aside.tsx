@@ -1,27 +1,13 @@
 import React from 'react';
 import {
-	BiGridAlt,
 	FiActivity,
-	FiArchive,
 	FiBriefcase,
-	FiDatabase,
 	FiGrid,
 	FiHome,
 	FiPackage,
 	FiUser,
 	FiUsers,
-	HiDocumentReport,
-	HiOutlineDocument,
-	HiUsers,
-	HiViewGrid,
 } from 'react-icons/all';
-import {
-	FaEnvelopeOpen,
-	FaLayerGroup,
-	FaNewspaper,
-	FaUsers,
-	FaUsersCog,
-} from 'react-icons/fa';
 import { AsideContainer as Container } from '../styles/components/aside';
 import { Link } from 'react-router-dom';
 

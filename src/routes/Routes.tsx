@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import CompanySetup from '../pages/CompanySetup';
 import Dashboard from '../pages/admin/Dashboard';
+import Categories from '../pages/admin/Categories';
 
 export default function Routes(): JSX.Element {
 	return (
@@ -12,6 +13,7 @@ export default function Routes(): JSX.Element {
 			<Route path='/' element={<Home />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/admin/dashboard' element={<Dashboard />} />
+			<Route path='/admin/categories' element={<Categories />} />
 			<Route path='/create-account' element={<Register />} />
 			<Route path='/company-setup' element={<CompanySetup />} />
 		</Roots>
