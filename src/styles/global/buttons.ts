@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export const BaseButton = css`
 	border: none;
 	background: none;
-	border-radius: 3px;
+	border-radius: 5px;
 	position: relative;
 	padding: 7px 10px;
 	color: rgb(${({ theme }) => theme.font});
@@ -32,7 +32,7 @@ export const BaseButton = css`
 export const ButtonA = css`
 	border: none;
 	background: rgb(${({ theme }) => theme.primary});
-	border-radius: 3px;
+	border-radius: 5px;
 	position: relative;
 	padding: 7px 10px;
 	color: rgb(${({ theme }) => theme.text});
@@ -61,7 +61,7 @@ export const ButtonA = css`
 export const ButtonB = css`
 	border: none;
 	background: rgb(${({ theme }) => theme.primary});
-	border-radius: 3px;
+	border-radius: 5px;
 	position: relative;
 	padding: 7px 10px;
 	color: rgb(${({ theme }) => theme.text});

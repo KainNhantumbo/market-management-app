@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import { BaseButton, ButtonA } from './buttons';
 
-export const Labels = css`
+export const StyledLabels = css`
 	font-weight: 500;
 	display: inline;
 	position: relative;
@@ -21,7 +21,7 @@ export const Labels = css`
 	}
 `;
 
-export const Inputs = css`
+export const StyledInputs = css`
 	input,
 	select {
 		width: 100%;

@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
 import {
 	FaEdit,
-	FaPaperPlane,
 	FaSearch,
 	FaTrashAlt,
+	HiFolderAdd,
 	HiSave,
 } from 'react-icons/all';
-import { BiSend } from 'react-icons/bi';
 
 interface CategoriesProps {
 	name: string;
@@ -34,7 +33,7 @@ export default function Categories(): JSX.Element {
 						<h2>Categories</h2>
 						<div className='search'>
 							<input type={'search'} placeholder={'Search category'} />
-							<button >
+							<button>
 								<FaSearch />
 							</button>
 						</div>
@@ -42,36 +41,42 @@ export default function Categories(): JSX.Element {
 
 					<form>
 						<label>
+							<HiFolderAdd />
 							<span>Add new product category</span>
 						</label>
-						<input
-							type='text'
-							name='category'
-							placeholder='Type the product category name.'
-							max-maxLength={250}
-						/>
-						<button type='submit'>
-							<HiSave />
-							<span>Save</span>
-						</button>
+						<section>
+							<input
+								type='text'
+								name='category'
+								placeholder='Type the product category name.'
+								max-maxLength={250}
+							/>
+							<button type='submit'>
+								<HiSave />
+								<span>Save</span>
+							</button>
+						</section>
 					</form>
 				</section>
+
 				<article>
-					{categoriesData.map((category) => {
-						return (
-							<section key={category.id} className='category'>
-								<div>{category.name}</div>
-								<div className='actions'>
-									<button className='edit'>
-										<FaEdit />
-									</button>
-									<button className='destroy'>
-										<FaTrashAlt />
-									</button>
-								</div>
-							</section>
-						);
-					})}
+					<section className='category-container'>
+						{categoriesData.map((category) => {
+							return (
+								<section key={category.id} className='category'>
+									<div>{category.name}</div>
+									<div className='actions'>
+										<button className='edit'>
+											<FaEdit />
+										</button>
+										<button className='destroy'>
+											<FaTrashAlt />
+										</button>
+									</div>
+								</section>
+							);
+						})}
+					</section>
 				</article>
 			</main>
 		</Container>
