@@ -1,11 +1,11 @@
 import { ThemeType } from './ThemeTypes';
 
 export const primary: ThemeType = {
-	primary: '0, 174, 239',
-	secondary: '128, 102, 149',
+	primary: '50, 54, 57',
+	secondary: '234, 102, 0',
 	alter: '205, 93, 125',
 	alterAlt: '234, 144, 122',
-	hover: '232, 240, 254',
+	hover: '42, 39, 68',
 	font: '95, 99, 104',
 	inner: '241, 243, 244',
 	text: '255, 255, 255',
@@ -19,7 +19,7 @@ export const dark: ThemeType = {
 	secondary: '64, 52, 82',
 	alter: '205, 93, 125',
 	alterAlt: '234, 144, 122',
-	hover: '88, 65, 83',
+	hover: '42, 39, 68',
 	font: '178, 177, 185',
 	inner: '55, 55, 55',
 	text: '240, 240,240',

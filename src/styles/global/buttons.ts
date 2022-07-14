@@ -11,7 +11,7 @@ export const BaseButton = css`
 	width: fit-content;
 	cursor: pointer;
 	:hover {
-		color: rgb(${({ theme }) => theme.alter});
+		color: rgb(${({ theme }) => theme.alterAlt});
 		transition: all 200ms ease-in-out;
 	}
 	svg {

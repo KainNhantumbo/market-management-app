@@ -5,7 +5,7 @@ export const AsideContainer = styled.aside`
 	top: 0;
 	left: 0;
 	z-index: 1000;
-	background: rgb(${({ theme }) => theme.backgroundAlt});
+	background: rgb(${({ theme }) => theme.hover});
 	box-shadow: 0 0 2px rgb(${({ theme }) => theme.shadows});
 	height: 100vh;
 
@@ -27,9 +27,11 @@ export const AsideContainer = styled.aside`
 			li {
 				position: relative;
 				padding: 10px;
+				color: rgb(${({ theme }) => theme.text});
+
 
 				:hover {
-					color: rgb(${({ theme }) => theme.alter});
+					color: rgb(${({ theme }) => theme.alterAlt});
 					cursor: pointer;
 				}
 				span {

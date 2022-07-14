@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import CompanySetup from '../pages/CompanySetup';
 import Dashboard from '../pages/admin/Dashboard';
 import Categories from '../pages/admin/Categories';
+import Profile from '../pages/admin/Profile';
 
 export default function Routes(): JSX.Element {
 	return (
@@ -14,6 +15,7 @@ export default function Routes(): JSX.Element {
 			<Route path='/login' element={<Login />} />
 			<Route path='/admin/dashboard' element={<Dashboard />} />
 			<Route path='/admin/categories' element={<Categories />} />
+			<Route path='/admin/profile' element={<Profile />} />
 			<Route path='/create-account' element={<Register />} />
 			<Route path='/company-setup' element={<CompanySetup />} />
 		</Roots>

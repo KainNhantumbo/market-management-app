@@ -1,19 +1,10 @@
 import styled from 'styled-components';
 import { ButtonA, ButtonB } from './global/buttons';
 import { StyledInputs, StyledLabels } from './global/form';
+import { InitialStyles } from './global/page';
 
 export const CategoriesContainer = styled.div`
-	width: 100vw;
-	min-height: 100vh;
-	position: relative;
-	padding: 75px 0 30px 160px;
-	display: flex;
-	justify-content: space-between;
-	gap: 10px;
-
-	@media screen and (max-width: 460px) {
-		padding: 75px 0 30px 70px;
-	}
+	${InitialStyles}
 
 	main {
 		display: flex;

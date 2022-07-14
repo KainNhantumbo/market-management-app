@@ -7,9 +7,11 @@ export default function Dashboard() {
 		<Container>
 			<Aside />
 			<Header location='Dashboard' />
-			<article className='page'>
-				<section className='cards-container'>d</section>
-			</article>
+			<main>
+				<article className='page'>
+					<section className='cards-container'>d</section>
+				</article>
+			</main>
 		</Container>
 	);
 }
