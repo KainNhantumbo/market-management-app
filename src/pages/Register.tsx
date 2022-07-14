@@ -181,7 +181,7 @@ export default function Register() {
 									<input
 										type='number'
 										name='age'
-										placeholder='Type your age here'
+										placeholder='Type your age here.'
 										required
 										onChange={(e) => handleChange(e)}
 									/>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton, ButtonA } from './global/buttons';
+import { BaseButton, ButtonA, ButtonDanger } from './global/buttons';
 import { StyledInputs, StyledLabels } from './global/form';
 import { InitialStyles } from './global/page';
 
@@ -18,6 +18,10 @@ export const ProfileContainer = styled.div`
 			line-height: 1.6rem;
 			font-weight: 500;
       align-self: flex-start;
+
+			p {
+				font-size: .9rem;
+			}
 		}
 
 		article {
@@ -81,6 +85,9 @@ export const ProfileContainer = styled.div`
 					}
 					.login {
 						${ButtonA}
+					}
+					.delete {
+						${ButtonDanger}
 					}
 				}
 			}

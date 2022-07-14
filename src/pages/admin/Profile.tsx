@@ -18,27 +18,47 @@ import {
 	FaUserGraduate,
 	FiCheck,
 	FiEdit,
+	FiTrash2,
 } from 'react-icons/all';
 import type { FormSubmit, Inputs } from '../../types/form';
 
-interface UserData {
-	username: string;
+interface ProfileData {
 	password: string;
+	confirm_password: string;
+	phone: string;
+	adress: string;
+	gender: string;
+	age: string;
+	department: string;
+	qualification: string;
+	email: string;
+	user_name: string;
+	last_name: string;
+	first_name: string;
 }
 
 export default function Profile() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
-	const [isEditable, setIsEditable] = useState(false);
-
-	const [formData, setFormData] = useState<UserData>({
-		username: '',
-		password: '',
-	});
+	const [isEditable, setIsEditable] = useState(true);
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
+	const [profileData, setProfileData] = useState<ProfileData>({
+		password: '',
+		confirm_password: '',
+		phone: '',
+		adress: '',
+		gender: '',
+		age: '',
+		department: '',
+		qualification: '',
+		email: '',
+		user_name: '',
+		last_name: '',
+		first_name: '',
+	});
 
 	const handleChange = (e: Inputs): void => {
-		setFormData((prevData) => ({
+		setProfileData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
@@ -58,7 +78,7 @@ export default function Profile() {
 			displayErrors(err.response.data.message);
 		}
 	};
-  
+
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {
@@ -73,8 +93,9 @@ export default function Profile() {
 			<main>
 				<section className='upper-container'>
 					<h2>
-						<span>General information</span>
+						<span>Account information</span>
 					</h2>
+					<p>Here you can see and modify your account details.</p>
 				</section>
 				<article className='content-container'>
 					<form onSubmit={handleSubmit}>
@@ -89,6 +110,8 @@ export default function Profile() {
 									placeholder='Type your first name here.'
 									name='first_name'
 									required
+									value={profileData.first_name}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -102,6 +125,8 @@ export default function Profile() {
 									placeholder='Type your last name here.'
 									name='last_name'
 									required
+									value={profileData.last_name}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -117,7 +142,9 @@ export default function Profile() {
 									type='text'
 									placeholder='Type your username here.'
 									name='user_name'
+									value={profileData.user_name}
 									required
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -131,6 +158,8 @@ export default function Profile() {
 									placeholder='Type your e-mail here.'
 									name='email'
 									required
+									value={profileData.email}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -146,6 +175,8 @@ export default function Profile() {
 									type='text'
 									name='qualification'
 									required
+									disabled={isEditable}
+									value={profileData.qualification}
 									placeholder='Type your qualification here.'
 									onChange={(e) => handleChange(e)}
 								/>
@@ -159,6 +190,8 @@ export default function Profile() {
 									type='text'
 									required
 									name='department'
+									value={profileData.department}
+									disabled={isEditable}
 									placeholder='Type your department here.'
 									onChange={(e) => handleChange(e)}
 								/>
@@ -176,6 +209,8 @@ export default function Profile() {
 									name='age'
 									placeholder='Type your age here'
 									required
+									value={profileData.age}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -188,6 +223,8 @@ export default function Profile() {
 									name='gender'
 									defaultValue={'Male'}
 									defaultChecked={true}
+									disabled={isEditable}
+									value={profileData.gender}
 									onChange={(e) => handleChange(e)}
 								>
 									<option value='Male'>Male</option>
@@ -206,6 +243,8 @@ export default function Profile() {
 									type='text'
 									name='adress'
 									placeholder='Type your adress here.'
+									disabled={isEditable}
+									value={profileData.adress}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -219,38 +258,46 @@ export default function Profile() {
 									name='phone'
 									maxLength={30}
 									required
+									disabled={isEditable}
+									value={profileData.phone}
 									placeholder='Type your phone number.'
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
 						</section>
 
-						<section className='form-section'>
-							<div className='form-element'>
-								<label>
-									<FaUnlock />
-									<span>Password</span>
-								</label>
-								<input
-									type='password'
-									name='password'
-									placeholder='Type your password here.'
-									onChange={(e) => handleChange(e)}
-								/>
-							</div>
-							<div className='form-element'>
-								<label>
-									<FaLock />
-									<span>Confirm Password</span>
-								</label>
-								<input
-									type='confirm_password'
-									name='confirm_password'
-									placeholder='Confirm your password.'
-									onChange={(e) => handleChange(e)}
-								/>
-							</div>
-						</section>
+						{isBtnUpdate ? (
+							<section className='form-section'>
+								<div className='form-element'>
+									<label>
+										<FaUnlock />
+										<span>Password</span>
+									</label>
+									<input
+										type='password'
+										name='password'
+										disabled={isEditable}
+										value={profileData.password}
+										placeholder='Type your password here.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+								<div className='form-element'>
+									<label>
+										<FaLock />
+										<span>Confirm Password</span>
+									</label>
+									<input
+										type='confirm_password'
+										name='confirm_password'
+										disabled={isEditable}
+										value={profileData.qualification}
+										placeholder='Confirm your password.'
+										onChange={(e) => handleChange(e)}
+									/>
+								</div>
+							</section>
+						) : null}
 
 						<span className='errorMessage'>{errorMessage}</span>
 
@@ -271,6 +318,11 @@ export default function Profile() {
 									<span>Update</span>
 								</button>
 							) : null}
+
+							<button className='delete'>
+								<FiTrash2 />
+								<span>Delete Account</span>
+							</button>
 						</section>
 					</form>
 				</article>

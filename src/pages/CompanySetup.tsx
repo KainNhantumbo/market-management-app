@@ -101,7 +101,7 @@ export default function CompanySetup() {
 									</label>
 									<input
 										type='text'
-										placeholder='Type the company group here.'
+										placeholder='Type the company group here'
 										name='group'
 										required
 										onChange={(e) => handleChange(e)}
@@ -120,7 +120,7 @@ export default function CompanySetup() {
 										name='phone'
 										maxLength={30}
 										required
-										placeholder='Type your phone number.'
+										placeholder='Type your phone number'
 										onChange={(e) => handleChange(e)}
 									/>
 								</div>
@@ -131,7 +131,7 @@ export default function CompanySetup() {
 									</label>
 									<input
 										type='email'
-										placeholder='Type your e-mail here.'
+										placeholder='Type your e-mail here'
 										name='email'
 										required
 										onChange={(e) => handleChange(e)}
@@ -149,7 +149,7 @@ export default function CompanySetup() {
 										type='text'
 										name='adress'
 										required
-										placeholder='Type company adress here.'
+										placeholder='Type company adress here'
 										onChange={(e) => handleChange(e)}
 									/>
 								</div>
@@ -495,7 +495,7 @@ export default function CompanySetup() {
 									<textarea
 										cols={30}
 										rows={7}
-										placeholder='Type description here.'
+										placeholder='Type company description here'
 										name='description'
 										required
 										onChange={(e) => handleChange(e)}

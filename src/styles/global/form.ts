@@ -32,10 +32,17 @@ export const StyledInputs = css`
 		font-weight: 500;
 		outline: none;
 		border-radius: 5px;
+		background: rgb(${({ theme }) => theme.inner});
 		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		::placeholder {
 			color: rgba(${({ theme }) => theme.font}, 0.5);
 			font-size: 0.9rem;
+		}
+		:disabled {
+			background: none;
+			::placeholder {
+				color: transparent;
+			}
 		}
 	}
 

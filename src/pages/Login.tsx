@@ -7,13 +7,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 interface UserData {
-	username: string;
+	user_name: string;
 	password: string;
 }
 
 const Login: FC = (): JSX.Element => {
 	const [formData, setFormData] = useState<UserData>({
-		username: '',
+		user_name: '',
 		password: '',
 	});
 	const [errorMessage, setErrorMessage] = useState('');
@@ -76,7 +76,7 @@ const Login: FC = (): JSX.Element => {
 							<input
 								type='text'
 								placeholder='Type your username here.'
-								name='username'
+								name='user_name'
 								required
 								onChange={(e) => handleChange(e)}
 							/>

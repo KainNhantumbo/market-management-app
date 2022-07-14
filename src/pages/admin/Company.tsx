@@ -26,7 +26,7 @@ export default function Company() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
 	const [isEditable, setIsEditable] = useState(false);
 
-	const [formData, setFormData] = useState<UserData>({
+	const [companyData, setCompanyData] = useState<UserData>({
 		username: '',
 		password: '',
 	});
@@ -34,7 +34,7 @@ export default function Company() {
 	const navigate = useNavigate();
 
 	const handleChange = (e: Inputs): void => {
-		setFormData((prevData) => ({
+		setCompanyData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
@@ -69,8 +69,9 @@ export default function Company() {
 			<main>
 				<section className='upper-container'>
 					<h2>
-						<span>General information</span>
+						<span>Company information</span>
 					</h2>
+          <p>Here you can see and modify your company details.</p>
 				</section>
 				<article>
 					<form onSubmit={handleSubmit}>
