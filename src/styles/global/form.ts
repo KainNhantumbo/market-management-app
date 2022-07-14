@@ -45,7 +45,6 @@ export const StyledInputs = css`
 			}
 		}
 	}
-
 	textarea {
 		resize: none;
 	}
@@ -55,57 +54,55 @@ export const StyledInputs = css`
 `;
 
 export const FormDivisions = css`
-	.form-container {
-		width: 100%;
-		max-width: 700px;
-		display: flex;
-		gap: 20px;
-		justify-content: flex-start;
-		flex-direction: column;
-		background: rgb(${({ theme }) => theme.backgroundAlt});
-		border-radius: 3px;
-		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
-		padding: 40px 30px;
+	width: 100%;
+	max-width: 700px;
+	display: flex;
+	gap: 20px;
+	justify-content: flex-start;
+	flex-direction: column;
+	background: rgb(${({ theme }) => theme.backgroundAlt});
+	border-radius: 3px;
+	border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
+	padding: 40px 30px;
 
-		@media screen and (max-width: 340px) {
-			padding: 40px 15px;
+	@media screen and (max-width: 340px) {
+		padding: 40px 15px;
 
-			form {
+		form {
+			display: flex;
+			justify-content: flex-start;
+			flex-direction: column;
+			gap: 15px;
+
+			.form-section {
 				display: flex;
-				justify-content: flex-start;
-				flex-direction: column;
-				gap: 15px;
+				flex-direction: row;
+				width: 100%;
+				gap: 10px;
 
-				.form-section {
+				@media screen and (max-width: 655px) {
+					flex-direction: column;
+				}
+
+				.form-element {
 					display: flex;
-					flex-direction: row;
+					flex-direction: column;
 					width: 100%;
-					gap: 10px;
-
-					@media screen and (max-width: 655px) {
-						flex-direction: column;
-					}
-
-					.form-element {
-						display: flex;
-						flex-direction: column;
-						width: 100%;
-						gap: 5px;
-					}
+					gap: 5px;
 				}
+			}
 
-				.errorMessage {
-					color: rgb(${({ theme }) => theme.alter});
-					font-weight: 500;
-					font-size: 0.9rem;
-				}
+			.errorMessage {
+				color: rgb(${({ theme }) => theme.alter});
+				font-weight: 500;
+				font-size: 0.9rem;
+			}
 
-				.actions {
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: flex-start;
-					gap: 10px;
-				}
+			.actions {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: flex-start;
+				gap: 10px;
 			}
 		}
 	}

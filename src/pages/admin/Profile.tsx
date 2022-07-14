@@ -131,7 +131,6 @@ export default function Profile() {
 								/>
 							</div>
 						</section>
-
 						<section className='form-section'>
 							<div className='form-element'>
 								<label>

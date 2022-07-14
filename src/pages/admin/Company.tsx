@@ -1,3 +1,5 @@
+import Aside from '../../components/Aside';
+import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { useNavigate } from 'react-router-dom';
@@ -14,24 +16,31 @@ import {
 	FiCheck,
 	FiEdit,
 } from 'react-icons/all';
-import Header from '../../components/Header';
-import Aside from '../../components/Aside';
 
-interface UserData {
-	username: string;
-	password: string;
+interface CompanyData {
+	name: string;
+	group: string;
+	phone: string;
+	adress: string;
+	country: string;
+	description: string;
+	email: string;
 }
 
 export default function Company() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
-	const [isEditable, setIsEditable] = useState(false);
-
-	const [companyData, setCompanyData] = useState<UserData>({
-		username: '',
-		password: '',
-	});
+	const [isEditable, setIsEditable] = useState(true);
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
+	const [companyData, setCompanyData] = useState<CompanyData>({
+		name: '',
+		group: '',
+		phone: '',
+		adress: '',
+		country: '',
+		description: '',
+		email: '',
+	});
 
 	const handleChange = (e: Inputs): void => {
 		setCompanyData((prevData) => ({
@@ -71,7 +80,7 @@ export default function Company() {
 					<h2>
 						<span>Company information</span>
 					</h2>
-          <p>Here you can see and modify your company details.</p>
+					<p>Here you can see and modify your company details.</p>
 				</section>
 				<article>
 					<form onSubmit={handleSubmit}>
@@ -86,6 +95,8 @@ export default function Company() {
 									placeholder='Type company name'
 									name='name'
 									required
+									disabled={isEditable}
+									value={companyData.name}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -99,6 +110,8 @@ export default function Company() {
 									placeholder='Type the company group here.'
 									name='group'
 									required
+									value={companyData.group}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
@@ -115,6 +128,8 @@ export default function Company() {
 									name='phone'
 									maxLength={30}
 									required
+									disabled={isEditable}
+									value={companyData.phone}
 									placeholder='Type your phone number.'
 									onChange={(e) => handleChange(e)}
 								/>
@@ -128,6 +143,8 @@ export default function Company() {
 									type='email'
 									placeholder='Type your e-mail here.'
 									name='email'
+									value={companyData.email}
+									disabled={isEditable}
 									required
 									onChange={(e) => handleChange(e)}
 								/>
@@ -144,6 +161,8 @@ export default function Company() {
 									type='text'
 									name='adress'
 									required
+									disabled={isEditable}
+									value={companyData.adress}
 									placeholder='Type company adress here.'
 									onChange={(e) => handleChange(e)}
 								/>
@@ -154,9 +173,10 @@ export default function Company() {
 									<span>Country</span>
 								</label>
 								<select
-									defaultValue={'Australia'}
+									defaultValue={companyData.country}
 									defaultChecked={true}
 									required
+									disabled={isEditable}
 									name='country'
 									onChange={handleChange}
 								>
@@ -489,6 +509,8 @@ export default function Company() {
 									placeholder='Type description here.'
 									name='description'
 									required
+									value={companyData.description}
+									disabled={isEditable}
 									onChange={(e) => handleChange(e)}
 								/>
 							</div>
