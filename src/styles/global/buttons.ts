@@ -69,7 +69,7 @@ export const ButtonB = css`
 	cursor: pointer;
 	display: grid;
 	place-content: center;
-	
+
 	:hover {
 		color: rgb(${({ theme }) => theme.text});
 		transition: all 200ms ease-in-out;

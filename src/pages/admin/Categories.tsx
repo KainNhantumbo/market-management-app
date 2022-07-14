@@ -4,9 +4,11 @@ import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
 import {
 	FaEdit,
+	FaPlus,
 	FaSearch,
 	FaTrashAlt,
-	HiFolderAdd,
+	FiEdit,
+	FiTrash,
 	HiSave,
 } from 'react-icons/all';
 import fetchAPI from '../../utils/fetchdata';
@@ -54,7 +56,7 @@ export default function Categories(): JSX.Element {
 
 					<form>
 						<label>
-							<HiFolderAdd />
+							<FaPlus />
 							<span>Add new product category</span>
 						</label>
 						<section>
@@ -79,11 +81,11 @@ export default function Categories(): JSX.Element {
 								<section key={category.id} className='category'>
 									<div>{category.name}</div>
 									<div className='actions'>
-										<button className='edit'>
-											<FaEdit />
+										<button className='edit' title='Edit'>
+											<FiEdit />
 										</button>
-										<button className='destroy'>
-											<FaTrashAlt />
+										<button className='destroy' title='Delete'>
+											<FiTrash />
 										</button>
 									</div>
 								</section>

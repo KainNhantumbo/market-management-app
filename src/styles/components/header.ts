@@ -11,14 +11,14 @@ export const HeaderContainer = styled.header`
 	align-items: center;
 	gap: 5px;
 	background: rgb(${({ theme }) => theme.backgroundAlt});
-	box-shadow: 0 0 12px rgba(${({ theme }) => theme.shadows}, 0.6);
+	border-bottom: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 	z-index: 5000;
 
 	.brand {
 		position: relative;
 		color: rgb(${({ theme }) => theme.primary});
 		cursor: pointer;
-		
+
 		span {
 			font-weight: 600;
 			text-align: center;
@@ -42,6 +42,7 @@ export const HeaderContainer = styled.header`
 		cursor: pointer;
 		display: grid;
 		place-content: center;
+		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		svg {
 			width: 20px;
 			height: 20px;

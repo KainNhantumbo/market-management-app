@@ -10,7 +10,7 @@ export const AsideContainer = styled.aside`
 	height: 100vh;
 
 	nav {
-		margin-top: 80px;
+		margin-top: 70px;
 
 		ul {
 			display: flex;
@@ -28,7 +28,6 @@ export const AsideContainer = styled.aside`
 				position: relative;
 				padding: 10px;
 				color: rgb(${({ theme }) => theme.text});
-
 
 				:hover {
 					color: rgb(${({ theme }) => theme.alterAlt});
