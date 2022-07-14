@@ -34,13 +34,11 @@ export const LoginContainer = styled.div`
 
 	article {
 		width: 100%;
-		@media screen and (max-width: 340px) {
-			padding: 40px 15px;
-		}
+		padding: 0 20px;
 
 		.form-container {
 			width: 100%;
-			max-width: 700px;
+			max-width: 500px;
 			display: flex;
 			gap: 20px;
 			justify-content: flex-start;
@@ -48,10 +46,10 @@ export const LoginContainer = styled.div`
 			background: rgb(${({ theme }) => theme.backgroundAlt});
 			border-radius: 3px;
 			border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
-			padding: 40px;
+			padding: 40px 20px;
 
-			@media screen and (max-width: 340px) {
-				padding: 40px 15px;
+			@media screen and (min-width: 440px ){
+				min-width: 400px;
 			}
 
 			.message {
@@ -107,7 +105,9 @@ export const LoginContainer = styled.div`
 		justify-content: center;
 		gap: 10px;
 		font-weight: 500;
+		margin: 0 10px;
 		margin-bottom: 20px;
+
 		i {
 			color: rgb(${({ theme }) => theme.primary});
 		}

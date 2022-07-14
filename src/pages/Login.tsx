@@ -1,10 +1,9 @@
 import { LoginContainer as Container } from '../styles/login';
 import { FC, useState } from 'react';
-import type { ChangeEvent } from 'react';
-import { BiLogIn } from 'react-icons/bi';
-import { FaLock, FaUser } from 'react-icons/fa';
-import axios from 'axios';
+import { FaLock, FaUser, BiLogIn } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
+import { FormSubmit, Inputs } from '../types/form';
+import fetchAPI from '../utils/fetchdata';
 
 interface UserData {
 	user_name: string;
@@ -19,32 +18,41 @@ const Login: FC = (): JSX.Element => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
 	};
 
-	const handleSubmit = async (
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await axios({});
-			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
+			const { data: user } = await fetchAPI({
+				method: 'post',
+				url: '/auth/login',
+				data: formData,
+			});
+			console.log(user);
+
+			localStorage.setItem(
+				'accessToken',
+				JSON.stringify({ token: user.token })
+			);
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
 		}
 	};
+
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {
 			setErrorMessage('');
 		}, 3000);
 	};
+
 	return (
 		<Container>
 			<header className='upper-container'>
