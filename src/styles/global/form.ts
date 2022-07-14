@@ -23,6 +23,7 @@ export const StyledLabels = css`
 
 export const StyledInputs = css`
 	input,
+	textarea,
 	select {
 		width: 100%;
 		border: none;
@@ -31,12 +32,15 @@ export const StyledInputs = css`
 		font-weight: 500;
 		outline: none;
 		border-radius: 5px;
-		border: 1px solid transparent;
-
+		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		::placeholder {
 			color: rgba(${({ theme }) => theme.font}, 0.5);
 			font-size: 0.9rem;
 		}
+	}
+
+	textarea {
+		resize: none;
 	}
 
 	select {

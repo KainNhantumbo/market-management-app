@@ -54,6 +54,7 @@ export default function Register() {
 			displayErrors(err.response.data.message);
 		}
 	};
+	
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {

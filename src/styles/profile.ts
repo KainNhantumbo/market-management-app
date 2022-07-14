@@ -25,7 +25,6 @@ export const ProfileContainer = styled.div`
 			max-width: 900px;
 			display: flex;
 			gap: 20px;
-			justify-content: flex-start;
 			flex-direction: column;
 			background: rgb(${({ theme }) => theme.backgroundAlt});
 			border-radius: 3px;

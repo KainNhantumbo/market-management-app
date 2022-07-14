@@ -1,4 +1,3 @@
-import { BiLogInCircle, BiSync } from 'react-icons/bi';
 import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { ProfileContainer as Container } from '../../styles/profile';
@@ -7,20 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import fetchAPI from '../../utils/fetchdata';
 import {
 	FaAddressCard,
-	FaEdit,
 	FaEnvelope,
 	FaGenderless,
 	FaLock,
 	FaPhoneAlt,
 	FaSuperpowers,
-	FaSync,
-	FaSyncAlt,
 	FaUnlock,
 	FaUser,
 	FaUserEdit,
 	FaUserFriends,
 	FaUserGraduate,
-	FaUserLock,
 	FiCheck,
 	FiEdit,
 } from 'react-icons/all';
@@ -217,15 +212,15 @@ export default function Profile() {
 								<label>
 									<FaPhoneAlt />
 									<span>Phone</span>
-									<input
-										type='number'
-										name='phone'
-										maxLength={30}
-										required
-										placeholder='Type your phone number.'
-										onChange={(e) => handleChange(e)}
-									/>
 								</label>
+								<input
+									type='number'
+									name='phone'
+									maxLength={30}
+									required
+									placeholder='Type your phone number.'
+									onChange={(e) => handleChange(e)}
+								/>
 							</div>
 						</section>
 
