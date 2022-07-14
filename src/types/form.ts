@@ -1,6 +1,8 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from 'react';
 
 export type Inputs =
 	| ChangeEvent<HTMLInputElement>
-	| React.ChangeEvent<HTMLSelectElement>
+	| ChangeEvent<HTMLSelectElement>
 	| ChangeEvent<HTMLTextAreaElement>;
+
+export type FormSubmit = FormEvent<HTMLFormElement>;

@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { useState, ChangeEvent } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegisterContainer as Container } from '../styles/register';
 import {
@@ -11,13 +9,15 @@ import {
 	FaPhoneAlt,
 	FaSuperpowers,
 	FaUnlock,
+	FaUnlockAlt,
 	FaUser,
 	FaUserEdit,
 	FaUserFriends,
 	FaUserGraduate,
-	FaUserLock,
-} from 'react-icons/fa';
-import { BiLogInCircle } from 'react-icons/bi';
+	BiLogInCircle,
+} from 'react-icons/all';
+import { FormSubmit, Inputs } from '../types/form';
+import fetchAPI from '../utils/fetchdata';
 
 interface UserData {
 	username: string;
@@ -32,29 +32,28 @@ export default function Register() {
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
-	): void => {
+	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
 	};
 
-	const handleSubmit = async (
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await axios({});
-			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
+			const { data: user } = await fetchAPI({});
+			localStorage.setItem(
+				'accessToken',
+				JSON.stringify({ token: user.token })
+			);
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
 		}
 	};
-	
+
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {
@@ -221,15 +220,15 @@ export default function Register() {
 									<label>
 										<FaPhoneAlt />
 										<span>Phone</span>
-										<input
-											type='number'
-											name='phone'
-											maxLength={30}
-											required
-											placeholder='Type your phone number.'
-											onChange={(e) => handleChange(e)}
-										/>
 									</label>
+									<input
+										type='number'
+										name='phone'
+										maxLength={30}
+										required
+										placeholder='Type your phone number.'
+										onChange={(e) => handleChange(e)}
+									/>
 								</div>
 							</section>
 
@@ -268,7 +267,7 @@ export default function Register() {
 									<span>Next</span>
 								</button>
 								<button className='login' onClick={() => navigate('/login')}>
-									<FaUserLock />
+									<FaUnlockAlt />
 									<span>Login</span>
 								</button>
 							</section>

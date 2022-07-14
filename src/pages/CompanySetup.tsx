@@ -1,8 +1,7 @@
-import * as React from 'react';
 import { CompanySetupContainer as Container } from '../styles/company-setup';
-import { useState, ChangeEvent } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { FormSubmit, Inputs } from '../types/form';
 import {
 	FaAddressCard,
 	FaCheck,
@@ -12,9 +11,8 @@ import {
 	FaLayerGroup,
 	FaLocationArrow,
 	FaPhoneAlt,
-	FaUserLock,
 } from 'react-icons/fa';
-import { BiLogInCircle, BiMap, BiTargetLock } from 'react-icons/bi';
+import fetchAPI from '../utils/fetchdata';
 
 interface CompanyData {
 	username: string;
@@ -29,22 +27,21 @@ export default function CompanySetup() {
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
-	): void => {
+	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
 	};
 
-	const handleSubmit = async (
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await axios({});
-			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
+			const { data: user } = await fetchAPI({});
+			localStorage.setItem(
+				'accessToken',
+				JSON.stringify({ token: user.token })
+			);
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);
@@ -117,15 +114,15 @@ export default function CompanySetup() {
 									<label>
 										<FaPhoneAlt />
 										<span>Phone</span>
-										<input
-											type='number'
-											name='phone'
-											maxLength={30}
-											required
-											placeholder='Type your phone number.'
-											onChange={(e) => handleChange(e)}
-										/>
 									</label>
+									<input
+										type='number'
+										name='phone'
+										maxLength={30}
+										required
+										placeholder='Type your phone number.'
+										onChange={(e) => handleChange(e)}
+									/>
 								</div>
 								<div className='form-element'>
 									<label>
@@ -495,8 +492,9 @@ export default function CompanySetup() {
 										<FaDotCircle />
 										<span>Description</span>
 									</label>
-									<input
-										type='text'
+									<textarea
+										cols={30}
+										rows={7}
 										placeholder='Type description here.'
 										name='description'
 										required

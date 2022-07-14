@@ -1,7 +1,7 @@
 import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { ProfileContainer as Container } from '../../styles/profile';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import fetchAPI from '../../utils/fetchdata';
 import {
@@ -19,6 +19,7 @@ import {
 	FiCheck,
 	FiEdit,
 } from 'react-icons/all';
+import type { FormSubmit, Inputs } from '../../types/form';
 
 interface UserData {
 	username: string;
@@ -36,28 +37,28 @@ export default function Profile() {
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
 
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
-	): void => {
+	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
 	};
 
-	const handleSubmit = async (
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
 			const { data: user } = await fetchAPI({});
-			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
+			localStorage.setItem(
+				'accessToken',
+				JSON.stringify({ token: user.token })
+			);
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
 		}
 	};
+  
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {

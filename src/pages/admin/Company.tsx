@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { useNavigate } from 'react-router-dom';
 import fetchAPI from '../../utils/fetchdata';
-import type { Inputs } from '../../types/form';
+import type { FormSubmit, Inputs } from '../../types/form';
 import {
 	FaAddressCard,
 	FaDotCircle,
@@ -40,13 +40,14 @@ export default function Company() {
 		}));
 	};
 
-	const handleSubmit = async (
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
 			const { data: user } = await fetchAPI({});
-			localStorage.setItem('uminoToken', JSON.stringify({ token: user.token }));
+			localStorage.setItem(
+				'accessToken',
+				JSON.stringify({ token: user.token })
+			);
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { BaseButton, ButtonA } from './global/buttons';
+import { StyledInputs, StyledLabels } from './global/form';
 
 export const CompanySetupContainer = styled.div`
 	width: 100%;
-	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -19,7 +19,6 @@ export const CompanySetupContainer = styled.div`
 		gap: 10px;
 		background: rgb(${({ theme }) => theme.backgroundAlt});
 		font-weight: 600;
-		margin: 0;
 		h1 {
 			position: relative;
 			color: rgb(${({ theme }) => theme.primary});
@@ -89,45 +88,10 @@ export const CompanySetupContainer = styled.div`
 				}
 
 				label {
-					font-weight: 500;
-					display: inline;
-					position: relative;
-					line-height: 1.4rem;
-
-					svg {
-						width: 16px;
-						height: 16px;
-						position: absolute;
-						top: 2px;
-						left: 0;
-						color: rgb(${({ theme }) => theme.alterAlt});
-					}
-					span {
-						padding-left: 25px;
-						font-weight: 500;
-					}
+					${StyledLabels}
 				}
 
-				input,
-				select {
-					width: 100%;
-					border: none;
-					padding: 5px 10px;
-					line-height: 1.2rem;
-					font-weight: 500;
-					outline: none;
-					border-radius: 5px;
-					border: 1px solid transparent;
-
-					::placeholder {
-						color: rgba(${({ theme }) => theme.font}, 0.5);
-						font-size: 0.9rem;
-					}
-				}
-
-				select {
-					max-height: 32px;
-				}
+				${StyledInputs}
 
 				.errorMessage {
 					color: rgb(${({ theme }) => theme.alter});

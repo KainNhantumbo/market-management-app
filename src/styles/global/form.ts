@@ -42,7 +42,6 @@ export const StyledInputs = css`
 	textarea {
 		resize: none;
 	}
-
 	select {
 		max-height: 32px;
 	}
