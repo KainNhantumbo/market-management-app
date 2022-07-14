@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import { FaArrowLeft, FaFolder, FaFolderPlus } from 'react-icons/all';
 import { ModalWithInput as Container } from '../styles/components/modal-with-input';
 

@@ -9,6 +9,7 @@ import {
 	HiFolderAdd,
 	HiSave,
 } from 'react-icons/all';
+import fetchAPI from '../../utils/fetchdata';
 
 interface CategoriesProps {
 	name: string;
@@ -16,13 +17,24 @@ interface CategoriesProps {
 }
 
 export default function Categories(): JSX.Element {
-	const [category, setcategory] = useState<CategoriesProps>();
-	const [categoriesData, setCategoriesData] = useState<CategoriesProps[]>([
+	const [categories, setCategories] = useState<CategoriesProps[]>([
 		{ name: 'Acessories', id: 'tatr' },
 		{ name: 'Meal', id: 'torvals' },
 		{ name: 'Marlalela', id: 'kjbhasdjk' },
 	]);
 
+	async function getCategories(): Promise<void> {
+		try {
+			const { data } = await fetchAPI({ method: 'get', url: '/categories' });
+			console.log(data.data);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	useEffect(() => {
+		getCategories();
+	}, []);
 
 	return (
 		<Container>
@@ -62,7 +74,7 @@ export default function Categories(): JSX.Element {
 
 				<article>
 					<section className='category-container'>
-						{categoriesData.map((category) => {
+						{categories.map((category) => {
 							return (
 								<section key={category.id} className='category'>
 									<div>{category.name}</div>
