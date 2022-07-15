@@ -64,6 +64,15 @@ export default function Company() {
 		}
 	};
 
+	const handleUpdate = async ()=> {
+		try {
+			
+		} catch (err: any) {
+			console.log(err.message);
+			displayErrors(err.response.data.message);
+		}
+	}
+
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
 		setTimeout(() => {

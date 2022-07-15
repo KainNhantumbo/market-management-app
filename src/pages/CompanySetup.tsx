@@ -12,7 +12,7 @@ import {
 	FaLocationArrow,
 	FaPhoneAlt,
 } from 'react-icons/fa';
-import fetchAPI from '../utils/fetchdata';
+import { fetchAPI, getToken } from '../utils/fetchdata';
 
 interface CompanyData {
 	name: string;
@@ -47,10 +47,14 @@ export default function CompanySetup() {
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
+			const token = getToken();
 			await fetchAPI({
 				method: 'post',
 				url: '/company',
 				data: formData,
+				headers: {
+					authorization: token,
+				},
 			});
 			navigate('/admin/dashboard');
 		} catch (err: any) {

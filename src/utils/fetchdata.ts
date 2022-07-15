@@ -18,6 +18,4 @@ const fetchAPI = axios.create({
 	],
 });
 fetchAPI.defaults.headers.common['Accept'] = 'application/json';
-fetchAPI.defaults.headers.common['Authorization'] = getToken();
-
-export default fetchAPI;
+export { fetchAPI, getToken };
