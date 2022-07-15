@@ -33,13 +33,11 @@ const Login: FC = (): JSX.Element => {
 				url: '/auth/login',
 				data: formData,
 			});
-			console.log(user);
-
 			localStorage.setItem(
 				'accessToken',
 				JSON.stringify({ token: user.token })
 			);
-			navigate('/');
+			navigate('/admin/dashboard');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);

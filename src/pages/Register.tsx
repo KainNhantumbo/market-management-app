@@ -20,14 +20,34 @@ import { FormSubmit, Inputs } from '../types/form';
 import fetchAPI from '../utils/fetchdata';
 
 interface UserData {
-	username: string;
 	password: string;
+	confirm_password: string;
+	phone: string;
+	adress: string;
+	gender: string;
+	age: string;
+	department: string;
+	qualification: string;
+	email: string;
+	user_name: string;
+	last_name: string;
+	first_name: string;
 }
 
 export default function Register() {
 	const [formData, setFormData] = useState<UserData>({
-		username: '',
 		password: '',
+		confirm_password: '',
+		phone: '',
+		adress: '',
+		gender: '',
+		age: '',
+		department: '',
+		qualification: '',
+		email: '',
+		user_name: '',
+		last_name: '',
+		first_name: '',
 	});
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
@@ -39,15 +59,26 @@ export default function Register() {
 		}));
 	};
 
-	const handleSubmit = async (e: FormSubmit): Promise<void> => {
+	const handleSubmit = async (e: FormSubmit) => {
 		e.preventDefault();
+		if (formData.password !== formData.confirm_password) {
+			displayErrors('Passwords must match each other.');
+			return null;
+		} else if (formData.password.length < 6) {
+			displayErrors('Password must have at least 6 characteres.');
+			return null;
+		}
 		try {
-			const { data: user } = await fetchAPI({});
+			const { data: user } = await fetchAPI({
+				method: 'post',
+				url: '/auth/register',
+				data: formData,
+			});
 			localStorage.setItem(
 				'accessToken',
 				JSON.stringify({ token: user.token })
 			);
-			navigate('/');
+			navigate('/company-setup');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
