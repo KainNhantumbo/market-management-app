@@ -282,7 +282,7 @@ export default function Register() {
 										<span>Confirm Password</span>
 									</label>
 									<input
-										type='confirm_password'
+										type='password'
 										name='confirm_password'
 										placeholder='Confirm your password.'
 										onChange={(e) => handleChange(e)}

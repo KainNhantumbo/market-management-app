@@ -15,14 +15,24 @@ import {
 import fetchAPI from '../utils/fetchdata';
 
 interface CompanyData {
-	username: string;
-	password: string;
+	name: string;
+	group: string;
+	phone: string;
+	adress: string;
+	country: string;
+	description: string;
+	email: string;
 }
 
 export default function CompanySetup() {
 	const [formData, setFormData] = useState<CompanyData>({
-		username: '',
-		password: '',
+		name: '',
+		group: '',
+		phone: '',
+		adress: '',
+		country: '',
+		description: '',
+		email: '',
 	});
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
@@ -37,12 +47,12 @@ export default function CompanySetup() {
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await fetchAPI({});
-			localStorage.setItem(
-				'accessToken',
-				JSON.stringify({ token: user.token })
-			);
-			navigate('/');
+			await fetchAPI({
+				method: 'post',
+				url: '/company',
+				data: formData,
+			});
+			navigate('/admin/dashboard');
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
