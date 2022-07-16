@@ -35,7 +35,25 @@ export default function Categories(): JSX.Element {
 		}
 	}
 
-
+	async function handleSubmit(e: FormSubmit) {
+		e.preventDefault();
+		try {
+			const token = getToken();
+			await fetchAPI({
+				method: 'post',
+				url: '/categories',
+				data: formData,
+				headers: {
+					authorization: token,
+				},
+			});
+			getCategories();
+			setFormData(() => ({ name: '' }));
+			(e as any).target.reset();
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 
 
