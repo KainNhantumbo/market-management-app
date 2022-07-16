@@ -2,9 +2,8 @@ import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
-import { useNavigate } from 'react-router-dom';
 import { fetchAPI, getToken } from '../../utils/fetchdata';
-import type { FormSubmit, Inputs } from '../../types/form';
+import type { Inputs } from '../../types/form';
 import {
 	FaAddressCard,
 	FaDotCircle,
@@ -31,7 +30,6 @@ export default function Company() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
 	const [isEditable, setIsEditable] = useState(true);
 	const [errorMessage, setErrorMessage] = useState('');
-	const navigate = useNavigate();
 	const [companyData, setCompanyData] = useState<CompanyData>({
 		name: '',
 		group: '',
@@ -47,6 +45,12 @@ export default function Company() {
 			...prevData,
 			[e.target.name]: e.target.value,
 		}));
+	};
+
+	// sets the edit mode
+	const editFields = () => {
+		setIsEditable(!isEditable);
+		setIsBtnUpdate(!isBtnUpdate);
 	};
 
 	const getCompanyInfo = async (): Promise<void> => {
@@ -65,33 +69,19 @@ export default function Company() {
 		}
 	};
 
-	const handleSubmit = async (e: FormSubmit): Promise<void> => {
-		e.preventDefault();
+	const handleUpdate = async (): Promise<void> => {
 		try {
 			const token = getToken();
-			const { data } = await fetchAPI({
-				method: 'get',
+			await fetchAPI({
+				method: 'patch',
 				url: `/company`,
+				data: companyData,
 				headers: {
 					authorization: token,
 				},
 			});
-			navigate('/');
-		} catch (err: any) {
-			console.log(err.message);
-			displayErrors(err.response.data.message);
-		}
-	};
-
-	const handleUpdate = async () => {
-		try {
-		} catch (err: any) {
-			console.log(err.message);
-			displayErrors(err.response.data.message);
-		}
-	};
-	const handleDelete = async () => {
-		try {
+			editFields();
+			getCompanyInfo();
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
@@ -104,9 +94,11 @@ export default function Company() {
 			setErrorMessage('');
 		}, 3000);
 	};
+
 	useEffect(() => {
 		getCompanyInfo();
 	}, []);
+	
 	return (
 		<Container>
 			<Header location='Company' />
@@ -119,7 +111,7 @@ export default function Company() {
 					<p>Here you can see and modify your company details.</p>
 				</section>
 				<article>
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={(e) => e.preventDefault()}>
 						<section className='form-section'>
 							<div className='form-element'>
 								<label>
@@ -555,17 +547,14 @@ export default function Company() {
 
 						<section className='actions'>
 							{isBtnUpdate ? null : (
-								<button className='next'>
+								<button className='next' onClick={() => editFields()}>
 									<FiEdit />
 									<span>Edit</span>
 								</button>
 							)}
+
 							{isBtnUpdate ? (
-								<button
-									className='login'
-									type='submit'
-									onClick={() => navigate('/login')}
-								>
+								<button className='login' onClick={() => handleUpdate()}>
 									<FiCheck />
 									<span>Update</span>
 								</button>
