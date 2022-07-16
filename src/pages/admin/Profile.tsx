@@ -4,6 +4,7 @@ import { ProfileContainer as Container } from '../../styles/profile';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAPI, getToken } from '../../utils/fetchdata';
+import { calendarDate } from '../../utils/formatTime';
 import {
 	FaAddressCard,
 	FaEnvelope,
@@ -35,6 +36,8 @@ interface ProfileData {
 	user_name: string;
 	last_name: string;
 	first_name: string;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export default function Profile() {
@@ -55,6 +58,8 @@ export default function Profile() {
 		user_name: '',
 		last_name: '',
 		first_name: '',
+		updatedAt: '',
+		createdAt: '',
 	});
 
 	const handleChange = (e: Inputs): void => {
@@ -64,20 +69,31 @@ export default function Profile() {
 		}));
 	};
 
-	const handleSubmit = async (e: FormSubmit): Promise<void> => {
-		e.preventDefault();
+	const handleUpdate = async (): Promise<void> => {
 		try {
-			const { data: user } = await fetchAPI({});
-			localStorage.setItem(
-				'accessToken',
-				JSON.stringify({ token: user.token })
-			);
-			navigate('/');
+			const token = getToken();
+			const { data: user } = await fetchAPI({ method: 'patch' });
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
 		}
 	};
+
+	// const getProfileInfo = async () => {
+	// 	try {
+	// 		const token = getToken()
+	// 		const { data } = await fetchAPI({
+	// 			method: 'get',
+	// 			url: '/users',
+	// 			headers: {
+	// 				authorization: token,
+	// 			},
+	// 		});
+	// 		setProfileData(data.data)
+	// 	} catch (err) {
+	// 		console.log(err)
+	// 	}
+	// }
 
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
@@ -85,6 +101,10 @@ export default function Profile() {
 			setErrorMessage('');
 		}, 3000);
 	};
+
+	useEffect(() => {
+		// getProfileInfo()
+	}, []);
 
 	return (
 		<Container>
@@ -96,9 +116,11 @@ export default function Profile() {
 						<span>Account information</span>
 					</h2>
 					<p>Here you can see and modify your account details.</p>
+					<h4>Created at: {calendarDate(profileData.createdAt)}</h4>
+					<h4>Last profile update: {calendarDate(profileData.updatedAt)}</h4>
 				</section>
 				<article className='content-container'>
-					<form onSubmit={handleSubmit}>
+					<form>
 						<section className='form-section'>
 							<div className='form-element'>
 								<label>
@@ -220,7 +242,6 @@ export default function Profile() {
 								</label>
 								<select
 									name='gender'
-									defaultValue={'Male'}
 									defaultChecked={true}
 									disabled={isEditable}
 									value={profileData.gender}

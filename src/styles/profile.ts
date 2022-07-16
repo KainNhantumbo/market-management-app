@@ -19,14 +19,13 @@ export const ProfileContainer = styled.div`
 			font-weight: 500;
 			align-self: flex-start;
 
-			p,
-			h4 {
+			p {
 				font-size: 0.9rem;
 				font-weight: 400;
 			}
 
 			h4 {
-				font-weight: 500;
+				font-size: 0.9rem;
 				color: rgb(${({ theme }) => theme.alter});
 			}
 		}

@@ -4,14 +4,22 @@ import {
 	FiBriefcase,
 	FiGrid,
 	FiHome,
+	FiLogOut,
 	FiPackage,
 	FiUser,
 	FiUsers,
 } from 'react-icons/all';
 import { AsideContainer as Container } from '../styles/components/aside';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Aside: React.FC = (): JSX.Element => {
+	// log the user out and delete access token from storage
+	const logUserOut = () => {
+		localStorage.removeItem('accessToken');
+		const navigate = useNavigate();
+		navigate('/');
+	};
+
 	return (
 		<Container>
 			<nav>
@@ -58,6 +66,10 @@ const Aside: React.FC = (): JSX.Element => {
 							<span>Reports</span>
 						</li>
 					</Link>
+					<li title='Reports' onClick={logUserOut}>
+						<FiLogOut />
+						<span>Logout</span>
+					</li>
 				</ul>
 			</nav>
 		</Container>

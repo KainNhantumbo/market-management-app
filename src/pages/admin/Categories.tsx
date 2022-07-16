@@ -92,7 +92,6 @@ export default function Categories(): JSX.Element {
 							</button>
 						</div>
 					</div>
-
 					<form onSubmit={handleSubmit}>
 						<label>
 							<FaPlus />
