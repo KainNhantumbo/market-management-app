@@ -10,17 +10,24 @@ export const ProfileContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-    align-items: center;
-    width: 100vw;
+		align-items: center;
+		width: 100vw;
 
 		.upper-container {
 			font-size: 1.2rem;
 			line-height: 1.6rem;
 			font-weight: 500;
-      align-self: flex-start;
+			align-self: flex-start;
 
-			p {
-				font-size: .9rem;
+			p,
+			h4 {
+				font-size: 0.9rem;
+				font-weight: 400;
+			}
+
+			h4 {
+				font-weight: 500;
+				color: rgb(${({ theme }) => theme.alter});
 			}
 		}
 
@@ -34,15 +41,10 @@ export const ProfileContainer = styled.div`
 			border-radius: 3px;
 			border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 			padding: 20px;
-      margin-right: 10px;
-
+			margin-right: 10px;
 
 			@media screen and (max-width: 340px) {
 				padding: 40px 15px;
-			}
-
-			h4 {
-				
 			}
 
 			form {

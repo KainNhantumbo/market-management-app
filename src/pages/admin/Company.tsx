@@ -25,7 +25,7 @@ interface CompanyData {
 	country: string;
 	description: string;
 	email: string;
-	updatedAt: string
+	updatedAt: string;
 }
 
 export default function Company() {
@@ -40,7 +40,7 @@ export default function Company() {
 		country: '',
 		description: '',
 		email: '',
-		updatedAt: ''
+		updatedAt: '',
 	});
 
 	const handleChange = (e: Inputs): void => {
@@ -101,7 +101,7 @@ export default function Company() {
 	useEffect(() => {
 		getCompanyInfo();
 	}, []);
-	
+
 	return (
 		<Container>
 			<Header location='Company' />
