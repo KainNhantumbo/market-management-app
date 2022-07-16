@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { BiCog } from 'react-icons/bi';
 import { FaArrowRight } from 'react-icons/fa';
 import { HomeContainer as Container } from '../styles/home';
 import { FC } from 'react';
 
-const Home: FC = () => {
-	const navigate = useNavigate();
+const Home: FC = (): JSX.Element => {
+	const navigate: NavigateFunction = useNavigate();
 
 	return (
 		<Container>
@@ -26,7 +26,7 @@ const Home: FC = () => {
 					<div className='action'>
 						<BiCog className='icon' />
 						<span>Administrator</span>
-						<button onClick={() => navigate('/admin')}>
+						<button onClick={() => navigate('/admin/dashboard')}>
 							<FaArrowRight />
 							<span>Manage system</span>
 						</button>

@@ -10,13 +10,14 @@ import {
 	FiUsers,
 } from 'react-icons/all';
 import { AsideContainer as Container } from '../styles/components/aside';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 
 const Aside: React.FC = (): JSX.Element => {
+	const navigate: NavigateFunction = useNavigate();
+	
 	// log the user out and delete access token from storage
 	const logUserOut = () => {
 		localStorage.removeItem('accessToken');
-		const navigate = useNavigate();
 		navigate('/');
 	};
 
