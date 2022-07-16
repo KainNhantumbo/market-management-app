@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { fetchAPI, getToken } from '../../utils/fetchdata';
+import { calendarDate } from '../../utils/formatTime';
 import type { Inputs } from '../../types/form';
 import {
 	FaAddressCard,
@@ -24,6 +25,7 @@ interface CompanyData {
 	country: string;
 	description: string;
 	email: string;
+	updatedAt: string
 }
 
 export default function Company() {
@@ -38,6 +40,7 @@ export default function Company() {
 		country: '',
 		description: '',
 		email: '',
+		updatedAt: ''
 	});
 
 	const handleChange = (e: Inputs): void => {
@@ -109,6 +112,7 @@ export default function Company() {
 						<span>Company information</span>
 					</h2>
 					<p>Here you can see and modify your company details.</p>
+					<h4>Last update: {calendarDate(companyData.updatedAt)}</h4>
 				</section>
 				<article>
 					<form onSubmit={(e) => e.preventDefault()}>

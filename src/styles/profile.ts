@@ -41,6 +41,10 @@ export const ProfileContainer = styled.div`
 				padding: 40px 15px;
 			}
 
+			h4 {
+				
+			}
+
 			form {
 				display: flex;
 				flex-direction: column;
