@@ -49,14 +49,33 @@ export default function Company() {
 		}));
 	};
 
+	const getCompanyInfo = async (): Promise<void> => {
+		try {
+			const token = getToken();
+			const { data } = await fetchAPI({
+				method: 'get',
+				url: `/company`,
+				headers: {
+					authorization: token,
+				},
+			});
+			setCompanyData(data.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const { data: user } = await fetchAPI({});
-			localStorage.setItem(
-				'accessToken',
-				JSON.stringify({ token: user.token })
-			);
+			const token = getToken();
+			const { data } = await fetchAPI({
+				method: 'get',
+				url: `/company`,
+				headers: {
+					authorization: token,
+				},
+			});
 			navigate('/');
 		} catch (err: any) {
 			console.log(err.message);
@@ -64,14 +83,20 @@ export default function Company() {
 		}
 	};
 
-	const handleUpdate = async ()=> {
+	const handleUpdate = async () => {
 		try {
-			
 		} catch (err: any) {
 			console.log(err.message);
 			displayErrors(err.response.data.message);
 		}
-	}
+	};
+	const handleDelete = async () => {
+		try {
+		} catch (err: any) {
+			console.log(err.message);
+			displayErrors(err.response.data.message);
+		}
+	};
 
 	const displayErrors = (message: string): void => {
 		setErrorMessage(message);
@@ -79,7 +104,9 @@ export default function Company() {
 			setErrorMessage('');
 		}, 3000);
 	};
-
+	useEffect(() => {
+		getCompanyInfo();
+	}, []);
 	return (
 		<Container>
 			<Header location='Company' />
@@ -182,9 +209,8 @@ export default function Company() {
 									<span>Country</span>
 								</label>
 								<select
-									defaultValue={companyData.country}
-									defaultChecked={true}
 									required
+									value={companyData.country}
 									disabled={isEditable}
 									name='country'
 									onChange={handleChange}
