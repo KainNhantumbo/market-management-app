@@ -17,7 +17,8 @@ import {
 	BiLogInCircle,
 } from 'react-icons/all';
 import { FormSubmit, Inputs } from '../types/form';
-import fetchAPI from '../utils/fetchdata';
+import { fetchAPI, getToken } from '../utils/fetchdata';
+
 
 interface UserData {
 	password: string;

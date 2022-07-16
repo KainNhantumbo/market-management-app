@@ -2,37 +2,42 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
-import {
-	FaEdit,
-	FaPlus,
-	FaSearch,
-	FaTrashAlt,
-	FiEdit,
-	FiTrash,
-	HiSave,
-} from 'react-icons/all';
-import fetchAPI from '../../utils/fetchdata';
+import { FaPlus, FaSearch, FiEdit, FiTrash, HiSave } from 'react-icons/all';
+import { fetchAPI, getToken } from '../../utils/fetchdata';
+import { FormSubmit } from '../../types/form';
 
 interface CategoriesProps {
 	name: string;
 	id: string;
 }
 
+interface Category {
+	name: string;
+}
+
 export default function Categories(): JSX.Element {
-	const [categories, setCategories] = useState<CategoriesProps[]>([
-		{ name: 'Acessories', id: 'tatr' },
-		{ name: 'Meal', id: 'torvals' },
-		{ name: 'Marlalela', id: 'kjbhasdjk' },
-	]);
+	const [categories, setCategories] = useState<CategoriesProps[]>([]);
+	const [formData, setFormData] = useState<Category>({ name: '' });
 
 	async function getCategories(): Promise<void> {
 		try {
-			const { data } = await fetchAPI({ method: 'get', url: '/categories' });
-			console.log(data.data);
+			const token = getToken();
+			const { data } = await fetchAPI({
+				method: 'get',
+				url: '/categories',
+				headers: {
+					authorization: token,
+				},
+			});
+			setCategories(data.data);
 		} catch (err) {
 			console.log(err);
 		}
 	}
+
+
+
+
 
 	useEffect(() => {
 		getCategories();
@@ -54,7 +59,7 @@ export default function Categories(): JSX.Element {
 						</div>
 					</div>
 
-					<form>
+					<form onSubmit={handleSubmit}>
 						<label>
 							<FaPlus />
 							<span>Add new product category</span>
@@ -65,6 +70,12 @@ export default function Categories(): JSX.Element {
 								name='category'
 								placeholder='Type the product category name.'
 								maxLength={250}
+								onChange={(e) =>
+									setFormData((prevData) => ({
+										...prevData,
+										name: e.target.value,
+									}))
+								}
 							/>
 							<button type='submit'>
 								<HiSave />

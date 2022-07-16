@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import { FaLock, FaUser, BiLogIn } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
 import { FormSubmit, Inputs } from '../types/form';
-import fetchAPI from '../utils/fetchdata';
+import { fetchAPI, getToken } from '../utils/fetchdata';
 
 interface UserData {
 	user_name: string;

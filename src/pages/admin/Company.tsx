@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { useNavigate } from 'react-router-dom';
-import fetchAPI from '../../utils/fetchdata';
+import { fetchAPI, getToken } from '../../utils/fetchdata';
 import type { FormSubmit, Inputs } from '../../types/form';
 import {
 	FaAddressCard,
