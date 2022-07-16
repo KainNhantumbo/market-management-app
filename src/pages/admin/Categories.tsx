@@ -35,10 +35,12 @@ export default function Categories(): JSX.Element {
 		}
 	}
 
-	async function handleSubmit(e: FormSubmit) {
+	// sends formdata to server
+	async function handleSubmit(e: FormSubmit): Promise<void> {
 		e.preventDefault();
+		const token = getToken();
+		if (formData.name === '') return;
 		try {
-			const token = getToken();
 			await fetchAPI({
 				method: 'post',
 				url: '/categories',
@@ -55,7 +57,21 @@ export default function Categories(): JSX.Element {
 		}
 	}
 
-
+	async function deleteCategory(id: string): Promise<void> {
+		const token = getToken();
+		try {
+			await fetchAPI({
+				method: 'delete',
+				url: `/categories/${id}`,
+				headers: {
+					authorization: token,
+				},
+			});
+			getCategories();
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	useEffect(() => {
 		getCategories();
@@ -113,7 +129,11 @@ export default function Categories(): JSX.Element {
 										<button className='edit' title='Edit'>
 											<FiEdit />
 										</button>
-										<button className='destroy' title='Delete'>
+										<button
+											className='destroy'
+											title='Delete'
+											onClick={() => deleteCategory(category.id)}
+										>
 											<FiTrash />
 										</button>
 									</div>
