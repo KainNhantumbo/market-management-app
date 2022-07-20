@@ -30,9 +30,9 @@ const DialogBox: FC<Props> = ({
 					<div className='prompt-actions'>
 						<button className='prompt-cancel' onClick={() => closeModal(false)}>
 							<FaArrowLeft />
-							<span>No, cancel</span>
+							<span>Cancel</span>
 						</button>
-						<button onClick={action}>
+						<button className='prompt-accept' onClick={action}>
 							{icon}
 							<span>{button_text}</span>
 						</button>

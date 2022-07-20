@@ -102,22 +102,23 @@ export default function Profile() {
 		}
 	};
 
-	const getProfileInfo = async (): Promise<void> => {
-		try {
-			const { data } = await useFetchAPI({
-				method: 'get',
-				url: '/users',
+	const getProfileInfo = (): void => {
+		useFetchAPI({
+			method: 'get',
+			url: '/users',
+		})
+			.then(({ data }) => {
+				setProfileData(data.data);
+			})
+			.catch((err) => {
+				console.error(err);
+				feedBack(setErrorMessage, err.response.data.message, 3000);
 			});
-			setProfileData(data.data);
-		} catch (err: any) {
-			console.error(err);
-			feedBack(setErrorMessage, err.response.data.message, 3000);
-		}
 	};
 
 	const deleteAccount = async (): Promise<void> => {
 		try {
-			// await useFetchAPI({ method: 'delete', url: '/users' });
+			await useFetchAPI({ method: 'delete', url: '/users' });
 			navigate('/');
 		} catch (err: any) {
 			console.error(err);
@@ -139,7 +140,7 @@ export default function Profile() {
 						closeModal={setIsModalActive}
 						prompt_title={'Delete Account'}
 						prompt_message={
-							'Are you sure? All data associated with this account will be lost. You cannot undo this action.'
+							'Are you sure? Your account and all data associated with it will be permanently lost. Once done, you cannot undo this action.'
 						}
 						button_text={'Yes, delete account.'}
 						icon={<FiTrash2 />}
