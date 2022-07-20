@@ -2,7 +2,6 @@ import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { ProfileContainer as Container } from '../../styles/profile';
-import { fetchAPI, getToken } from '../../utils/fetchdata';
 import { calendarDate } from '../../utils/formatTime';
 import type { Inputs } from '../../types/form';
 import {
@@ -16,6 +15,8 @@ import {
 	FiCheck,
 	FiEdit,
 } from 'react-icons/all';
+import feedBack from '../../utils/feedback';
+import useFetchAPI from '../../hooks/useFetch';
 
 interface CompanyData {
 	name: string;
@@ -58,46 +59,31 @@ export default function Company() {
 
 	const getCompanyInfo = async (): Promise<void> => {
 		try {
-			const token = getToken();
-			const { data } = await fetchAPI({
+			const { data } = await useFetchAPI({
 				method: 'get',
 				url: `/company`,
-				headers: {
-					authorization: token,
-				},
 			});
 			if (data.data) {
 				setCompanyData(data.data);
 			}
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	};
 
 	const handleUpdate = async (): Promise<void> => {
 		try {
-			const token = getToken();
-			await fetchAPI({
+			await useFetchAPI({
 				method: 'patch',
 				url: `/company`,
 				data: companyData,
-				headers: {
-					authorization: token,
-				},
 			});
 			editFields();
 			getCompanyInfo();
 		} catch (err: any) {
-			console.log(err.message);
-			displayErrors(err.response.data.message);
+			console.error(err.message);
+			feedBack(setErrorMessage, err.response.data.message, 3000);
 		}
-	};
-
-	const displayErrors = (message: string): void => {
-		setErrorMessage(message);
-		setTimeout(() => {
-			setErrorMessage('');
-		}, 3000);
 	};
 
 	useEffect(() => {
@@ -114,7 +100,12 @@ export default function Company() {
 						<span>Company information</span>
 					</h2>
 					<p>Here you can see and modify your company details.</p>
-					<h4>Last update: {calendarDate(companyData.updatedAt)}</h4>
+					<h4>
+						Last update:{' '}
+						{companyData.updatedAt
+							? calendarDate(companyData.updatedAt)
+							: 'Not set.'}
+					</h4>
 				</section>
 				<article>
 					<form onSubmit={(e) => e.preventDefault()}>

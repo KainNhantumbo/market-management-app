@@ -1,6 +1,6 @@
-import { SetStateAction } from 'react';
+import * as React from 'react';
 
-type state = (message: SetStateAction<string>) => void;
+type state = React.Dispatch<React.SetStateAction<string>>
 
 function feedBack(fn: state, message: string, delay: number) {
 	fn(message);

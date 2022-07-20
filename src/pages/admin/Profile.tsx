@@ -2,8 +2,6 @@ import Aside from '../../components/Aside';
 import Header from '../../components/Header';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { fetchAPI, getToken } from '../../utils/fetchdata';
 import { calendarDate } from '../../utils/formatTime';
 import {
 	FaAddressCard,
@@ -17,6 +15,7 @@ import {
 	FaUserEdit,
 	FaUserFriends,
 	FaUserGraduate,
+	FiAlertTriangle,
 	FiCheck,
 	FiEdit,
 	FiTrash2,
@@ -46,7 +45,6 @@ export default function Profile() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
 	const [isEditable, setIsEditable] = useState(true);
 	const [errorMessage, setErrorMessage] = useState('');
-	const navigate = useNavigate();
 	const [profileData, setProfileData] = useState<ProfileData>({
 		password: '',
 		confirm_password: '',
@@ -64,6 +62,12 @@ export default function Profile() {
 		createdAt: '',
 	});
 
+	// sets the edit mode
+	const editFields = () => {
+		setIsEditable(!isEditable);
+		setIsBtnUpdate(!isBtnUpdate);
+	};
+
 	const handleChange = (e: Inputs): void => {
 		setProfileData((prevData) => ({
 			...prevData,
@@ -71,10 +75,21 @@ export default function Profile() {
 		}));
 	};
 
-	const handleUpdate = async (): Promise<void> => {
+	const handleUpdate = async (e: FormSubmit): Promise<void> => {
+		e.preventDefault();
+		if (profileData.password?.length >= 6) {
+			if (profileData.password !== profileData.confirm_password) {
+				return feedBack(
+					setErrorMessage,
+					'Both password fields must match each other. To cancel, please leave it blank.',
+					5000
+				);
+			}
+		}
 		try {
-			const token = getToken();
-			await useFetchAPI({ method: 'patch', url: '/users' });
+			await useFetchAPI({ method: 'patch', url: '/users', data: profileData });
+			editFields();
+			getProfileInfo();
 		} catch (err: any) {
 			console.log(err.message);
 			feedBack(setErrorMessage, err.response.data.message, 3000);
@@ -87,16 +102,14 @@ export default function Profile() {
 				method: 'get',
 				url: '/users',
 			});
-			setProfileData(data.data)
+			setProfileData(data.data);
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
-	}
-
-
+	};
 
 	useEffect(() => {
-		getProfileInfo()
+		getProfileInfo();
 	}, []);
 
 	return (
@@ -113,7 +126,7 @@ export default function Profile() {
 					<h4>Last profile update: {calendarDate(profileData.updatedAt)}</h4>
 				</section>
 				<article className='content-container'>
-					<form>
+					<form onSubmit={handleUpdate}>
 						<section className='form-section'>
 							<div className='form-element'>
 								<label>
@@ -278,8 +291,16 @@ export default function Profile() {
 								/>
 							</div>
 						</section>
-
-						{isBtnUpdate ? (
+						{isBtnUpdate && (
+							<label>
+								<FiAlertTriangle />
+								<span>
+									Leave these following fields blank if you don't want to update
+									password.
+								</span>
+							</label>
+						)}
+						{isBtnUpdate && (
 							<section className='form-section'>
 								<div className='form-element'>
 									<label>
@@ -301,41 +322,38 @@ export default function Profile() {
 										<span>Confirm Password</span>
 									</label>
 									<input
-										type='confirm_password'
+										type='password'
 										name='confirm_password'
 										disabled={isEditable}
-										value={profileData.qualification}
+										value={profileData.confirm_password}
 										placeholder='Confirm your password.'
 										onChange={(e) => handleChange(e)}
 									/>
 								</div>
 							</section>
-						) : null}
+						)}
 
 						<span className='errorMessage'>{errorMessage}</span>
 
 						<section className='actions'>
-							{isBtnUpdate ? null : (
-								<button className='next'>
+							{!isBtnUpdate && (
+								<button className='next' onClick={editFields}>
 									<FiEdit />
 									<span>Edit</span>
 								</button>
 							)}
-							{isBtnUpdate ? (
-								<button
-									className='login'
-									type='submit'
-									onClick={() => navigate('/login')}
-								>
+							{isBtnUpdate && (
+								<button className='login' type={'submit'}>
 									<FiCheck />
 									<span>Update</span>
 								</button>
-							) : null}
-
-							<button className='delete'>
-								<FiTrash2 />
-								<span>Delete Account</span>
-							</button>
+							)}
+							{isBtnUpdate ? null : (
+								<button className='delete'>
+									<FiTrash2 />
+									<span>Delete Account</span>
+								</button>
+							)}
 						</section>
 					</form>
 				</article>

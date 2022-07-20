@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import type { FormSubmit, Inputs } from '../types/form';
 import customConnection from '../api/axios';
 import { Link } from 'react-router-dom';
+import feedBack from '../utils/feedback';
 
 interface UserData {
 	user_name: string;
@@ -29,7 +30,11 @@ const Login: FC = (): JSX.Element => {
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		if (formData.password.length < 6)
-			return displayErrors('Password must have at least 6 characters.');
+			return feedBack(
+				setErrorMessage,
+				'Password must have at least 6 characters.',
+				3000
+			);
 
 		try {
 			const { data: user } = await customConnection({
@@ -44,15 +49,8 @@ const Login: FC = (): JSX.Element => {
 			navigate('/admin/dashboard');
 		} catch (err: any) {
 			console.log(err.message);
-			displayErrors(err.response.data.message);
+			feedBack(setErrorMessage, err.response.data.message, 3000);
 		}
-	};
-
-	const displayErrors = (message: string): void => {
-		setErrorMessage(message);
-		setTimeout(() => {
-			setErrorMessage('');
-		}, 3000);
 	};
 
 	return (

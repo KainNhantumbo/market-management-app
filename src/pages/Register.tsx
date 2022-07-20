@@ -17,8 +17,8 @@ import {
 	BiLogInCircle,
 } from 'react-icons/all';
 import { FormSubmit, Inputs } from '../types/form';
-import { fetchAPI, getToken } from '../utils/fetchdata';
-
+import feedback from '../utils/feedback';
+import customConnection from '../api/axios';
 
 interface UserData {
 	password: string;
@@ -62,15 +62,22 @@ export default function Register() {
 
 	const handleSubmit = async (e: FormSubmit) => {
 		e.preventDefault();
-		if (formData.password !== formData.confirm_password) {
-			displayErrors('Passwords must match each other.');
-			return null;
-		} else if (formData.password.length < 6) {
-			displayErrors('Password must have at least 6 characteres.');
-			return null;
-		}
+		if (formData.password !== formData.confirm_password)
+			return feedback(
+				setErrorMessage,
+				'Passwords must match each other.',
+				3000
+			);
+
+		if (formData.password.length < 6)
+			return feedback(
+				setErrorMessage,
+				'Password must have at least 6 characters.',
+				3000
+			);
+
 		try {
-			const { data: user } = await fetchAPI({
+			const { data: user } = await customConnection({
 				method: 'post',
 				url: '/auth/register',
 				data: formData,
@@ -82,15 +89,8 @@ export default function Register() {
 			navigate('/company-setup');
 		} catch (err: any) {
 			console.log(err.message);
-			displayErrors(err.response.data.message);
+			feedback(setErrorMessage, err.response.data.message, 3000);
 		}
-	};
-
-	const displayErrors = (message: string): void => {
-		setErrorMessage(message);
-		setTimeout(() => {
-			setErrorMessage('');
-		}, 3000);
 	};
 
 	return (
@@ -116,6 +116,7 @@ export default function Register() {
 							</h2>
 						</section>
 						<p>Register a new administrative account. </p>
+
 						<form onSubmit={handleSubmit}>
 							<section className='form-section'>
 								<div className='form-element'>
