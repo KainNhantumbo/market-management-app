@@ -1,9 +1,10 @@
 import { LoginContainer as Container } from '../styles/login';
 import { FC, useState } from 'react';
-import { FaLock, FaUser, BiLogIn } from 'react-icons/all';
+import { FaLock, FaUser, BiLogIn, FiArrowLeft } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
 import type { FormSubmit, Inputs } from '../types/form';
 import { fetchAPI } from '../utils/fetchdata';
+import { Link } from 'react-router-dom';
 
 interface UserData {
 	user_name: string;
@@ -64,6 +65,12 @@ const Login: FC = (): JSX.Element => {
 						<span>Market Management</span>
 					</h2>
 				</section>
+				<Link className='auth' to={'/'}>
+					<button>
+						<FiArrowLeft />
+						<span>Go Home</span>
+					</button>
+					</Link>
 			</header>
 			<main>
 				<article>

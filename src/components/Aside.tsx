@@ -22,14 +22,15 @@ const Aside: React.FC = (): JSX.Element => {
 	const navigate: NavigateFunction = useNavigate();
 	const url = window.location.pathname;
 
-	// log the user out and delete access token from storage
+	// log the user out by deleting the access token from storage
+	// [on development only] 
 	const logUserOut = () => {
 		localStorage.removeItem('accessToken');
 		navigate('/');
 	};
 
 	const navData: NavData[] = [
-		{ link: '/admin/dashboard', pathName: 'DashBoard', icon: <FiHome /> },
+		{ link: '/admin/dashboard', pathName: 'Overview', icon: <FiHome /> },
 		{ link: '/admin/products', pathName: 'Products', icon: <FiPackage /> },
 		{ link: '/admin/categories', pathName: 'Categories', icon: <FiGrid /> },
 		{ link: '/admin/profile', pathName: 'Profile', icon: <FiUser /> },

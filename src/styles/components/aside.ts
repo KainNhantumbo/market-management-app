@@ -20,8 +20,7 @@ export const AsideContainer = styled.aside`
 			font-weight: 500;
 			padding: 0 10px;
 			@media screen and (max-width: 460px) {
-				width: 55px;
-				gap: 30px;
+				width: 60px;
 			}
 
 			.active {
@@ -38,11 +37,15 @@ export const AsideContainer = styled.aside`
 				padding: 10px;
 				color: rgb(${({ theme }) => theme.font});
 				border-radius: 3px;
+				height: 40px;
+				display: grid;
+				align-items: center;
 
 				:hover {
 					color: rgb(${({ theme }) => theme.alterAlt});
 					cursor: pointer;
 				}
+
 				span {
 					padding-left: 25px;
 					@media screen and (max-width: 460px) {
@@ -51,8 +54,8 @@ export const AsideContainer = styled.aside`
 				}
 				svg {
 					position: absolute;
-					top: 8px;
-					left: 5px;
+					top: 9px;
+					left: 6px;
 					width: 22px;
 					height: 22px;
 				}

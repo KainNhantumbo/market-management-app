@@ -30,6 +30,21 @@ export const LoginContainer = styled.div`
 			font-size: 1.2rem;
 			color: rgb(${({ theme }) => theme.font});
 		}
+		.auth {
+			position: fixed;
+			left: 10px;
+			top: 10px;
+			button {
+				${ButtonA}
+				svg {
+					left: 8px;
+				}
+				span {
+					padding: 0;
+					padding-left: 20px;
+				}
+			}
+		}
 	}
 
 	article {
@@ -48,7 +63,7 @@ export const LoginContainer = styled.div`
 			border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 			padding: 40px 20px;
 
-			@media screen and (min-width: 440px ){
+			@media screen and (min-width: 440px) {
 				min-width: 400px;
 			}
 
