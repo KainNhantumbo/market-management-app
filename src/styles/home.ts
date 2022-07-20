@@ -12,7 +12,6 @@ export const HomeContainer = styled.div`
 		text-align: center;
 		font-weight: 500;
 		position: relative;
-
 		.auth {
 			position: fixed;
 			right: 10px;
@@ -21,9 +20,10 @@ export const HomeContainer = styled.div`
 				${ButtonA}
 			}
 		}
-
 		h1 {
 			color: rgb(${({ theme }) => theme.primary});
+			text-transform: uppercase;
+			font-weight: 700;
 		}
 	}
 
@@ -33,6 +33,7 @@ export const HomeContainer = styled.div`
 		justify-content: flex-start;
 		gap: 20px;
 		width: 100%;
+		margin: 0 10px;
 
 		.action {
 			width: 100vw;
@@ -42,10 +43,14 @@ export const HomeContainer = styled.div`
 			justify-content: space-between;
 			align-items: center;
 			background: rgb(${({ theme }) => theme.backgroundAlt});
-			box-shadow: 0 0 25px rgba(${({ theme }) => theme.shadows}, 0.6);
-			border-radius: 10px;
+			border-radius: 3px;
 			padding: 30px 50px;
 			position: relative;
+			border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
+
+			:hover {
+				box-shadow: 0 0 25px rgba(${({ theme }) => theme.shadows}, 0.6);
+			}
 
 			.icon {
 				width: 20px;

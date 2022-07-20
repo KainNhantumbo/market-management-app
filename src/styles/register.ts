@@ -25,10 +25,13 @@ export const RegisterContainer = styled.div`
 			position: relative;
 			color: rgb(${({ theme }) => theme.primary});
 			line-height: 1.2rem;
+			text-transform: uppercase;
+			font-weight: 700;
 		}
 		h2 {
-			font-size: 1.2rem;
+			font-size: 1rem;
 			color: rgb(${({ theme }) => theme.font});
+			text-transform: uppercase;
 		}
 	}
 

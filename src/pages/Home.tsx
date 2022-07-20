@@ -11,8 +11,8 @@ const Home: FC = (): JSX.Element => {
 	return (
 		<Container>
 			<header>
-				<h1>Market Management System</h1>
-				<h2>Choose your path to work on</h2>
+				<h1>Market Management</h1>
+				<h2>What are we going to do today?</h2>
 				<Link className='auth' to={'/create-account'}>
 					<button>
 						<FiLogIn />
