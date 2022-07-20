@@ -23,7 +23,7 @@ const Aside: React.FC = (): JSX.Element => {
 	const url = window.location.pathname;
 
 	// log the user out by deleting the access token from storage
-	// [on development only] 
+	// [on development only]
 	const logUserOut = () => {
 		localStorage.removeItem('accessToken');
 		navigate('/');
@@ -44,7 +44,7 @@ const Aside: React.FC = (): JSX.Element => {
 			<nav>
 				<ul>
 					{navData.map((data) => (
-						<Link to={data.link}>
+						<Link to={data.link} key={data.pathName}>
 							<li
 								title={data.pathName}
 								className={data.link == url ? 'active' : 'inative'}

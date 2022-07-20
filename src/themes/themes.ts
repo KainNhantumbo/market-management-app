@@ -10,7 +10,7 @@ export const primary: ThemeType = {
 	inner: '241, 243, 244',
 	text: '255, 255, 255',
 	shadows: '197, 197, 198',
-	background: '244, 247, 253',
+	background: '244, 246, 248',
 	backgroundAlt: '255, 255, 255',
 };
 

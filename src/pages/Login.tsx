@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import { FaLock, FaUser, BiLogIn, FiArrowLeft } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
 import type { FormSubmit, Inputs } from '../types/form';
-import { fetchAPI } from '../utils/fetchdata';
+import customConnection from '../api/axios';
 import { Link } from 'react-router-dom';
 
 interface UserData {
@@ -28,8 +28,11 @@ const Login: FC = (): JSX.Element => {
 
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
+		if (formData.password.length < 6)
+			return displayErrors('Password must have at least 6 characters.');
+
 		try {
-			const { data: user } = await fetchAPI({
+			const { data: user } = await customConnection({
 				method: 'post',
 				url: '/auth/login',
 				data: formData,
@@ -70,7 +73,7 @@ const Login: FC = (): JSX.Element => {
 						<FiArrowLeft />
 						<span>Go Home</span>
 					</button>
-					</Link>
+				</Link>
 			</header>
 			<main>
 				<article>

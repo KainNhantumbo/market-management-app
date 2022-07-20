@@ -22,6 +22,8 @@ import {
 	FiTrash2,
 } from 'react-icons/all';
 import type { FormSubmit, Inputs } from '../../types/form';
+import useFetchAPI from '../../hooks/useFetch';
+import feedBack from '../../utils/feedback';
 
 interface ProfileData {
 	password: string;
@@ -72,38 +74,29 @@ export default function Profile() {
 	const handleUpdate = async (): Promise<void> => {
 		try {
 			const token = getToken();
-			const { data: user } = await fetchAPI({ method: 'patch' });
+			await useFetchAPI({ method: 'patch', url: '/users' });
 		} catch (err: any) {
 			console.log(err.message);
-			displayErrors(err.response.data.message);
+			feedBack(setErrorMessage, err.response.data.message, 3000);
 		}
 	};
 
-	// const getProfileInfo = async () => {
-	// 	try {
-	// 		const token = getToken()
-	// 		const { data } = await fetchAPI({
-	// 			method: 'get',
-	// 			url: '/users',
-	// 			headers: {
-	// 				authorization: token,
-	// 			},
-	// 		});
-	// 		setProfileData(data.data)
-	// 	} catch (err) {
-	// 		console.log(err)
-	// 	}
-	// }
+	const getProfileInfo = async () => {
+		try {
+			const { data } = await useFetchAPI({
+				method: 'get',
+				url: '/users',
+			});
+			setProfileData(data.data)
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
-	const displayErrors = (message: string): void => {
-		setErrorMessage(message);
-		setTimeout(() => {
-			setErrorMessage('');
-		}, 3000);
-	};
+
 
 	useEffect(() => {
-		// getProfileInfo()
+		getProfileInfo()
 	}, []);
 
 	return (

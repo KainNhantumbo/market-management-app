@@ -1,4 +1,4 @@
-import axios from '../api/axios';
+import customConnection from '../api/axios';
 
 type fetchConfig = {
 	method: string;
@@ -6,13 +6,13 @@ type fetchConfig = {
 	url: string;
 };
 
-
+// fetch data from api
 const useFetchAPI = (config: fetchConfig) => {
 	const acessToken = JSON.parse(
 		localStorage.getItem('accessToken') || `{"token": ""}`
 	);
 	const token = `Bearer ${acessToken.token}`;
-	return axios({
+	return customConnection({
 		...config,
 		headers: {
 			authorization: token,
