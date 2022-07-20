@@ -1,8 +1,9 @@
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate, Link } from 'react-router-dom';
 import { BiCog } from 'react-icons/bi';
 import { FaArrowRight } from 'react-icons/fa';
 import { HomeContainer as Container } from '../styles/home';
 import { FC } from 'react';
+import { FiLogIn } from 'react-icons/fi';
 
 const Home: FC = (): JSX.Element => {
 	const navigate: NavigateFunction = useNavigate();
@@ -12,6 +13,12 @@ const Home: FC = (): JSX.Element => {
 			<header>
 				<h1>Market Management System</h1>
 				<h2>Choose your path to work on</h2>
+				<Link className='auth' to={'/create-account'}>
+					<button>
+						<FiLogIn />
+						<span>Create account</span>
+					</button>
+				</Link>
 			</header>
 			<main>
 				<article className='actions-container'>

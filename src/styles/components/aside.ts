@@ -24,10 +24,20 @@ export const AsideContainer = styled.aside`
 				gap: 30px;
 			}
 
+			.active {
+				border-left: 3px solid rgb(${({ theme }) => theme.alterAlt});
+				background: rgb(${({ theme }) => theme.backgroundAlt});
+			}
+
+			.inative {
+				border-left: 3px solid transparent;
+			}
+
 			li {
 				position: relative;
 				padding: 10px;
-				color: rgb(${({ theme }) => theme.text});
+				color: rgb(${({ theme }) => theme.font});
+				border-radius: 3px;
 
 				:hover {
 					color: rgb(${({ theme }) => theme.alterAlt});

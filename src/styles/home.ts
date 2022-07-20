@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton } from './global/buttons';
+import { BaseButton, ButtonA } from './global/buttons';
 
 export const HomeContainer = styled.div`
 	display: flex;
@@ -11,6 +11,16 @@ export const HomeContainer = styled.div`
 	header {
 		text-align: center;
 		font-weight: 500;
+		position: relative;
+
+		.auth {
+			position: fixed;
+			right: 10px;
+			top: 10px;
+			button {
+				${ButtonA}
+			}
+		}
 
 		h1 {
 			color: rgb(${({ theme }) => theme.primary});
