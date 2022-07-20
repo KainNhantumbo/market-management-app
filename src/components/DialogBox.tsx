@@ -8,13 +8,15 @@ interface Props {
 	button_text: string;
 	closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 	icon: JSX.Element;
+	action: () => Promise<void> | void;
 }
 
-export const ConfirmDialog: FC<Props> = ({
+const DialogBox: FC<Props> = ({
 	prompt_title,
 	prompt_message,
 	button_text,
 	closeModal,
+	action,
 	icon,
 }): JSX.Element => {
 	return (
@@ -26,11 +28,11 @@ export const ConfirmDialog: FC<Props> = ({
 						<p className='prompt-message'>{prompt_message}</p>
 					</div>
 					<div className='prompt-actions'>
-						<button className='prompt-cancel' onClick={(e) => {}}>
+						<button className='prompt-cancel' onClick={() => closeModal(false)}>
 							<FaArrowLeft />
 							<span>No, cancel</span>
 						</button>
-						<button onClick={(e) => closeModal(false)}>
+						<button onClick={action}>
 							{icon}
 							<span>{button_text}</span>
 						</button>
@@ -40,3 +42,5 @@ export const ConfirmDialog: FC<Props> = ({
 		</Container>
 	);
 };
+
+export default DialogBox;

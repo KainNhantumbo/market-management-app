@@ -12,39 +12,6 @@ export const ConfirmModalContainer = styled.section`
 	display: grid;
 	place-content: center;
 	user-select: none;
-
-	button {
-		border: none;
-		background: none;
-		border-radius: 3px;
-		position: relative;
-		padding: 7px 10px;
-		color: rgb(${({ theme }) => theme.text});
-		background: rgb(${({ theme }) => theme.primary});
-		width: fit-content;
-		cursor: pointer;
-
-		:hover {
-			box-shadow: 0 0 12px rgb(${({ theme }) => theme.shadows});
-			background: rgb(${({ theme }) => theme.secondary});
-			transition: all 200ms ease-in-out;
-		}
-
-		svg {
-			width: 18px;
-			height: 18px;
-			position: absolute;
-			top: 7px;
-			left: 7px;
-			pointer-events: none;
-		}
-		span {
-			padding-left: 20px;
-			font-weight: 500;
-			pointer-events: none;
-		}
-	}
-
 	position: fixed;
 	width: 100vw;
 	height: 100vh;

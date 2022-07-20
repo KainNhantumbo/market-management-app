@@ -1,5 +1,6 @@
 import Aside from '../../components/Aside';
 import Header from '../../components/Header';
+import DialogBox from '../../components/DialogBox';
 import { ProfileContainer as Container } from '../../styles/profile';
 import { useState, useEffect } from 'react';
 import { calendarDate } from '../../utils/formatTime';
@@ -16,6 +17,7 @@ import {
 	FaUserFriends,
 	FaUserGraduate,
 	FiAlertTriangle,
+	FiArrowLeftCircle,
 	FiCheck,
 	FiEdit,
 	FiTrash2,
@@ -23,6 +25,7 @@ import {
 import type { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import feedBack from '../../utils/feedback';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 interface ProfileData {
 	password: string;
@@ -44,6 +47,7 @@ interface ProfileData {
 export default function Profile() {
 	const [isBtnUpdate, setIsBtnUpdate] = useState(false);
 	const [isEditable, setIsEditable] = useState(true);
+	const [isModalActive, setIsModalActive] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [profileData, setProfileData] = useState<ProfileData>({
 		password: '',
@@ -62,8 +66,10 @@ export default function Profile() {
 		createdAt: '',
 	});
 
+	const navigate: NavigateFunction = useNavigate();
+
 	// sets the edit mode
-	const editFields = () => {
+	const editFields = (): void => {
 		setIsEditable(!isEditable);
 		setIsBtnUpdate(!isBtnUpdate);
 	};
@@ -96,15 +102,26 @@ export default function Profile() {
 		}
 	};
 
-	const getProfileInfo = async () => {
+	const getProfileInfo = async (): Promise<void> => {
 		try {
 			const { data } = await useFetchAPI({
 				method: 'get',
 				url: '/users',
 			});
 			setProfileData(data.data);
-		} catch (err) {
-			console.log(err);
+		} catch (err: any) {
+			console.error(err);
+			feedBack(setErrorMessage, err.response.data.message, 3000);
+		}
+	};
+
+	const deleteAccount = async (): Promise<void> => {
+		try {
+			// await useFetchAPI({ method: 'delete', url: '/users' });
+			navigate('/');
+		} catch (err: any) {
+			console.error(err);
+			feedBack(setErrorMessage, err.response.data.message, 3000);
 		}
 	};
 
@@ -117,6 +134,18 @@ export default function Profile() {
 			<Header location='User Profile' />
 			<Aside />
 			<main>
+				{isModalActive && (
+					<DialogBox
+						closeModal={setIsModalActive}
+						prompt_title={'Delete Account'}
+						prompt_message={
+							'Are you sure? All data associated with this account will be lost. You cannot undo this action.'
+						}
+						button_text={'Yes, delete account.'}
+						icon={<FiTrash2 />}
+						action={deleteAccount}
+					/>
+				)}
 				<section className='upper-container'>
 					<h2>
 						<span>Account information</span>
@@ -343,13 +372,25 @@ export default function Profile() {
 								</button>
 							)}
 							{isBtnUpdate && (
+								<button className='next' onClick={editFields}>
+									<FiArrowLeftCircle />
+									<span>Cancel</span>
+								</button>
+							)}
+							{isBtnUpdate && (
 								<button className='login' type={'submit'}>
 									<FiCheck />
 									<span>Update</span>
 								</button>
 							)}
-							{isBtnUpdate ? null : (
-								<button className='delete'>
+							{!isBtnUpdate && (
+								<button
+									className='delete'
+									onClick={(e) => {
+										e.preventDefault();
+										setIsModalActive(true);
+									}}
+								>
 									<FiTrash2 />
 									<span>Delete Account</span>
 								</button>
