@@ -66,7 +66,9 @@ export default function Company() {
 					authorization: token,
 				},
 			});
-			setCompanyData(data.data);
+			if (data.data) {
+				setCompanyData(data.data);
+			}
 		} catch (err) {
 			console.log(err);
 		}

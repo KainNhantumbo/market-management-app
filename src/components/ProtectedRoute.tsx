@@ -8,9 +8,8 @@ interface Props {
 // used to restrict acess to admin routes
 const ProtectedRoute: FC<Props> = ({ children }) => {
 	const { token } = JSON.parse(
-		localStorage.getItem('accessToken') || `{"token": ""}`
+		localStorage.getItem('accessToken') || `{"token":""}`
 	);
-	console.log(token);
 	if (!token) return <Navigate to={'/login'} />;
 	return children;
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { RegisterContainer as Container } from '../styles/register';
 import {
 	FaAddressCard,
@@ -51,7 +51,7 @@ export default function Register() {
 		first_name: '',
 	});
 	const [errorMessage, setErrorMessage] = useState('');
-	const navigate = useNavigate();
+	const navigate: NavigateFunction = useNavigate();
 
 	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
