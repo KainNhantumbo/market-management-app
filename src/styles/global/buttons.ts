@@ -100,7 +100,28 @@ export const ButtonB = css`
 	place-content: center;
 
 	:hover {
-		color: rgb(${({ theme }) => theme.text});
+		transition: all 200ms ease-in-out;
+		background: rgb(${({ theme }) => theme.secondary});
+	}
+	svg {
+		pointer-events: none;
+	}
+`;
+
+export const ButtonC = css`
+	border: none;
+	border: 1px solid rgba(${({ theme }) => theme.font}, 0.5);
+	background: none;
+	border-radius: 5px;
+	position: relative;
+	padding: 5px;
+	color: rgb(${({ theme }) => theme.primary});
+	width: fit-content;
+	cursor: pointer;
+	display: grid;
+	place-content: center;
+
+	:hover {
 		transition: all 200ms ease-in-out;
 		background: rgb(${({ theme }) => theme.secondary});
 	}

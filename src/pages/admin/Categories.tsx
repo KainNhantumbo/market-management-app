@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
-import { FaPlus, FaSearch, FiEdit, FiTrash, HiSave } from 'react-icons/all';
-import { fetchAPI, getToken } from '../../utils/fetchdata';
+import {
+	FaPlus,
+	FaSearch,
+	FiEdit,
+	FiTrash,
+	FiTrash2,
+	HiSave,
+} from 'react-icons/all';
 import { FormSubmit } from '../../types/form';
+import useFetchAPI from '../../hooks/useFetch';
 
 interface CategoriesProps {
 	name: string;
@@ -21,13 +28,9 @@ export default function Categories(): JSX.Element {
 
 	async function getCategories(): Promise<void> {
 		try {
-			const token = getToken();
-			const { data } = await fetchAPI({
+			const { data } = await useFetchAPI({
 				method: 'get',
 				url: '/categories',
-				headers: {
-					authorization: token,
-				},
 			});
 			setCategories(data.data);
 		} catch (err) {
@@ -38,16 +41,12 @@ export default function Categories(): JSX.Element {
 	// sends formdata to server
 	async function handleSubmit(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		const token = getToken();
 		if (formData.name === '') return;
 		try {
-			await fetchAPI({
+			await useFetchAPI({
 				method: 'post',
 				url: '/categories',
 				data: formData,
-				headers: {
-					authorization: token,
-				},
 			});
 			getCategories();
 			setFormData(() => ({ name: '' }));
@@ -58,14 +57,10 @@ export default function Categories(): JSX.Element {
 	}
 
 	async function deleteCategory(id: string): Promise<void> {
-		const token = getToken();
 		try {
-			await fetchAPI({
+			await useFetchAPI({
 				method: 'delete',
 				url: `/categories/${id}`,
-				headers: {
-					authorization: token,
-				},
 			});
 			getCategories();
 		} catch (err) {
@@ -119,11 +114,27 @@ export default function Categories(): JSX.Element {
 				</section>
 
 				<article>
+					<section className='description-bar'>
+						<div className='description-titles'>
+							<div className='name'>
+								<span>Name</span>
+							</div>
+							<div className=''>
+								<span>Description</span>
+							</div>
+						</div>
+						<div className='description-actions'>
+							<span>Actions</span>
+						</div>
+					</section>
 					<section className='category-container'>
 						{categories.map((category) => {
 							return (
 								<section key={category.id} className='category'>
-									<div>{category.name}</div>
+									<section className='data'>
+										<div className='name'>{category.name}</div>
+										<div className='description'>{category.name}</div>
+									</section>
 									<div className='actions'>
 										<button className='edit' title='Edit'>
 											<FiEdit />
@@ -133,7 +144,7 @@ export default function Categories(): JSX.Element {
 											title='Delete'
 											onClick={() => deleteCategory(category.id)}
 										>
-											<FiTrash />
+											<FiTrash2 />
 										</button>
 									</div>
 								</section>

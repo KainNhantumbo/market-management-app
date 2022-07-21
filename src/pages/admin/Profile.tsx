@@ -119,6 +119,7 @@ export default function Profile() {
 	const deleteAccount = async (): Promise<void> => {
 		try {
 			await useFetchAPI({ method: 'delete', url: '/users' });
+			localStorage.removeItem('accessToken');
 			navigate('/');
 		} catch (err: any) {
 			console.error(err);

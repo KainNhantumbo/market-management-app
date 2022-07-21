@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ButtonA, ButtonB } from './global/buttons';
+import { ButtonA, ButtonB, ButtonC } from './global/buttons';
 import { StyledInputs, StyledLabels } from './global/form';
 import { InitialStyles } from './global/page';
 
@@ -66,33 +66,74 @@ export const CategoriesContainer = styled.div`
 		}
 
 		article {
-			border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.5);
-			padding-top: 15px;
-			margin-right: 5px;
-			display: flex;
+			margin-right: 10px;
+			.description-bar {
+				padding: 15px 10px;
+				border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.5);
+				display: flex;
+				justify-content: space-between;
+				gap: 10px;
+				font-weight: 500;
+
+				.description-titles {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					gap: 8px;
+
+					.name {
+						width: 300px;
+					}
+				}
+
+				.description-actions {
+					padding-right: 10px;
+				}
+			}
 			.category-container {
 				display: flex;
 				flex-direction: column;
 				gap: 5px;
 				width: 100vw;
 				justify-content: center;
+				margin-right: 20px;
 			}
 
 			.category {
 				display: flex;
 				width: 100%;
 				justify-content: space-between;
-				padding: 10px;
+				padding: 5px 10px;
 				background: rgb(${({ theme }) => theme.backgroundAlt});
 				border: 1px solid rgba(${({ theme }) => theme.font}, 0.2);
 				align-items: center;
-				border-radius: 5px;
+				border-radius: 3px;
+				gap: 10px;
+
+				.data {
+					display: grid;
+					grid-template-columns: 300px 1fr;
+					gap: 8px;
+					text-align: start;
+
+					.name,
+					.description {
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						padding: 12px 0;
+					}
+
+					.name {
+						width: 300px;
+						max-width: 300px;
+					}
+				}
 				.actions {
 					display: flex;
 					flex-direction: row;
 					gap: 5px;
 					button {
-						${ButtonB}
+						${ButtonC}
 						width: 32px;
 						height: 32px;
 					}
