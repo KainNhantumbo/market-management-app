@@ -6,12 +6,14 @@ import {
 	FaPlus,
 	FaSearch,
 	FiEdit,
-	FiTrash,
 	FiTrash2,
+	HiPlus,
+	HiPlusSm,
 	HiSave,
 } from 'react-icons/all';
 import { FormSubmit } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
+import { correctWindow } from '../../utils/window';
 
 interface CategoriesProps {
 	name: string;
@@ -70,6 +72,7 @@ export default function Categories(): JSX.Element {
 
 	useEffect(() => {
 		getCategories();
+		correctWindow()
 	}, []);
 
 	return (
@@ -86,8 +89,14 @@ export default function Categories(): JSX.Element {
 								<FaSearch />
 							</button>
 						</div>
+						<div className='add'>
+							<button>
+								<HiPlusSm />
+								<span>Add new category</span>
+							</button>
+						</div>
 					</div>
-					<form onSubmit={handleSubmit}>
+					{/* <form onSubmit={handleSubmit}>
 						<label>
 							<FaPlus />
 							<span>Add new product category</span>
@@ -110,7 +119,7 @@ export default function Categories(): JSX.Element {
 								<span>Save</span>
 							</button>
 						</section>
-					</form>
+					</form> */}
 				</section>
 
 				<article>

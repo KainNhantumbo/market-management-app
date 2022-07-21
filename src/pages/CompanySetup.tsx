@@ -1,5 +1,5 @@
 import { CompanySetupContainer as Container } from '../styles/company-setup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FormSubmit, Inputs } from '../types/form';
 import {
@@ -12,7 +12,9 @@ import {
 	FaLocationArrow,
 	FaPhoneAlt,
 } from 'react-icons/fa';
-import { fetchAPI, getToken } from '../utils/fetchdata';
+import feedBack from '../utils/feedback';
+import { correctWindow } from '../utils/window';
+import useFetchAPI from '../hooks/useFetch';
 
 interface CompanyData {
 	name: string;
@@ -47,28 +49,21 @@ export default function CompanySetup() {
 	const handleSubmit = async (e: FormSubmit): Promise<void> => {
 		e.preventDefault();
 		try {
-			const token = getToken();
-			await fetchAPI({
+			await useFetchAPI({
 				method: 'post',
 				url: '/company',
 				data: formData,
-				headers: {
-					authorization: token,
-				},
 			});
 			navigate('/admin/dashboard');
 		} catch (err: any) {
 			console.log(err.message);
-			displayErrors(err.response.data.message);
+			feedBack(setErrorMessage, err.response.data.message, 5000);
 		}
 	};
 
-	const displayErrors = (message: string): void => {
-		setErrorMessage(message);
-		setTimeout(() => {
-			setErrorMessage('');
-		}, 3000);
-	};
+	useEffect(() => {
+		correctWindow();
+	}, []);
 
 	return (
 		<Container>

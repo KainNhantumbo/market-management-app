@@ -17,6 +17,7 @@ import {
 } from 'react-icons/all';
 import feedBack from '../../utils/feedback';
 import useFetchAPI from '../../hooks/useFetch';
+import { correctWindow } from '../../utils/window';
 
 interface CompanyData {
 	name: string;
@@ -88,6 +89,7 @@ export default function Company() {
 
 	useEffect(() => {
 		getCompanyInfo();
+		correctWindow()
 	}, []);
 
 	return (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { RegisterContainer as Container } from '../styles/register';
 import {
@@ -19,6 +19,7 @@ import {
 import { FormSubmit, Inputs } from '../types/form';
 import feedback from '../utils/feedback';
 import customConnection from '../api/axios';
+import { correctWindow } from '../utils/window';
 
 interface UserData {
 	password: string;
@@ -92,6 +93,10 @@ export default function Register() {
 			feedback(setErrorMessage, err.response.data.message, 3000);
 		}
 	};
+	
+	useEffect(() => {
+		correctWindow();
+	}, []);
 
 	return (
 		<Container>

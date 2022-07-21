@@ -31,6 +31,11 @@ export const CategoriesContainer = styled.div`
 					line-height: 1.6rem;
 					font-weight: 500;
 				}
+				.add {
+					button {
+						${ButtonA}
+					}
+				}
 				.search {
 					display: flex;
 					flex-direction: row;
@@ -41,6 +46,7 @@ export const CategoriesContainer = styled.div`
 						${ButtonB}
 					}
 				}
+
 			}
 
 			form {

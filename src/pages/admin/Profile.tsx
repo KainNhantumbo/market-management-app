@@ -26,6 +26,7 @@ import type { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import feedBack from '../../utils/feedback';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { correctWindow } from '../../utils/window';
 
 interface ProfileData {
 	password: string;
@@ -129,6 +130,7 @@ export default function Profile() {
 
 	useEffect(() => {
 		getProfileInfo();
+		correctWindow()
 	}, []);
 
 	return (
@@ -153,7 +155,7 @@ export default function Profile() {
 						<span>Account information</span>
 					</h2>
 					<p>Here you can see and modify your account details.</p>
-					<h4>Created at: {calendarDate(profileData.createdAt)}</h4>
+					<h4>Created: {calendarDate(profileData.createdAt)}</h4>
 					<h4>Last profile update: {calendarDate(profileData.updatedAt)}</h4>
 				</section>
 				<article className='content-container'>

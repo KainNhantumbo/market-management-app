@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import { BaseButton, ButtonA } from './buttons';
 
 export const StyledLabels = css`
 	font-weight: 500;
@@ -31,15 +30,16 @@ export const StyledInputs = css`
 		line-height: 1.2rem;
 		font-weight: 500;
 		outline: none;
-		border-radius: 5px;
+		border-radius: 3px;
 		background: rgb(${({ theme }) => theme.inner});
-		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
+		border: 1px solid rgba(${({ theme }) => theme.font}, 0.5);
 		::placeholder {
-			color: rgba(${({ theme }) => theme.font}, 0.5);
+			color: rgba(${({ theme }) => theme.font}, 0.7);
 			font-size: 0.9rem;
 		}
 		:disabled {
 			background: none;
+			border: 1px solid rgba(${({ theme }) => theme.font}, 0.1);
 			::placeholder {
 				color: transparent;
 			}
