@@ -53,6 +53,7 @@ export default function Categories(): JSX.Element {
 			console.error(err);
 		}
 	}
+
 	// search
 	const handleSearch = async (): Promise<void> => {
 		try {
@@ -198,7 +199,12 @@ export default function Categories(): JSX.Element {
 								<input
 									type={'search'}
 									placeholder={'Search category'}
-									onChange={(e) => setSearchItems(e.target.value)}
+									onChange={(e) => {
+										setSearchItems(e.target.value);
+										if (e.target.value.length < 1) {
+											getCategories();
+										}
+									}}
 								/>
 								<button onClick={handleSearch}>
 									<FaSearch />
