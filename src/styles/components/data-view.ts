@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BaseButton, ButtonA } from '../global/buttons';
 import { StyledLabels } from '../global/form';
 
-export const ModalWithInput = styled.article`
+export const Viewer = styled.article`
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
@@ -31,11 +31,12 @@ export const ModalWithInput = styled.article`
 		border-radius: 3px;
 		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		background: rgb(${({ theme }) => theme.backgroundAlt});
+		width: 100%;
 		max-width: 600px;
 		margin: 0 10px;
 
-		@media screen and (min-width: 450px) {
-			width: 400px;
+		@media screen and (max-width: 450px) {
+			width: 300px;
 		}
 
 		.prompt-info {
@@ -50,10 +51,8 @@ export const ModalWithInput = styled.article`
 			p {
 				line-height: 1.6rem;
 				font-size: 0.9rem;
-			}
-
-			label {
-				${StyledLabels}
+        text-overflow: ellipsis;
+        overflow: hidden;
 			}
 		}
 

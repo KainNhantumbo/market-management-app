@@ -1,24 +1,48 @@
-import { ConfirmModalContainer as Container } from '../styles/components/confirm-modal';
-import { FC } from 'react';
-import { FaArrowLeft } from 'react-icons/fa';
+import { Viewer as Container } from '../styles/components/data-view';
+import { FiX } from 'react-icons/fi';
 
 interface Props {
 	reject: () => void;
-	values: string[];
+	values: DataProps[];
+}
+
+interface DataProps {
 	title: string;
+	details: Details[];
+}
+
+interface Details {
+	item: string;
 }
 
 export default function ViewCategory(props: Props): JSX.Element {
 	return (
 		<Container>
-			<section className='dialog-modal' onClick={(e) => {}}>
+			<section
+				className='dialog-modal'
+				onClick={(e) => {
+					const target = (e as any).target.classList;
+					if (target.contains('dialog-modal')) {
+						props.reject();
+					}
+				}}
+			>
 				<div className='dialog-prompt'>
 					<div className='prompt-info'>
-						<span className='prompt-title'></span>
+						{props.values.map((item, index) => {
+							return (
+								<div key={index}>
+									<span className='prompt-title'>{item.title}</span>
+									{item.details.map((element, index) => {
+										return <p key={index.toString()}>{element.item}</p>;
+									})}
+								</div>
+							);
+						})}
 					</div>
 					<div className='prompt-actions'>
 						<button className='prompt-cancel' onClick={props.reject}>
-							<FaArrowLeft />
+							<FiX />
 							<span>Close</span>
 						</button>
 					</div>
