@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BaseButton, ButtonA } from '../global/buttons';
-import { StyledInputs } from '../global/form';
+import { StyledInputs, StyledLabels } from '../global/form';
 
 export const ModalWithInput = styled.article`
 	position: fixed;
@@ -19,7 +19,8 @@ export const ModalWithInput = styled.article`
 	${StyledInputs}
 
 	.error-message {
-		color: red;
+		color: rgb(${({ theme }) => theme.alter});
+		font-size: 0.9rem;
 		font-weight: 500;
 	}
 
@@ -27,13 +28,17 @@ export const ModalWithInput = styled.article`
 		display: flex;
 		justify-content: flex-start;
 		flex-direction: column;
-		gap: 20px;
+		gap: 10px;
 		padding: 20px;
 		border-radius: 3px;
 		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		background: rgb(${({ theme }) => theme.backgroundAlt});
 		max-width: 600px;
 		margin: 0 10px;
+
+		@media screen and (min-width: 450px) {
+			width: 400px;
+		}
 
 		.prompt-info {
 			display: flex;
@@ -47,6 +52,10 @@ export const ModalWithInput = styled.article`
 			p {
 				line-height: 1.6rem;
 				font-size: 0.9rem;
+			}
+
+			label {
+				${StyledLabels}
 			}
 		}
 

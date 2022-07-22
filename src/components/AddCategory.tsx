@@ -20,22 +20,24 @@ export default function AddCategory(props: Props): JSX.Element {
 		>
 			<form onSubmit={props.accept} className='dialog-prompt'>
 				<div className='prompt-info'>
-					<HiViewGrid />
-					<span className='prompt-title'>Add new category</span>
+					<label>
+						<HiViewGrid />
+						<span >Add new category</span>
+					</label>
 					<input
 						className='prompt-input'
 						type={'text'}
 						placeholder={'Type the category name.'}
 						name='name'
 						onChange={props.coletor}
-            maxLength={250}
+						maxLength={250}
 					/>
 					<textarea
-						rows={5}
+						rows={8}
 						placeholder={'Type category description.'}
 						name={'description'}
 						onChange={props.coletor}
-            maxLength={250}
+						maxLength={250}
 					/>
 				</div>
 				<span className='error-message'>{props.errorMessage}</span>

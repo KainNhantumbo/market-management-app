@@ -7,6 +7,7 @@ import { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
 import AddCategory from '../../components/AddCategory';
+import feedBack from '../../utils/feedback';
 
 interface CategoriesProps {
 	name: string;
@@ -49,7 +50,10 @@ export default function Categories(): JSX.Element {
 	// sends formdata to server
 	async function handleSubmit(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		if (formData.name === '') return;
+		if (formData.name === '') {
+			feedBack(setErrorMessage, 'Name field must not be empty.', 3000);
+			return;
+		}
 		try {
 			await useFetchAPI({
 				method: 'post',
@@ -60,8 +64,9 @@ export default function Categories(): JSX.Element {
 			setFormData(() => ({ name: '', description: '' }));
 			getCategories();
 			(e as any).target.reset();
-		} catch (err) {
+		} catch (err: any) {
 			console.log(err);
+			feedBack(setErrorMessage, err.response.message, 5000);
 		}
 	}
 
@@ -89,7 +94,7 @@ export default function Categories(): JSX.Element {
 			<main>
 				{isAddModalActive && (
 					<AddCategory
-						errorMessage={''}
+						errorMessage={errorMessage}
 						reject={setIsAddModalActive}
 						coletor={handleChange}
 						accept={handleSubmit}
