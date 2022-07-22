@@ -145,6 +145,9 @@ export const CategoriesContainer = styled.div`
 					@media screen and (max-width: 745px) {
 						grid-template-columns: 200px 1fr;
 					}
+					@media screen and (max-width: 490px) {
+						grid-template-columns: 1fr 1fr;
+					}
 
 					.name,
 					.description {

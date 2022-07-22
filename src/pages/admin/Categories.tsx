@@ -23,6 +23,7 @@ interface Category {
 }
 
 export default function Categories(): JSX.Element {
+	const [searchItems, setSearchItems] = useState('');
 	const [categories, setCategories] = useState<CategoriesProps[]>([]);
 	const [categoryViewer, setCategoryViewer] = useState<DataViewerInterface>([]);
 	const [isAddModalActive, setIsAddModalActive] = useState(false);
@@ -49,9 +50,21 @@ export default function Categories(): JSX.Element {
 			});
 			setCategories(data.data);
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
+	// search
+	const handleSearch = async (): Promise<void> => {
+		try {
+			const { data } = await useFetchAPI({
+				method: 'get',
+				url: `/categories?search=${searchItems}`,
+			});
+			setCategories(data.data);
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	// sends formdata to server
 	async function handleSubmit(e: FormSubmit): Promise<void> {
@@ -74,6 +87,13 @@ export default function Categories(): JSX.Element {
 
 	async function handleUpdate(e: FormSubmit): Promise<void> {
 		e.preventDefault();
+		if (formData.name === '' || formData.description === '') {
+			return feedBack(
+				setErrorMessage,
+				'Please fill all the fields to update category.',
+				3000
+			);
+		}
 		try {
 			await useFetchAPI({
 				method: 'patch',
@@ -175,8 +195,12 @@ export default function Categories(): JSX.Element {
 						<h2>Categories</h2>
 						<section className='container'>
 							<div className='search'>
-								<input type={'search'} placeholder={'Search category'} />
-								<button>
+								<input
+									type={'search'}
+									placeholder={'Search category'}
+									onChange={(e) => setSearchItems(e.target.value)}
+								/>
+								<button onClick={handleSearch}>
 									<FaSearch />
 								</button>
 							</div>
