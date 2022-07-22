@@ -2,19 +2,11 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
-import {
-	FaPlus,
-	FaSearch,
-	FiEdit,
-	FiTrash2,
-	HiPlus,
-	HiPlusSm,
-	HiSave,
-} from 'react-icons/all';
+import { FaSearch, FiEdit, FiTrash2, HiPlusSm } from 'react-icons/all';
 import { FormSubmit } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
-
+import Add from '../../components/AddCategory'
 interface CategoriesProps {
 	name: string;
 	id: string;
@@ -72,7 +64,7 @@ export default function Categories(): JSX.Element {
 
 	useEffect(() => {
 		getCategories();
-		correctWindow()
+		correctWindow();
 	}, []);
 
 	return (
