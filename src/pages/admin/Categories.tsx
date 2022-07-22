@@ -3,10 +3,11 @@ import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
 import { FaSearch, FiEdit, FiTrash2, HiPlusSm } from 'react-icons/all';
-import { FormSubmit } from '../../types/form';
+import { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
-import Add from '../../components/AddCategory'
+import AddCategory from '../../components/AddCategory';
+
 interface CategoriesProps {
 	name: string;
 	id: string;
@@ -14,11 +15,24 @@ interface CategoriesProps {
 
 interface Category {
 	name: string;
+	description: string;
 }
 
 export default function Categories(): JSX.Element {
 	const [categories, setCategories] = useState<CategoriesProps[]>([]);
-	const [formData, setFormData] = useState<Category>({ name: '' });
+	const [isAddModalActive, setIsAddModalActive] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
+	const [formData, setFormData] = useState<Category>({
+		name: '',
+		description: '',
+	});
+
+	const handleChange = (e: Inputs): void => {
+		setFormData((prevData) => ({
+			...prevData,
+			[e.target.name]: e.target.value,
+		}));
+	};
 
 	async function getCategories(): Promise<void> {
 		try {
@@ -42,8 +56,9 @@ export default function Categories(): JSX.Element {
 				url: '/categories',
 				data: formData,
 			});
+			setIsAddModalActive(false);
+			setFormData(() => ({ name: '', description: '' }));
 			getCategories();
-			setFormData(() => ({ name: '' }));
 			(e as any).target.reset();
 		} catch (err) {
 			console.log(err);
@@ -72,6 +87,14 @@ export default function Categories(): JSX.Element {
 			<Header location='Categories' />
 			<Aside />
 			<main>
+				{isAddModalActive && (
+					<AddCategory
+						errorMessage={''}
+						reject={setIsAddModalActive}
+						coletor={handleChange}
+						accept={handleSubmit}
+					/>
+				)}
 				<section className='upper-container'>
 					<div className='title-tools'>
 						<h2>Categories</h2>
@@ -82,36 +105,12 @@ export default function Categories(): JSX.Element {
 							</button>
 						</div>
 						<div className='add'>
-							<button>
+							<button onClick={() => setIsAddModalActive(true)}>
 								<HiPlusSm />
 								<span>Add new category</span>
 							</button>
 						</div>
 					</div>
-					{/* <form onSubmit={handleSubmit}>
-						<label>
-							<FaPlus />
-							<span>Add new product category</span>
-						</label>
-						<section>
-							<input
-								type='text'
-								name='category'
-								placeholder='Type the product category name.'
-								maxLength={250}
-								onChange={(e) =>
-									setFormData((prevData) => ({
-										...prevData,
-										name: e.target.value,
-									}))
-								}
-							/>
-							<button type='submit'>
-								<HiSave />
-								<span>Save</span>
-							</button>
-						</section>
-					</form> */}
 				</section>
 
 				<article>
