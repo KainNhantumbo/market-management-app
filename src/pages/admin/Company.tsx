@@ -89,7 +89,7 @@ export default function Company() {
 
 	useEffect(() => {
 		getCompanyInfo();
-		correctWindow()
+		correctWindow();
 	}, []);
 
 	return (

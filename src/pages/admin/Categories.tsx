@@ -11,7 +11,8 @@ import feedBack from '../../utils/feedback';
 
 interface CategoriesProps {
 	name: string;
-	id: string;
+	description: string;
+	id: number;
 }
 
 interface Category {
@@ -22,6 +23,7 @@ interface Category {
 export default function Categories(): JSX.Element {
 	const [categories, setCategories] = useState<CategoriesProps[]>([]);
 	const [isAddModalActive, setIsAddModalActive] = useState(false);
+	const [isUpdate, setIsUpdate] = useState({ mode: false, id: 0 });
 	const [errorMessage, setErrorMessage] = useState('');
 	const [formData, setFormData] = useState<Category>({
 		name: '',
@@ -70,7 +72,34 @@ export default function Categories(): JSX.Element {
 		}
 	}
 
-	async function deleteCategory(id: string): Promise<void> {
+	async function handleUpdate(e: FormSubmit): Promise<void> {
+		e.preventDefault();
+		try {
+			await useFetchAPI({
+				method: 'patch',
+				url: `/categories/${isUpdate.id}`,
+				data: formData,
+			});
+			setIsAddModalActive(false);
+			setFormData(() => ({ name: '', description: '' }));
+			cancelOps();
+			getCategories();
+			(e as any).target.reset();
+		} catch (err: any) {
+			console.log(err);
+			feedBack(setErrorMessage, err.response.message, 5000);
+		}
+	}
+
+	const getCategoryForUpdate = (id: number) => {
+		const [category] = categories.filter((element) => {
+			return element.id === id;
+		});
+		setFormData(category);
+		setIsUpdate({ mode: true, id: id });
+	};
+
+	async function deleteCategory(id: number): Promise<void> {
 		try {
 			await useFetchAPI({
 				method: 'delete',
@@ -81,6 +110,15 @@ export default function Categories(): JSX.Element {
 			console.log(err);
 		}
 	}
+
+	// cancels create or update operations by removing the modal
+	const cancelOps = (): void => {
+		if (isAddModalActive) {
+			setIsAddModalActive(false);
+			return;
+		}
+		setIsUpdate((prevState) => ({ ...prevState, mode: false }));
+	};
 
 	useEffect(() => {
 		getCategories();
@@ -95,9 +133,20 @@ export default function Categories(): JSX.Element {
 				{isAddModalActive && (
 					<AddCategory
 						errorMessage={errorMessage}
-						reject={setIsAddModalActive}
+						reject={cancelOps}
 						coletor={handleChange}
 						accept={handleSubmit}
+						title={'Add new category'}
+					/>
+				)}
+				{isUpdate.mode && (
+					<AddCategory
+						errorMessage={errorMessage}
+						reject={cancelOps}
+						coletor={handleChange}
+						accept={handleUpdate}
+						title={'Update category'}
+						values={formData}
 					/>
 				)}
 				<section className='upper-container'>
@@ -124,7 +173,7 @@ export default function Categories(): JSX.Element {
 							<div className='name'>
 								<span>Name</span>
 							</div>
-							<div className=''>
+							<div>
 								<span>Description</span>
 							</div>
 						</div>
@@ -138,10 +187,14 @@ export default function Categories(): JSX.Element {
 								<section key={category.id} className='category'>
 									<section className='data'>
 										<div className='name'>{category.name}</div>
-										<div className='description'>{category.name}</div>
+										<div className='description'>{category.description}</div>
 									</section>
 									<div className='actions'>
-										<button className='edit' title='Edit'>
+										<button
+											className='edit'
+											title='Edit'
+											onClick={(e) => getCategoryForUpdate(category.id)}
+										>
 											<FiEdit />
 										</button>
 										<button
