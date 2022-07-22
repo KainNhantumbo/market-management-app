@@ -24,7 +24,7 @@ export const Viewer = styled.article`
 
 	.dialog-prompt {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		flex-direction: column;
 		gap: 10px;
 		padding: 20px;
@@ -32,6 +32,8 @@ export const Viewer = styled.article`
 		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		background: rgb(${({ theme }) => theme.backgroundAlt});
 		width: 100%;
+		min-width: 300px;
+		min-height: 200px;
 		max-width: 600px;
 		margin: 0 10px;
 

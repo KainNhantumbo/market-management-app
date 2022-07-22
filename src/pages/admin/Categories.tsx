@@ -8,6 +8,8 @@ import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
 import AddCategory from '../../components/AddCategory';
 import feedBack from '../../utils/feedback';
+import DataViewer, { DataViewerInterface } from '../../components/DataViewer';
+import { Item } from 'framer-motion/types/components/Reorder/Item';
 
 interface CategoriesProps {
 	name: string;
@@ -22,6 +24,7 @@ interface Category {
 
 export default function Categories(): JSX.Element {
 	const [categories, setCategories] = useState<CategoriesProps[]>([]);
+	const [categoryViewer, setCategoryViewer] = useState<DataViewerInterface>([]);
 	const [isAddModalActive, setIsAddModalActive] = useState(false);
 	const [isUpdate, setIsUpdate] = useState({ mode: false, id: 0 });
 	const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +32,7 @@ export default function Categories(): JSX.Element {
 		name: '',
 		description: '',
 	});
+	const [isViewerActive, setIsViewerActive] = useState(false);
 
 	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
@@ -95,6 +99,18 @@ export default function Categories(): JSX.Element {
 		setIsUpdate({ mode: true, id: id });
 	};
 
+	const getCategoryForViewer = (id: number): void => {
+		const [category] = categories.filter((element) => {
+			return element.id === id;
+		});
+		const data: DataViewerInterface = [
+			{ title: 'Category', details: category.name },
+			{ title: 'Description', details: category.description },
+		];
+		setCategoryViewer(data);
+		setIsViewerActive(true);
+	};
+
 	async function deleteCategory(id: number): Promise<void> {
 		try {
 			await useFetchAPI({
@@ -114,6 +130,11 @@ export default function Categories(): JSX.Element {
 			return;
 		}
 		setIsUpdate((prevState) => ({ ...prevState, mode: false }));
+	};
+
+	// quits data viewer
+	const quitViewer = (): void => {
+		setIsViewerActive(false);
 	};
 
 	useEffect(() => {
@@ -145,6 +166,10 @@ export default function Categories(): JSX.Element {
 						values={formData}
 					/>
 				)}
+				{isViewerActive && (
+					<DataViewer quit={quitViewer} data={categoryViewer} />
+				)}
+
 				<section className='upper-container'>
 					<div className='title-tools'>
 						<h2>Categories</h2>
@@ -183,7 +208,10 @@ export default function Categories(): JSX.Element {
 						{categories.map((category) => {
 							return (
 								<section key={category.id} className='category'>
-									<section className='data'>
+									<section
+										className='data'
+										onClick={() => getCategoryForViewer(category.id)}
+									>
 										<div className='name'>{category.name}</div>
 										<div className='description'>{category.description}</div>
 									</section>
