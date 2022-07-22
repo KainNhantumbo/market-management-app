@@ -52,10 +52,6 @@ export default function Categories(): JSX.Element {
 	// sends formdata to server
 	async function handleSubmit(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		if (formData.name === '') {
-			feedBack(setErrorMessage, 'Name field must not be empty.', 3000);
-			return;
-		}
 		try {
 			await useFetchAPI({
 				method: 'post',
@@ -68,7 +64,7 @@ export default function Categories(): JSX.Element {
 			(e as any).target.reset();
 		} catch (err: any) {
 			console.log(err);
-			feedBack(setErrorMessage, err.response.message, 5000);
+			feedBack(setErrorMessage, err.response.data.message, 5000);
 		}
 	}
 
@@ -87,7 +83,7 @@ export default function Categories(): JSX.Element {
 			(e as any).target.reset();
 		} catch (err: any) {
 			console.log(err);
-			feedBack(setErrorMessage, err.response.message, 5000);
+			feedBack(setErrorMessage, err.response.data.message, 5000);
 		}
 	}
 
@@ -152,18 +148,20 @@ export default function Categories(): JSX.Element {
 				<section className='upper-container'>
 					<div className='title-tools'>
 						<h2>Categories</h2>
-						<div className='search'>
-							<input type={'search'} placeholder={'Search category'} />
-							<button>
-								<FaSearch />
-							</button>
-						</div>
-						<div className='add'>
-							<button onClick={() => setIsAddModalActive(true)}>
-								<HiPlusSm />
-								<span>Add new category</span>
-							</button>
-						</div>
+						<section className='container'>
+							<div className='search'>
+								<input type={'search'} placeholder={'Search category'} />
+								<button>
+									<FaSearch />
+								</button>
+							</div>
+							<div className='add'>
+								<button onClick={() => setIsAddModalActive(true)}>
+									<HiPlusSm />
+									<span>Add new category</span>
+								</button>
+							</div>
+						</section>
 					</div>
 				</section>
 
@@ -173,7 +171,7 @@ export default function Categories(): JSX.Element {
 							<div className='name'>
 								<span>Name</span>
 							</div>
-							<div>
+							<div className='description'>
 								<span>Description</span>
 							</div>
 						</div>

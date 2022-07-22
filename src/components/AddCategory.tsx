@@ -60,7 +60,7 @@ export default function AddCategory(props: Props): JSX.Element {
 					</button>
 					<button type='submit' className='prompt-accept'>
 						<FiCheck />
-						<span>Add category</span>
+						<span>Save</span>
 					</button>
 				</div>
 			</form>

@@ -46,7 +46,15 @@ export const CategoriesContainer = styled.div`
 						${ButtonB}
 					}
 				}
+				.container {
+					display: flex;
+					gap: 10px;
+					flex-direction: row-reverse;
 
+					@media screen and (max-width: 655px) {
+						flex-direction: column-reverse;
+					}
+				}
 			}
 
 			form {
@@ -88,6 +96,15 @@ export const CategoriesContainer = styled.div`
 
 					.name {
 						width: 300px;
+
+						@media screen and (max-width: 745px) {
+							width: 200px;
+						}
+					}
+					.description {
+						@media screen and (max-width: 575px) {
+							display: none;
+						}
 					}
 				}
 
@@ -114,12 +131,20 @@ export const CategoriesContainer = styled.div`
 				align-items: center;
 				border-radius: 3px;
 				gap: 10px;
+				cursor: pointer;
 
+				:hover {
+					box-shadow: 0 0 20px rgba(${({ theme }) => theme.shadows}, 0.6);
+				}
 				.data {
 					display: grid;
 					grid-template-columns: 300px 1fr;
 					gap: 8px;
 					text-align: start;
+
+					@media screen and (max-width: 745px) {
+						grid-template-columns: 200px 1fr;
+					}
 
 					.name,
 					.description {
@@ -129,9 +154,10 @@ export const CategoriesContainer = styled.div`
 						padding: 12px 0;
 					}
 
-					.name {
-						width: 300px;
-						max-width: 300px;
+					.description {
+						@media screen and (max-width: 575px) {
+							display: none;
+						}
 					}
 				}
 				.actions {

@@ -35,11 +35,14 @@ export const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
     width: 5px;
     background: none;
-    background: rgba(${({ theme }) => theme.secondary}, .3);
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 15px;
-    background: rgba(${({ theme }) => theme.alter}, .5);
+    background: rgba(${({ theme }) => theme.primary}, .4);
+    :hover {
+      background: rgba(${({ theme }) => theme.primary}, .8);
+    }
   }
 `;
