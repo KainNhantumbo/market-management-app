@@ -1,5 +1,17 @@
 import { SortContainer as Container } from '../styles/components/sort-items-box';
-import { FiX, FaSort, FaSortAlphaDown, FaSortAlphaUp, FaSortNumericDown, FaSortNumericUp, FaSortAmountDown, BiSortDown, BiSortUp, BiSortZA, BiSortAZ } from 'react-icons/all';
+import {
+	FiX,
+	FaSort,
+	FaSortAlphaDown,
+	FaSortAlphaUp,
+	FaSortNumericDown,
+	FaSortNumericUp,
+	FaSortAmountDown,
+	BiSortDown,
+	BiSortUp,
+	BiSortZA,
+	BiSortAZ,
+} from 'react-icons/all';
 
 interface Props {
 	quit: () => void;
@@ -18,10 +30,15 @@ export default function SortItemsBox(props: Props): JSX.Element {
 		>
 			<section className='dialog-modal'>
 				<section className='dialog-prompt'>
-					<h2>
-						<FaSort />
-						<span>Sort by</span>
-					</h2>
+					<div className='top'>
+						<h2>
+							<FaSort />
+							<span>Sort by</span>
+						</h2>
+						<button className='quit' title='Close' onClick={props.quit}>
+							<FiX />
+						</button>
+					</div>
 					<section className='prompt-info'>
 						<div>
 							<BiSortAZ />
@@ -36,23 +53,17 @@ export default function SortItemsBox(props: Props): JSX.Element {
 							<span>Created At</span>
 						</div>
 						<div>
-							<BiSortUp/>
+							<BiSortUp />
 							<span>Created At (ascending)</span>
 						</div>
 						<div>
-							<FaSortNumericDown />
+							<BiSortDown />
 							<span>Updated At</span>
 						</div>
 						<div>
-							<FaSortNumericUp/>
+							<BiSortUp />
 							<span>Updated At (ascending)</span>
 						</div>
-					</section>
-					<section className='prompt-actions'>
-						<button className='prompt-cancel' onClick={props.quit}>
-							<FiX />
-							<span>Close</span>
-						</button>
 					</section>
 				</section>
 			</section>

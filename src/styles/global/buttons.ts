@@ -132,3 +132,25 @@ export const ButtonC = css`
 		pointer-events: none;
 	}
 `;
+
+export const StyledCornerButton = css`
+	border-radius: 3px;
+	background: rgb(${({ theme }) => theme.inner});
+	color: rgb(${({ theme }) => theme.primary});
+	border: none;
+	width: fit-content;
+	cursor: pointer;
+	display: grid;
+	place-content: center;
+	padding: 5px;
+
+	:hover {
+		background: rgb(${({ theme }) => theme.secondary});
+		svg {
+			color: rgb(${({ theme }) => theme.text});
+		}
+	}
+	svg {
+		pointer-events: none;
+	}
+`;
