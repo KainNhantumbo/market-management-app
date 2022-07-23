@@ -141,6 +141,7 @@ export const CategoriesContainer = styled.div`
 					grid-template-columns: 300px 1fr;
 					gap: 8px;
 					text-align: start;
+					width: 100%;
 
 					@media screen and (max-width: 745px) {
 						grid-template-columns: 200px 1fr;

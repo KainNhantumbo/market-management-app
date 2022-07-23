@@ -1,30 +1,19 @@
 import { Viewer as Container } from '../styles/components/data-view';
 import { FiX } from 'react-icons/fi';
-
-interface Props {
-	quit: () => void;
-	data: DataProps[];
-}
-
-export type DataViewerInterface = DataProps[];
-
-interface DataProps {
-	title: string;
-	details: string;
-}
+import { Props } from '../types/data-viewer';
 
 export default function DataViewer(props: Props): JSX.Element {
 	return (
-		<Container>
-			<section
-				className='dialog-modal'
-				onClick={(e) => {
-					const target = (e as any).target.classList;
-					if (target.contains('dialog-modal')) {
-						props.quit();
-					}
-				}}
-			>
+		<Container
+			className='main'
+			onClick={(e) => {
+				const target = (e as any).target.classList;
+				if (target.contains('main')) {
+					props.quit();
+				}
+			}}
+		>
+			<section className='dialog-modal'>
 				<div className='dialog-prompt'>
 					<div className='prompt-info'>
 						{props.data.map((item, index) => {
@@ -37,7 +26,13 @@ export default function DataViewer(props: Props): JSX.Element {
 						})}
 					</div>
 					<div className='prompt-actions'>
-						<button className='prompt-cancel' onClick={props.quit}>
+						<button
+							className='prompt-cancel'
+							onClick={(e) => {
+								e.stopPropagation();
+								props.quit();
+							}}
+						>
 							<FiX />
 							<span>Close</span>
 						</button>

@@ -8,8 +8,8 @@ import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
 import AddCategory from '../../components/AddCategory';
 import feedBack from '../../utils/feedback';
-import DataViewer, { DataViewerInterface } from '../../components/DataViewer';
-import { Item } from 'framer-motion/types/components/Reorder/Item';
+import DataViewer from '../../components/DataViewer';
+import { DataViewerInterface } from '../../types/data-viewer';
 
 interface CategoriesProps {
 	name: string;

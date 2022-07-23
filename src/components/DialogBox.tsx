@@ -20,8 +20,16 @@ const DialogBox: FC<Props> = ({
 	icon,
 }): JSX.Element => {
 	return (
-		<Container>
-			<section className='dialog-modal' onClick={(e) => {}}>
+		<Container
+			className='main'
+			onClick={(e) => {
+				const target = (e as any).target.classList;
+				if (target.contains('main')) {
+					closeModal(false);
+				}
+			}}
+		>
+			<section className='dialog-modal'>
 				<div className='dialog-prompt'>
 					<div className='prompt-info'>
 						<span className='prompt-title'>{prompt_title}</span>
