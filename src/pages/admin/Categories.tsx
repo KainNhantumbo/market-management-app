@@ -103,7 +103,7 @@ export default function Categories(): JSX.Element {
 		try {
 			await useFetchAPI({
 				method: 'patch',
-				url: `/categories/${isUpdate.id}`,
+			url: `/categories/${isUpdate.id}`,
 				data: formData,
 			});
 			setIsAddModalActive(false);
@@ -250,27 +250,25 @@ export default function Categories(): JSX.Element {
 				</section>
 
 				<article>
-					<section className='description-bar'>
-						<div className='description-titles'>
-							<div className='name'>
-								<span>Name</span>
+					{categories.length > 0 && (
+						<section className='description-bar'>
+							<div className='description-titles'>
+								<div className='name'>
+									<span>Name</span>
+								</div>
+								<div className='description'>
+									<span>Description</span>
+								</div>
 							</div>
-							<div className='description'>
-								<span>Description</span>
+							<div className='description-actions'>
+								<span>Actions</span>
 							</div>
-						</div>
-						<div className='description-actions'>
-							<span>Actions</span>
-						</div>
-					</section>
+						</section>
+					)}
 					<section className='category-container'>
 						{categories.map((category) => {
 							return (
-								<motion.section
-									key={category.id}
-									className='category'
-									whileTap={{ scale: 0.9 }}
-								>
+								<section key={category.id} className='category'>
 									<section
 										className='data'
 										onClick={() => getCategoryForViewer(category.id)}
@@ -279,22 +277,24 @@ export default function Categories(): JSX.Element {
 										<div className='description'>{category.description}</div>
 									</section>
 									<div className='actions'>
-										<button
+										<motion.button
+											whileTap={{ scale: 0.8 }}
 											className='edit'
 											title='Edit'
 											onClick={(e) => getCategoryForUpdate(category.id)}
 										>
 											<FiEdit />
-										</button>
-										<button
+										</motion.button>
+										<motion.button
+											whileTap={{ scale: 0.8 }}
 											className='destroy'
 											title='Delete'
 											onClick={() => deleteCategory(category.id)}
 										>
 											<FiTrash2 />
-										</button>
+										</motion.button>
 									</div>
-								</motion.section>
+								</section>
 							);
 						})}
 					</section>

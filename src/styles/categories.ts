@@ -150,6 +150,7 @@ export const CategoriesContainer = styled.div`
 
 				:hover {
 					box-shadow: 0 0 20px rgba(${({ theme }) => theme.shadows}, 0.6);
+					transition: all 200ms ease;
 				}
 				.data {
 					display: grid;

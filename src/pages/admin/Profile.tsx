@@ -130,7 +130,7 @@ export default function Profile() {
 
 	useEffect(() => {
 		getProfileInfo();
-		correctWindow()
+		correctWindow();
 	}, []);
 
 	return (
@@ -155,8 +155,14 @@ export default function Profile() {
 						<span>Account information</span>
 					</h2>
 					<p>Here you can see and modify your account details.</p>
-					<h4>Created: {calendarDate(profileData.createdAt)}</h4>
-					<h4>Last profile update: {calendarDate(profileData.updatedAt)}</h4>
+					<h4>
+						Created:{' '}
+						{profileData.createdAt && calendarDate(profileData.createdAt)}
+					</h4>
+					<h4>
+						Last profile update:{' '}
+						{profileData.updatedAt && calendarDate(profileData.updatedAt)}
+					</h4>
 				</section>
 				<article className='content-container'>
 					<form onSubmit={handleUpdate}>

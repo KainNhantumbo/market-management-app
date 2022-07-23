@@ -56,6 +56,8 @@ export default function AddCategory(props: Props): JSX.Element {
 									value={props.values?.name}
 									onChange={props.coletor}
 									maxLength={250}
+									autoComplete=''
+									aria-autocomplete='none'
 								/>
 								<textarea
 									rows={8}

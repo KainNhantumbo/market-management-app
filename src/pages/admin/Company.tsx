@@ -104,9 +104,7 @@ export default function Company() {
 					<p>Here you can see and modify your company details.</p>
 					<h4>
 						Last update:{' '}
-						{companyData.updatedAt
-							? calendarDate(companyData.updatedAt)
-							: 'Not set.'}
+						{companyData.updatedAt && calendarDate(companyData.updatedAt)}
 					</h4>
 				</section>
 				<article>
