@@ -6,6 +6,7 @@ import { dark, primary } from '../themes/themes';
 import { useNavigate } from 'react-router-dom';
 interface AppContextProps {
 	themeSwitcher: () => void;
+	themeSettings: ThemeSettings;
 }
 interface Props {
 	children: ReactNode;
@@ -14,7 +15,10 @@ interface ThemeSettings {
 	dark_mode: boolean;
 }
 
-const context = createContext<AppContextProps>({ themeSwitcher: () => {} });
+const context = createContext<AppContextProps>({
+	themeSwitcher: () => {},
+	themeSettings: { dark_mode: false },
+});
 const AppContext: React.FC<Props> = ({ children }) => {
 	const [themeSettings, setThemeSettings] = useState<ThemeSettings>({
 		dark_mode: false,
@@ -42,10 +46,7 @@ const AppContext: React.FC<Props> = ({ children }) => {
 		if (themeSettings.dark_mode === false) {
 			setMode(dark);
 			setThemeSettings({ dark_mode: true });
-			localStorage.setItem(
-				'AppSettings',
-				JSON.stringify({ dark_mode: true })
-			);
+			localStorage.setItem('AppSettings', JSON.stringify({ dark_mode: true }));
 			return;
 		}
 		setMode(primary);
@@ -63,6 +64,7 @@ const AppContext: React.FC<Props> = ({ children }) => {
 			<context.Provider
 				value={{
 					themeSwitcher,
+					themeSettings,
 				}}
 			>
 				{children}

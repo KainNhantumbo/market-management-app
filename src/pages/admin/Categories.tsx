@@ -53,11 +53,12 @@ export default function Categories(): JSX.Element {
 		}));
 	};
 
-	async function getCategories(): Promise<void> {
+	async function getCategories(query?: string): Promise<void> {
 		try {
+			let url = query ? `/categories?${query}` : `/categories`;
 			const { data } = await useFetchAPI({
 				method: 'get',
-				url: '/categories',
+				url: url,
 			});
 			setCategories(data.data);
 		} catch (err) {
@@ -189,7 +190,11 @@ export default function Categories(): JSX.Element {
 					icon={<HiViewGrid />}
 					title={'Category Previewer'}
 				/>
-				<SortItemsBox active={isSortActive} quit={quitSort} />
+				<SortItemsBox
+					active={isSortActive}
+					quit={quitSort}
+					fn={getCategories}
+				/>
 
 				<section className='upper-container'>
 					<div className='title-tools'>
@@ -211,23 +216,34 @@ export default function Categories(): JSX.Element {
 										}
 									}}
 								/>
-								<button onClick={handleSearch}>
+								<motion.button whileTap={{ scale: 0.8 }} onClick={handleSearch}>
 									<FaSearch />
-								</button>
+								</motion.button>
 							</div>
 							<div className='functions'>
-								<button title='Sort by' onClick={() => setIsSortActive(true)}>
+								<motion.button
+									whileTap={{ scale: 0.8 }}
+									title='Sort by'
+									onClick={() => setIsSortActive(true)}
+								>
 									<HiSortDescending />
-								</button>
-								<button title='Refresh' onClick={getCategories}>
+								</motion.button>
+								<motion.button
+									whileTap={{ scale: 0.8 }}
+									title='Refresh'
+									onClick={() => getCategories()}
+								>
 									<HiRefresh />
-								</button>
+								</motion.button>
 							</div>
 							<div className='add'>
-								<button onClick={() => setIsAddModalActive(true)}>
+								<motion.button
+									whileTap={{ scale: 0.8 }}
+									onClick={() => setIsAddModalActive(true)}
+								>
 									<HiPlusCircle />
 									<span>Add new category</span>
-								</button>
+								</motion.button>
 							</div>
 						</section>
 					</div>
@@ -250,8 +266,10 @@ export default function Categories(): JSX.Element {
 					<section className='category-container'>
 						{categories.map((category) => {
 							return (
-								<motion.section key={category.id} className='category'
-								whileTap={{scale: 0.9}}
+								<motion.section
+									key={category.id}
+									className='category'
+									whileTap={{ scale: 0.9 }}
 								>
 									<section
 										className='data'

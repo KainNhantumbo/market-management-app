@@ -12,7 +12,6 @@ export const BaseButton = css`
 	cursor: pointer;
 	:hover {
 		color: rgb(${({ theme }) => theme.alterAlt});
-		transition: all 200ms ease-in-out;
 	}
 	svg {
 		width: 18px;
@@ -40,7 +39,6 @@ export const ButtonA = css`
 	cursor: pointer;
 	:hover {
 		color: rgb(${({ theme }) => theme.text});
-		transition: all 200ms ease-in-out;
 		background: rgb(${({ theme }) => theme.secondary});
 	}
 	svg {
@@ -69,7 +67,6 @@ export const ButtonDanger = css`
 	cursor: pointer;
 	:hover {
 		color: rgb(${({ theme }) => theme.text});
-		transition: all 200ms ease-in-out;
 		background: rgb(${({ theme }) => theme.secondary});
 	}
 	svg {
@@ -100,7 +97,6 @@ export const ButtonB = css`
 	place-content: center;
 
 	:hover {
-		transition: all 200ms ease-in-out;
 		background: rgb(${({ theme }) => theme.secondary});
 	}
 	svg {
@@ -122,7 +118,6 @@ export const ButtonC = css`
 	place-content: center;
 
 	:hover {
-		transition: all 200ms ease-in-out;
 		background: rgb(${({ theme }) => theme.secondary});
 		svg {
 			color: rgb(${({ theme }) => theme.text});

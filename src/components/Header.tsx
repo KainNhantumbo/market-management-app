@@ -1,37 +1,40 @@
 import { HeaderContainer as Container } from '../styles/components/header';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { HiMoon, HiSun } from 'react-icons/all';
 import { useAppContext } from '../context/AppContext';
+import { motion } from 'framer-motion';
 
 interface Props {
 	location: string;
 }
 
 const Header: FC<Props> = ({ location }) => {
-	const { themeSwitcher } = useAppContext();
-	const [modeIcon, setModeIcon] = useState({ mode: 'light', icon: <HiSun /> });
+	const { themeSwitcher, themeSettings } = useAppContext();
+	const [modeIcon, setModeIcon] = useState(<HiSun />);
 
-	function handleIcon() {
-		if (modeIcon.mode === 'light') {
-			setModeIcon({ mode: 'dark', icon: <HiMoon /> });
-		} else {
-			setModeIcon({ mode: 'light', icon: <HiSun /> });
-		}
+	function handleIcon(): void {
+		if (themeSettings.dark_mode) return setModeIcon(<HiMoon />);
+		setModeIcon(<HiSun />);
 	}
+
+	useEffect(() => {
+		handleIcon();
+	}, []);
 
 	return (
 		<Container>
 			<h2 className='brand'>
 				<span>Administration</span>
 			</h2>
-			<button
+			<motion.button
+				whileTap={{ scale: 0.8 }}
 				onClick={() => {
 					themeSwitcher();
 					handleIcon();
 				}}
 			>
-				{modeIcon.icon}
-			</button>
+				{modeIcon}
+			</motion.button>
 			<p title={location}>{location}</p>
 		</Container>
 	);
