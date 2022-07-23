@@ -76,7 +76,7 @@ export default function Categories(): JSX.Element {
 		}
 	};
 
-	// sends formdata to server
+	// sends created category to the server
 	async function handleSubmit(e: FormSubmit): Promise<void> {
 		e.preventDefault();
 		try {
@@ -97,7 +97,7 @@ export default function Categories(): JSX.Element {
 
 	async function handleUpdate(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		if (formData.name === '' || formData.description === '')
+		if (!formData.name || !formData.description)
 			return feedBack(
 				setErrorMessage,
 				'Please fill all the fields to update category.',
