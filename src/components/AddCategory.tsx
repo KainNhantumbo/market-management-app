@@ -1,7 +1,7 @@
 import { FiArrowLeft, FiCheck, HiViewGrid } from 'react-icons/all';
 import { ModalWithInput as Container } from '../styles/components/modal-with-input';
 import { FormSubmit, Inputs } from '../types/form';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 type data = {
 	name: string;
@@ -20,7 +20,7 @@ interface Props {
 
 export default function AddCategory(props: Props): JSX.Element {
 	return (
-		<AnimatePresence>
+		<>
 			{props.active && (
 				<Container
 					className='dialog-modal'
@@ -32,17 +32,16 @@ export default function AddCategory(props: Props): JSX.Element {
 					}}
 				>
 					<form onSubmit={props.accept}>
-						<motion.section
-							initial={{ opacity: 0, scale: 0 }}
-							animate={{
-								opacity: 1,
-								scale: 1,
-								transition: {
-									duration: 0.3,
-								},
-							}}
-							exit={{ opacity: 0, scale: 0 }}
-							className='dialog-prompt'
+						<motion.section className='dialog-prompt'
+						initial={{ opacity: 0, scale: 0 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+							transition: {
+								duration: 0.3,
+							},
+						}}
+						exit={{ opacity: 0, scale: 0 }}
 						>
 							<div className='prompt-info'>
 								<label>
@@ -82,6 +81,6 @@ export default function AddCategory(props: Props): JSX.Element {
 					</form>
 				</Container>
 			)}
-		</AnimatePresence>
+		</>
 	);
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton } from '../global/buttons';
+import { StyledCornerButton } from '../global/buttons';
 
 export const Viewer = styled.article`
 	position: fixed;
@@ -34,6 +34,25 @@ export const Viewer = styled.article`
 			width: 300px;
 		}
 
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			place-items: center;
+			.quit {
+				${StyledCornerButton}
+			}
+
+			h2 {
+				font-weight: 500;
+				font-size: 1.1rem;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				color: rgb(${({ theme }) => theme.secondary});
+			}
+		}
+
 		.prompt-info {
 			display: flex;
 			flex-direction: column;
@@ -49,17 +68,6 @@ export const Viewer = styled.article`
 				font-size: 0.9rem;
 				text-overflow: ellipsis;
 				overflow: hidden;
-			}
-		}
-
-		.prompt-actions {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-end;
-			gap: 10px;
-
-			.prompt-cancel {
-				${BaseButton}
 			}
 		}
 	}

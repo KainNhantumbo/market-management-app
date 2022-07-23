@@ -5,6 +5,7 @@ import {
 	HiPlusCircle,
 	HiRefresh,
 	HiSortDescending,
+	HiViewGrid,
 } from 'react-icons/all';
 import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
@@ -18,6 +19,7 @@ import feedBack from '../../utils/feedback';
 import DataViewer from '../../components/DataViewer';
 import { DataViewerInterface } from '../../types/data-viewer';
 import SortItemsBox from '../../components/SortItemsBox';
+import { motion } from 'framer-motion';
 
 interface CategoriesProps {
 	name: string;
@@ -97,12 +99,6 @@ export default function Categories(): JSX.Element {
 
 	async function handleUpdate(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		if (!formData.name || !formData.description)
-			return feedBack(
-				setErrorMessage,
-				'Please fill all the fields to update category.',
-				3000
-			);
 		try {
 			await useFetchAPI({
 				method: 'patch',
@@ -129,7 +125,7 @@ export default function Categories(): JSX.Element {
 	const getCategoryForViewer = (id: number): void => {
 		const [category] = categories.filter((element) => element.id === id);
 		const data: DataViewerInterface = [
-			{ title: 'Category', details: category.name },
+			{ title: 'Name', details: category.name },
 			{ title: 'Description', details: category.description },
 		];
 		setCategoryViewer(data);
@@ -190,6 +186,8 @@ export default function Categories(): JSX.Element {
 					active={isViewerActive}
 					quit={quitViewer}
 					data={categoryViewer}
+					icon={<HiViewGrid />}
+					title={'Category Previewer'}
 				/>
 				<SortItemsBox active={isSortActive} quit={quitSort} />
 
@@ -252,7 +250,9 @@ export default function Categories(): JSX.Element {
 					<section className='category-container'>
 						{categories.map((category) => {
 							return (
-								<section key={category.id} className='category'>
+								<motion.section key={category.id} className='category'
+								whileTap={{scale: 0.9}}
+								>
 									<section
 										className='data'
 										onClick={() => getCategoryForViewer(category.id)}
@@ -276,7 +276,7 @@ export default function Categories(): JSX.Element {
 											<FiTrash2 />
 										</button>
 									</div>
-								</section>
+								</motion.section>
 							);
 						})}
 					</section>

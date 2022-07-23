@@ -1,7 +1,7 @@
 import { Viewer as Container } from '../styles/components/data-view';
-import { FiX } from 'react-icons/fi';
 import { Props } from '../types/data-viewer';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FiX } from 'react-icons/all';
 
 export default function DataViewer(props: Props): JSX.Element {
 	return (
@@ -29,6 +29,15 @@ export default function DataViewer(props: Props): JSX.Element {
 						exit={{ opacity: 0, scale: 0, transition: { delay: 0.28 } }}
 					>
 						<div className='dialog-prompt'>
+							<div className='top'>
+								<h2>
+									{props.icon}
+									<span>{props.title}</span>
+								</h2>
+								<button className='quit' title='Close' onClick={props.quit}>
+									<FiX />
+								</button>
+							</div>
 							<motion.div
 								className='prompt-info'
 								initial={{ opacity: 0, scale: 0, y: 90 }}
@@ -59,18 +68,6 @@ export default function DataViewer(props: Props): JSX.Element {
 									);
 								})}
 							</motion.div>
-							<div className='prompt-actions'>
-								<button
-									className='prompt-cancel'
-									onClick={(e) => {
-										e.stopPropagation();
-										props.quit();
-									}}
-								>
-									<FiX />
-									<span>Close</span>
-								</button>
-							</div>
 						</div>
 					</motion.section>
 				</Container>
