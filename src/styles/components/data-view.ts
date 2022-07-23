@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton, ButtonA } from '../global/buttons';
-import { StyledLabels } from '../global/form';
+import { BaseButton } from '../global/buttons';
 
 export const Viewer = styled.article`
 	position: fixed;
@@ -15,12 +14,6 @@ export const Viewer = styled.article`
 	place-content: center;
 	user-select: none;
 	position: fixed;
-
-	.error-message {
-		color: rgb(${({ theme }) => theme.alter});
-		font-size: 0.9rem;
-		font-weight: 500;
-	}
 
 	.dialog-prompt {
 		display: flex;
@@ -49,12 +42,13 @@ export const Viewer = styled.article`
 			span {
 				font-weight: 500;
 				color: rgb(${({ theme }) => theme.primary});
+				line-height: 1.8rem;
 			}
 			p {
-				line-height: 1.6rem;
+				line-height: 1.4rem;
 				font-size: 0.9rem;
-        text-overflow: ellipsis;
-        overflow: hidden;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
 		}
 

@@ -23,6 +23,7 @@ import AddCategory from '../../components/AddCategory';
 import feedBack from '../../utils/feedback';
 import DataViewer from '../../components/DataViewer';
 import { DataViewerInterface } from '../../types/data-viewer';
+import SortItemsBox from '../../components/SortItemsBox';
 
 interface CategoriesProps {
 	name: string;
@@ -41,6 +42,7 @@ export default function Categories(): JSX.Element {
 	const [categoryViewer, setCategoryViewer] = useState<DataViewerInterface>([]);
 	const [isAddModalActive, setIsAddModalActive] = useState(false);
 	const [isUpdate, setIsUpdate] = useState({ mode: false, id: 0 });
+	const [isSortActive, setIsSortActive] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [formData, setFormData] = useState<Category>({
 		name: '',
@@ -171,11 +173,15 @@ export default function Categories(): JSX.Element {
 		setIsViewerActive(false);
 	};
 
+	const quitSort = (): void => {
+		setIsSortActive(false);
+	};
+
 	useEffect(() => {
 		getCategories();
 		correctWindow();
 	}, []);
-
+	
 	return (
 		<Container>
 			<Header location='Categories' />
@@ -203,6 +209,7 @@ export default function Categories(): JSX.Element {
 				{isViewerActive && (
 					<DataViewer quit={quitViewer} data={categoryViewer} />
 				)}
+				{isSortActive && <SortItemsBox quit={quitSort} />}
 
 				<section className='upper-container'>
 					<div className='title-tools'>
@@ -229,8 +236,8 @@ export default function Categories(): JSX.Element {
 								</button>
 							</div>
 							<div className='functions'>
-								<button title='Sort by' onClick={handleSearch}>
-									<HiSortDescending  />
+								<button title='Sort by' onClick={() => setIsSortActive(true)}>
+									<HiSortDescending />
 								</button>
 								<button title='Refresh' onClick={getCategories}>
 									<HiRefresh />
@@ -242,7 +249,6 @@ export default function Categories(): JSX.Element {
 									<span>Add new category</span>
 								</button>
 							</div>
-							
 						</section>
 					</div>
 				</section>
