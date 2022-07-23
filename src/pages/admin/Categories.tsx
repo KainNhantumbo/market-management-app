@@ -169,28 +169,28 @@ export default function Categories(): JSX.Element {
 			<Header location='Categories' />
 			<Aside />
 			<main>
-				{isAddModalActive && (
-					<AddCategory
-						errorMessage={errorMessage}
-						reject={cancelOps}
-						coletor={handleChange}
-						accept={handleSubmit}
-						title={'Add new category'}
-					/>
-				)}
-				{isUpdate.mode && (
-					<AddCategory
-						errorMessage={errorMessage}
-						reject={cancelOps}
-						coletor={handleChange}
-						accept={handleUpdate}
-						title={'Update category'}
-						values={formData}
-					/>
-				)}
-				{isViewerActive && (
-					<DataViewer quit={quitViewer} data={categoryViewer} />
-				)}
+				<AddCategory
+					active={isAddModalActive}
+					errorMessage={errorMessage}
+					reject={cancelOps}
+					coletor={handleChange}
+					accept={handleSubmit}
+					title={'Add new category'}
+				/>
+				<AddCategory
+					active={isUpdate.mode}
+					errorMessage={errorMessage}
+					reject={cancelOps}
+					coletor={handleChange}
+					accept={handleUpdate}
+					title={'Update category'}
+					values={formData}
+				/>
+				<DataViewer
+					active={isViewerActive}
+					quit={quitViewer}
+					data={categoryViewer}
+				/>
 				<SortItemsBox active={isSortActive} quit={quitSort} />
 
 				<section className='upper-container'>

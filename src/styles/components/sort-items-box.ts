@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BaseButton, StyledCornerButton } from '../global/buttons';
+import { StyledCornerButton } from '../global/buttons';
 
 export const SortContainer = styled.article`
 	position: fixed;
