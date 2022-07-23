@@ -2,7 +2,20 @@ import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
-import { FaSearch, FiEdit, FiTrash2, HiPlusSm } from 'react-icons/all';
+import {
+	BiSort,
+	FaSearch,
+	FiColumns,
+	FiEdit,
+	FiTrash2,
+	HiPlus,
+	HiPlusCircle,
+	HiPlusSm,
+	HiRefresh,
+	HiSelector,
+	HiSortAscending,
+	HiSortDescending,
+} from 'react-icons/all';
 import { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
@@ -193,7 +206,12 @@ export default function Categories(): JSX.Element {
 
 				<section className='upper-container'>
 					<div className='title-tools'>
-						<h2>Categories</h2>
+						<section className='title'>
+							<h2>Categories</h2>
+							<div className='amount'>
+								<span>{categories.length} items</span>
+							</div>
+						</section>
 						<section className='container'>
 							<div className='search'>
 								<input
@@ -210,12 +228,21 @@ export default function Categories(): JSX.Element {
 									<FaSearch />
 								</button>
 							</div>
+							<div className='functions'>
+								<button title='Sort by' onClick={handleSearch}>
+									<HiSortDescending  />
+								</button>
+								<button title='Refresh' onClick={getCategories}>
+									<HiRefresh />
+								</button>
+							</div>
 							<div className='add'>
 								<button onClick={() => setIsAddModalActive(true)}>
-									<HiPlusSm />
+									<HiPlusCircle />
 									<span>Add new category</span>
 								</button>
 							</div>
+							
 						</section>
 					</div>
 				</section>

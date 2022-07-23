@@ -31,7 +31,7 @@ export const Viewer = styled.article`
 		border-radius: 3px;
 		border: 1px solid rgba(${({ theme }) => theme.shadows}, 0.5);
 		background: rgb(${({ theme }) => theme.backgroundAlt});
-		width: 100%;
+		width: 95%;
 		min-width: 300px;
 		min-height: 200px;
 		max-width: 600px;

@@ -22,20 +22,38 @@ export const CategoriesContainer = styled.div`
 				justify-content: flex-start;
 				flex-direction: column;
 				gap: 10px;
-				padding-bottom: 10px;
+				padding: 0 10px 10px 10px;
+				width: 100%;
+
 				${StyledInputs}
-				width: fit-content;
+
+				.title {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+				}
+
+				.functions {
+					display: flex;
+					gap: 10px;
+					button {
+						${ButtonB}
+					}
+				}
 
 				h2 {
 					font-size: 1.2rem;
 					line-height: 1.6rem;
 					font-weight: 500;
 				}
+
 				.add {
 					button {
 						${ButtonA}
 					}
 				}
+
 				.search {
 					display: flex;
 					flex-direction: row;
@@ -49,11 +67,8 @@ export const CategoriesContainer = styled.div`
 				.container {
 					display: flex;
 					gap: 10px;
-					flex-direction: row-reverse;
-
-					@media screen and (max-width: 655px) {
-						flex-direction: column-reverse;
-					}
+					justify-content: flex-end;
+					flex-flow: row-reverse wrap;
 				}
 			}
 
