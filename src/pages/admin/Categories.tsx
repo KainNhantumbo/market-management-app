@@ -1,21 +1,15 @@
+import {
+	FaSearch,
+	FiEdit,
+	FiTrash2,
+	HiPlusCircle,
+	HiRefresh,
+	HiSortDescending,
+} from 'react-icons/all';
 import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 import { CategoriesContainer as Container } from '../../styles/categories';
-import {
-	BiSort,
-	FaSearch,
-	FiColumns,
-	FiEdit,
-	FiTrash2,
-	HiPlus,
-	HiPlusCircle,
-	HiPlusSm,
-	HiRefresh,
-	HiSelector,
-	HiSortAscending,
-	HiSortDescending,
-} from 'react-icons/all';
 import { FormSubmit, Inputs } from '../../types/form';
 import useFetchAPI from '../../hooks/useFetch';
 import { correctWindow } from '../../utils/window';
@@ -69,7 +63,7 @@ export default function Categories(): JSX.Element {
 		}
 	}
 
-	// search
+	// search handler function
 	const handleSearch = async (): Promise<void> => {
 		try {
 			const { data } = await useFetchAPI({
@@ -103,13 +97,12 @@ export default function Categories(): JSX.Element {
 
 	async function handleUpdate(e: FormSubmit): Promise<void> {
 		e.preventDefault();
-		if (formData.name === '' || formData.description === '') {
+		if (formData.name === '' || formData.description === '')
 			return feedBack(
 				setErrorMessage,
 				'Please fill all the fields to update category.',
 				3000
 			);
-		}
 		try {
 			await useFetchAPI({
 				method: 'patch',
@@ -122,23 +115,19 @@ export default function Categories(): JSX.Element {
 			getCategories();
 			(e as any).target.reset();
 		} catch (err: any) {
-			console.log(err);
+			console.error(err);
 			feedBack(setErrorMessage, err.response.data.message, 5000);
 		}
 	}
 
 	const getCategoryForUpdate = (id: number) => {
-		const [category] = categories.filter((element) => {
-			return element.id === id;
-		});
+		const [category] = categories.filter((element) => element.id === id);
 		setFormData(category);
 		setIsUpdate({ mode: true, id: id });
 	};
 
 	const getCategoryForViewer = (id: number): void => {
-		const [category] = categories.filter((element) => {
-			return element.id === id;
-		});
+		const [category] = categories.filter((element) => element.id === id);
 		const data: DataViewerInterface = [
 			{ title: 'Category', details: category.name },
 			{ title: 'Description', details: category.description },
@@ -155,33 +144,26 @@ export default function Categories(): JSX.Element {
 			});
 			getCategories();
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 
 	// cancels create or update operations by removing the modal
 	const cancelOps = (): void => {
-		if (isAddModalActive) {
-			setIsAddModalActive(false);
-			return;
-		}
+		if (isAddModalActive) return setIsAddModalActive(false);
 		setIsUpdate((prevState) => ({ ...prevState, mode: false }));
 	};
 
-	// quits data viewer
-	const quitViewer = (): void => {
-		setIsViewerActive(false);
-	};
-
-	const quitSort = (): void => {
-		setIsSortActive(false);
-	};
+	// quits data viewer modal
+	const quitViewer = (): void => setIsViewerActive(false);
+	// quits sort modal
+	const quitSort = (): void => setIsSortActive(false);
 
 	useEffect(() => {
 		getCategories();
 		correctWindow();
 	}, []);
-	
+
 	return (
 		<Container>
 			<Header location='Categories' />
@@ -209,7 +191,7 @@ export default function Categories(): JSX.Element {
 				{isViewerActive && (
 					<DataViewer quit={quitViewer} data={categoryViewer} />
 				)}
-				{isSortActive && <SortItemsBox quit={quitSort} />}
+				<SortItemsBox active={isSortActive} quit={quitSort} />
 
 				<section className='upper-container'>
 					<div className='title-tools'>

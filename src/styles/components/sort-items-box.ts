@@ -70,7 +70,6 @@ export const SortContainer = styled.article`
 				cursor: pointer;
 
 				:hover {
-					transition: all 200ms ease;
 					background: rgb(${({ theme }) => theme.secondary});
 					color: rgb(${({ theme }) => theme.text});
 				}
