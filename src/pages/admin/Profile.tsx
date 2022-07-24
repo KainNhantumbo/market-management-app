@@ -138,18 +138,18 @@ export default function Profile() {
 			<Header location='User Profile' />
 			<Aside />
 			<main>
-				{isModalActive && (
-					<DialogBox
-						closeModal={setIsModalActive}
-						prompt_title={'Delete Account'}
-						prompt_message={
-							'Are you sure? Your account and all data associated with it will be permanently lost. Once done, you cannot undo this action.'
-						}
-						button_text={'Yes, delete account.'}
-						icon={<FiTrash2 />}
-						action={deleteAccount}
-					/>
-				)}
+				<DialogBox
+					close={setIsModalActive}
+					prompt_title={'Delete Account'}
+					prompt_message={
+						'Are you sure? Your account and all data associated with it will be permanently lost. Once done, you cannot undo this action.'
+					}
+					button_text={'Yes, delete account.'}
+					icon={<FiTrash2 />}
+					action={deleteAccount}
+					active={isModalActive}
+				/>
+
 				<section className='upper-container'>
 					<h2>
 						<span>Account information</span>
