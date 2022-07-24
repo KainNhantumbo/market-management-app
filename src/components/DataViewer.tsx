@@ -2,6 +2,7 @@ import { Viewer as Container } from '../styles/components/data-view';
 import { Props } from '../types/data-viewer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX } from 'react-icons/all';
+import { calendarDate, fullDate } from '../utils/formatTime';
 
 export default function DataViewer(props: Props): JSX.Element {
 	return (
@@ -68,12 +69,16 @@ export default function DataViewer(props: Props): JSX.Element {
 									);
 								})}
 								<div className='timestamps'>
-									<h5>
-										<span>{props.data.timestamps.createdAt}</span>
-									</h5>
-									<h5>
-										<span>{props.data.timestamps.updatedAt}</span>
-									</h5>
+									<span>
+										Created:{' '}
+										{props.data.timestamps.createdAt &&
+											fullDate(props.data.timestamps.createdAt)}
+									</span>
+									<span>
+										Last update:{' '}
+										{props.data.timestamps.updatedAt &&
+											calendarDate(props.data.timestamps.updatedAt)}
+									</span>
 								</div>
 							</motion.div>
 						</div>

@@ -58,7 +58,7 @@ export const Viewer = styled.article`
 			flex-direction: column;
 			justify-content: flex-start;
 			gap: 10px;
-			span {
+			.prompt-title {
 				font-weight: 500;
 				color: rgb(${({ theme }) => theme.primary});
 				line-height: 1.8rem;
@@ -68,6 +68,20 @@ export const Viewer = styled.article`
 				font-size: 0.9rem;
 				text-overflow: ellipsis;
 				overflow: hidden;
+			}
+
+			.timestamps {
+				font-size: 0.8rem;
+				line-height: 1rem;
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				border-top: 1px solid rgba(${({ theme }) => theme.font}, 0.3);
+				padding-top: 8px;
+
+				span {
+					color: rgba(${({ theme }) => theme.font}, 0.6);
+				}
 			}
 		}
 	}
