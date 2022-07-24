@@ -17,7 +17,7 @@ import { correctWindow } from '../../utils/window';
 import AddCategory from '../../components/AddCategory';
 import feedBack from '../../utils/feedback';
 import DataViewer from '../../components/DataViewer';
-import { DataViewerInterface } from '../../types/data-viewer';
+import { DataViewerTypes } from '../../types/data-viewer';
 import SortItemsBox from '../../components/SortItemsBox';
 import { motion } from 'framer-motion';
 
@@ -25,26 +25,35 @@ interface CategoriesProps {
 	name: string;
 	description: string;
 	id: number;
+	createdAt: string;
+	updatedAt: string;
 }
 
 interface Category {
 	name: string;
 	description: string;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export default function Categories(): JSX.Element {
 	const [searchItems, setSearchItems] = useState('');
 	const [categories, setCategories] = useState<CategoriesProps[]>([]);
-	const [categoryViewer, setCategoryViewer] = useState<DataViewerInterface>([]);
 	const [isAddModalActive, setIsAddModalActive] = useState(false);
 	const [isUpdate, setIsUpdate] = useState({ mode: false, id: 0 });
 	const [isSortActive, setIsSortActive] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
+	const [isViewerActive, setIsViewerActive] = useState(false);
+	const [categoryViewer, setCategoryViewer] = useState<DataViewerTypes>({
+		content: [{ title: '', details: '' }],
+		timestamps: { createdAt: '', updatedAt: '' },
+	});
 	const [formData, setFormData] = useState<Category>({
 		name: '',
 		description: '',
+		createdAt: '',
+		updatedAt: '',
 	});
-	const [isViewerActive, setIsViewerActive] = useState(false);
 
 	const handleChange = (e: Inputs): void => {
 		setFormData((prevData) => ({
@@ -89,7 +98,7 @@ export default function Categories(): JSX.Element {
 				data: formData,
 			});
 			setIsAddModalActive(false);
-			setFormData(() => ({ name: '', description: '' }));
+			setFormData((prevData) => ({ ...prevData, name: '', description: '' }));
 			getCategories();
 			(e as any).target.reset();
 		} catch (err: any) {
@@ -103,11 +112,11 @@ export default function Categories(): JSX.Element {
 		try {
 			await useFetchAPI({
 				method: 'patch',
-			url: `/categories/${isUpdate.id}`,
+				url: `/categories/${isUpdate.id}`,
 				data: formData,
 			});
 			setIsAddModalActive(false);
-			setFormData(() => ({ name: '', description: '' }));
+			setFormData((prevData) => ({ ...prevData, name: '', description: '' }));
 			cancelOps();
 			getCategories();
 			(e as any).target.reset();
@@ -118,17 +127,23 @@ export default function Categories(): JSX.Element {
 	}
 
 	const getCategoryForUpdate = (id: number) => {
-		const [category] = categories.filter((element) => element.id === id);
-		setFormData(category);
+		const [category]: any = categories.filter((element) => element.id === id);
+		setFormData(() => ({ ...category }));
 		setIsUpdate({ mode: true, id: id });
 	};
 
 	const getCategoryForViewer = (id: number): void => {
 		const [category] = categories.filter((element) => element.id === id);
-		const data: DataViewerInterface = [
-			{ title: 'Name', details: category.name },
-			{ title: 'Description', details: category.description },
-		];
+		const data: DataViewerTypes = {
+			content: [
+				{ title: 'Name', details: category.name },
+				{ title: 'Description', details: category.description },
+			],
+			timestamps: {
+				createdAt: category.createdAt,
+				updatedAt: category.updatedAt,
+			},
+		};
 		setCategoryViewer(data);
 		setIsViewerActive(true);
 	};

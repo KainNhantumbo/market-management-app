@@ -59,14 +59,22 @@ export default function DataViewer(props: Props): JSX.Element {
 									},
 								}}
 							>
-								{props.data.map((item, index) => {
+								{props.data.content.map((item, index) => {
 									return (
-										<div key={index} className={'item'}>
+										<section key={index} className={'item'}>
 											<span className='prompt-title'>{item.title}</span>
 											<p key={index.toString()}>{item.details}</p>
-										</div>
+										</section>
 									);
 								})}
+								<div className='timestamps'>
+									<h5>
+										<span>{props.data.timestamps.createdAt}</span>
+									</h5>
+									<h5>
+										<span>{props.data.timestamps.updatedAt}</span>
+									</h5>
+								</div>
 							</motion.div>
 						</div>
 					</motion.section>
